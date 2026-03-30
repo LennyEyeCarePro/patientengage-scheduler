@@ -7,196 +7,186 @@
   <meta name="description" content="Stop losing patients to unanswered forms. PatientEngage Real-Time Scheduler confirms bookings instantly and writes directly to your EHR.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --navy:     #0F2A4A;
-      --blue:     #1B5FA8;
-      --teal:     #00A3A3;
-      --green:    #0F6E56;
-      --green-bg: #F0FDF9;
-      --green-bd: #99F6E4;
-      --slate:    #64748B;
-      --muted:    #94A3B8;
-      --border:   #E2E8F0;
-      --canvas:   #F5F7FA;
-      --blue-lt:  #EEF4FF;
+      --navy:    #0F2A4A;
+      --blue:    #1B5FA8;
+      --teal:    #00A3A3;
+      --green:   #0F6E56;
+      --green-bg:#F0FDF9;
+      --green-bd:#A7F3D0;
+      --slate:   #64748B;
+      --muted:   #94A3B8;
+      --border:  #E2E8F0;
+      --bg:      #F8FAFC;
+      --blue-lt: #EEF4FF;
     }
-
     html { scroll-behavior: smooth; }
-    body { font-family: 'DM Sans', sans-serif; color: var(--navy); background: #fff; -webkit-font-smoothing: antialiased; }
+    body { font-family:'DM Sans',sans-serif; color:var(--navy); background:#fff; -webkit-font-smoothing:antialiased; line-height:1.6; }
 
-    /* ── NAV ── */
-    nav { display:flex; align-items:center; justify-content:space-between; padding:16px 48px; border-bottom:1px solid var(--border); background:#fff; position:sticky; top:0; z-index:100; }
-    .nav-logo { font-family:'DM Serif Display',serif; font-size:20px; color:var(--navy); text-decoration:none; }
-    .nav-links { display:flex; gap:28px; list-style:none; }
+    /* NAV */
+    nav { display:flex; align-items:center; justify-content:space-between; padding:16px 40px; background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+    .nav-logo { font-size:16px; font-weight:800; color:var(--navy); text-decoration:none; letter-spacing:-.3px; }
+    .nav-links { display:flex; gap:24px; list-style:none; }
     .nav-links a { font-size:13px; color:var(--muted); text-decoration:none; transition:color .2s; }
     .nav-links a:hover { color:var(--navy); }
     .nav-links .active { color:var(--navy); font-weight:600; border-bottom:2px solid var(--teal); padding-bottom:2px; }
-    .nav-cta { display:flex; gap:8px; }
-    .btn-ghost { padding:8px 18px; border-radius:30px; border:1.5px solid var(--border); background:#fff; color:var(--navy); font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:border-color .2s; }
-    .btn-ghost:hover { border-color:var(--navy); }
-    .btn-navy { padding:8px 18px; border-radius:30px; border:none; background:var(--navy); color:#fff; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background .2s; }
-    .btn-navy:hover { background:#1a3d6b; }
+    .nav-actions { display:flex; gap:8px; }
+    .btn-outline { padding:8px 20px; border-radius:30px; border:1.5px solid var(--border); background:#fff; color:var(--navy); font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:border-color .2s; }
+    .btn-outline:hover { border-color:var(--navy); }
+    .btn-dark { padding:8px 20px; border-radius:30px; border:none; background:var(--navy); color:#fff; font-size:13px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background .2s; }
+    .btn-dark:hover { background:#1a3d6b; }
 
-    /* ── HERO ── */
-    .hero { padding:88px 48px 72px; text-align:center; background:#fff; }
-    .badge { display:inline-flex; align-items:center; gap:7px; padding:5px 16px; background:var(--green-bg); border:1px solid var(--green-bd); border-radius:20px; font-size:12px; font-weight:600; color:var(--green); margin-bottom:24px; }
+    /* HERO */
+    .hero { padding:80px 40px 64px; text-align:center; }
+    .badge { display:inline-flex; align-items:center; gap:7px; padding:5px 16px; background:var(--green-bg); border:1px solid var(--green-bd); border-radius:30px; font-size:12px; font-weight:600; color:var(--green); margin-bottom:22px; }
     .badge-dot { width:6px; height:6px; border-radius:50%; background:var(--green); }
-    h1 { font-family:'DM Serif Display',serif; font-size:56px; line-height:1.08; letter-spacing:-.5px; color:var(--navy); margin-bottom:20px; max-width:680px; margin-left:auto; margin-right:auto; }
+    h1 { font-family:'DM Serif Display',serif; font-size:52px; font-weight:400; color:var(--navy); line-height:1.1; letter-spacing:-.5px; margin-bottom:18px; max-width:620px; margin-left:auto; margin-right:auto; }
     h1 em { font-style:italic; color:var(--teal); }
-    .hero-sub { font-size:17px; color:var(--slate); line-height:1.75; max-width:520px; margin:0 auto 12px; }
-    .problem-stmt { font-size:15px; color:var(--slate); line-height:1.7; max-width:560px; margin:0 auto 32px; padding:16px 20px; background:var(--canvas); border-radius:10px; border-left:3px solid var(--teal); text-align:left; }
-    .problem-stmt strong { color:var(--navy); }
-    .hero-cta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:12px; }
-    .btn-teal { padding:14px 30px; border-radius:30px; border:none; background:var(--teal); color:#fff; font-size:14px; font-weight:700; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background .2s; }
-    .btn-teal:hover { background:#008f8f; }
-    .btn-outline-lg { padding:14px 30px; border-radius:30px; border:1.5px solid var(--border); background:#fff; color:var(--navy); font-size:14px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:border-color .2s; }
-    .btn-outline-lg:hover { border-color:var(--navy); }
-    .hero-fine { font-size:12px; color:var(--muted); margin-bottom:56px; }
+    .hero-sub { font-size:16px; color:var(--slate); line-height:1.75; max-width:480px; margin:0 auto 28px; }
+    .hero-cta { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; margin-bottom:12px; }
+    .btn-navy-pill { padding:13px 28px; border-radius:30px; border:none; background:var(--navy); color:#fff; font-size:14px; font-weight:700; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background .2s; }
+    .btn-navy-pill:hover { background:#1a3d6b; }
+    .btn-ghost-pill { padding:13px 28px; border-radius:30px; border:1.5px solid var(--border); background:#fff; color:var(--navy); font-size:14px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:border-color .2s; }
+    .btn-ghost-pill:hover { border-color:var(--navy); }
+    .hero-fine { font-size:12px; color:var(--muted); margin-bottom:52px; }
 
-    /* ── HERO IMAGE ── */
-    .hero-img-wrap { max-width:860px; margin:0 auto; border-radius:16px; overflow:hidden; border:1px solid var(--border); box-shadow:0 16px 64px rgba(15,42,74,.12); }
-    .hero-img-wrap img { width:100%; display:block; }
-    .img-caption { font-size:11px; color:var(--muted); text-align:center; margin-top:10px; }
+    .hero-frame { max-width:680px; margin:0 auto; border-radius:16px; overflow:hidden; border:1px solid var(--border); box-shadow:0 8px 48px rgba(15,42,74,.12); }
+    .frame-bar { background:var(--bg); padding:10px 16px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:6px; }
+    .fdot { width:9px; height:9px; border-radius:50%; }
+    .furl { background:#EDF2F7; border-radius:5px; padding:3px 14px; font-size:10px; color:var(--muted); margin-left:10px; flex:1; max-width:320px; text-align:center; }
+    .hero-frame img { width:100%; display:block; }
+    .hero-cap { font-size:12px; color:var(--muted); text-align:center; margin-top:12px; }
+    .hero-cap strong { color:var(--navy); }
 
-    /* ── STATS ── */
-    .stats { display:grid; grid-template-columns:1fr 1fr 1fr; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--canvas); }
-    .stat { padding:32px 24px; text-align:center; border-right:1px solid var(--border); }
+    /* STATS */
+    .stats { display:flex; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--bg); }
+    .stat { flex:1; padding:28px 24px; text-align:center; border-right:1px solid var(--border); }
     .stat:last-child { border-right:none; }
-    .stat-n { font-family:'DM Serif Display',serif; font-size:44px; color:var(--navy); line-height:1; margin-bottom:6px; }
-    .stat-l { font-size:13px; color:var(--muted); line-height:1.5; }
+    .stat-n { font-family:'DM Serif Display',serif; font-size:38px; color:var(--navy); line-height:1; margin-bottom:5px; }
+    .stat-l { font-size:12px; color:var(--muted); line-height:1.5; }
 
-    /* ── SECTION SHELL ── */
-    .section { padding:80px 48px; }
-    .section-inner { max-width:900px; margin:0 auto; }
-    .section-alt { background:var(--canvas); }
-    .eyebrow { font-size:11px; font-weight:700; color:var(--teal); letter-spacing:1.2px; text-transform:uppercase; margin-bottom:10px; }
-    h2 { font-family:'DM Serif Display',serif; font-size:40px; line-height:1.15; color:var(--navy); margin-bottom:12px; }
-    .section-sub { font-size:15px; color:var(--slate); line-height:1.75; max-width:540px; margin-bottom:44px; }
+    /* LOGOS */
+    .logos { padding:24px 40px; text-align:center; border-bottom:1px solid var(--border); }
+    .logos p { font-size:12px; color:var(--muted); margin-bottom:14px; }
+    .logo-row { display:flex; justify-content:center; gap:10px; flex-wrap:wrap; }
+    .logo-pill { padding:5px 16px; border:1px solid var(--border); border-radius:30px; font-size:12px; font-weight:600; color:var(--muted); }
 
-    /* ── BEFORE STATES ── */
-    .before-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; margin-bottom:40px; }
-    .before-card { padding:24px; border-radius:12px; border:1px solid var(--border); background:#fff; }
-    .before-card.worst { border-color:#FECACA; background:#FEF2F2; }
-    .before-label { font-size:10px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; margin-bottom:10px; color:var(--muted); }
-    .before-label.bad { color:#DC2626; }
-    .before-title { font-size:15px; font-weight:700; color:var(--navy); margin-bottom:8px; }
-    .before-desc { font-size:13px; color:var(--slate); line-height:1.65; }
-    .before-quote { margin-top:32px; padding:24px 28px; background:var(--navy); border-radius:12px; }
-    .before-quote p { font-family:'DM Serif Display',serif; font-size:20px; color:#fff; line-height:1.5; font-style:italic; }
-    .before-quote span { display:block; font-size:12px; color:var(--muted); margin-top:10px; font-family:'DM Sans',sans-serif; font-style:normal; }
+    /* SECTIONS */
+    .section { padding:72px 40px; }
+    .section-alt { background:var(--bg); }
+    .si { max-width:860px; margin:0 auto; }
+    .eyebrow { font-size:11px; font-weight:700; color:var(--teal); letter-spacing:1px; text-transform:uppercase; margin-bottom:10px; }
+    h2 { font-family:'DM Serif Display',serif; font-size:36px; font-weight:400; color:var(--navy); line-height:1.2; margin-bottom:10px; letter-spacing:-.3px; }
+    .ssub { font-size:15px; color:var(--slate); line-height:1.75; max-width:480px; margin-bottom:40px; }
 
-    /* ── HOW IT WORKS ── */
-    .steps { display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; margin-bottom:48px; }
-    .step { padding:28px; border:1px solid var(--border); border-radius:14px; background:#fff; transition:border-color .2s; }
+    /* BEFORE STATES */
+    .before-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; margin-bottom:36px; }
+    .bc { padding:22px; border-radius:14px; border:1px solid var(--border); background:#fff; }
+    .bc.hl { border-color:#FECACA; background:#FEF9F9; }
+    .btag { display:inline-block; padding:2px 10px; border-radius:20px; font-size:10px; font-weight:700; letter-spacing:.5px; text-transform:uppercase; margin-bottom:10px; background:var(--bg); color:var(--muted); }
+    .btag.bad { background:#FEE2E2; color:#DC2626; }
+    .btitle { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+    .bbody { font-size:13px; color:var(--slate); line-height:1.65; }
+    .pullquote { background:var(--navy); border-radius:14px; padding:28px 32px; }
+    .pullquote p { font-family:'DM Serif Display',serif; font-size:20px; color:#fff; line-height:1.5; font-style:italic; margin-bottom:8px; }
+    .pullquote span { font-size:12px; color:var(--muted); }
+
+    /* STEPS */
+    .steps { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px; }
+    .step { padding:22px; border:1px solid var(--border); border-radius:14px; background:#fff; transition:border-color .2s; }
     .step:hover { border-color:var(--teal); }
-    .step-n { font-size:11px; font-weight:700; color:var(--teal); letter-spacing:.5px; margin-bottom:10px; }
-    .step-t { font-size:15px; font-weight:700; color:var(--navy); margin-bottom:6px; }
-    .step-d { font-size:13px; color:var(--slate); line-height:1.65; }
+    .step-n { font-size:11px; font-weight:700; color:var(--teal); margin-bottom:8px; letter-spacing:.3px; }
+    .step-t { font-size:14px; font-weight:700; color:var(--navy); margin-bottom:6px; }
+    .step-b { font-size:13px; color:var(--slate); line-height:1.65; }
 
-    /* ── SCREENSHOT SECTIONS ── */
-    .screenshot-block { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-bottom:72px; }
-    .screenshot-block.flip { direction:rtl; }
-    .screenshot-block.flip > * { direction:ltr; }
-    .screenshot-frame { border-radius:12px; overflow:hidden; border:1px solid var(--border); box-shadow:0 8px 32px rgba(15,42,74,.10); }
-    .screenshot-frame img { width:100%; display:block; }
-    .screenshot-text h3 { font-family:'DM Serif Display',serif; font-size:28px; color:var(--navy); margin-bottom:12px; line-height:1.2; }
-    .screenshot-text p { font-size:14px; color:var(--slate); line-height:1.75; margin-bottom:16px; }
-    .proof-tag { display:inline-block; padding:4px 12px; background:var(--blue-lt); color:var(--blue); border-radius:20px; font-size:12px; font-weight:600; }
+    /* PAIRS */
+    .pair { display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center; margin-top:48px; }
+    .pair.flip { direction:rtl; }
+    .pair.flip > * { direction:ltr; }
+    .pframe { border-radius:14px; overflow:hidden; border:1px solid var(--border); box-shadow:0 4px 24px rgba(15,42,74,.09); }
+    .pframe img { width:100%; display:block; }
+    .ptext h3 { font-family:'DM Serif Display',serif; font-size:26px; font-weight:400; color:var(--navy); line-height:1.2; margin-bottom:12px; }
+    .ptext p { font-size:14px; color:var(--slate); line-height:1.75; margin-bottom:12px; }
+    .proof-pill { display:inline-block; padding:4px 14px; background:var(--blue-lt); color:var(--blue); border-radius:20px; font-size:12px; font-weight:600; }
 
-    /* ── BENEFITS ── */
-    .benefits-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-    .benefit { padding:24px; border:1px solid var(--border); border-radius:14px; background:#fff; transition:border-color .2s; }
-    .benefit:hover { border-color:var(--teal); }
-    .benefit-icon { width:36px; height:36px; border-radius:8px; background:var(--blue-lt); display:flex; align-items:center; justify-content:center; margin-bottom:14px; }
-    .benefit-icon svg { width:18px; height:18px; }
-    .benefit-title { font-size:15px; font-weight:700; color:var(--navy); margin-bottom:6px; }
-    .benefit-desc { font-size:13px; color:var(--slate); line-height:1.65; }
+    /* CASE STUDY */
+    .case { background:linear-gradient(135deg,#F0F7FF,#F0FDFB); border:1px solid #DBEAFE; border-radius:16px; padding:36px; }
+    .case-stats { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; margin:20px 0 28px; }
+    .cs { padding:18px 12px; text-align:center; border-right:1px solid var(--border); }
+    .cs:last-child { border-right:none; }
+    .cs-n { font-family:'DM Serif Display',serif; font-size:30px; color:var(--navy); line-height:1; margin-bottom:4px; }
+    .cs-l { font-size:11px; color:var(--muted); line-height:1.4; }
+    .qtext { font-family:'DM Serif Display',serif; font-size:18px; color:var(--navy); line-height:1.65; font-style:italic; margin-bottom:18px; }
+    .qattr { display:flex; align-items:center; gap:12px; }
+    .avatar { width:38px; height:38px; border-radius:50%; background:var(--teal); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700; color:#fff; flex-shrink:0; }
+    .qname { font-size:13px; font-weight:700; color:var(--navy); }
+    .qloc { font-size:12px; color:var(--muted); }
 
-    /* ── CASE STUDY ── */
-    .case-study { background:linear-gradient(135deg,#F0F7FF,#F0FDFB); border-radius:16px; padding:40px; border:1px solid #DBEAFE; margin-bottom:0; }
-    .case-stats { display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:0; margin:24px 0; border:1px solid var(--border); border-radius:10px; overflow:hidden; background:#fff; }
-    .case-stat { padding:20px 16px; text-align:center; border-right:1px solid var(--border); }
-    .case-stat:last-child { border-right:none; }
-    .case-stat-n { font-family:'DM Serif Display',serif; font-size:32px; color:var(--navy); line-height:1; margin-bottom:4px; }
-    .case-stat-l { font-size:11px; color:var(--muted); }
-    .testimonial { margin-top:24px; }
-    .testimonial-text { font-family:'DM Serif Display',serif; font-size:19px; color:var(--navy); line-height:1.6; font-style:italic; margin-bottom:16px; }
-    .testimonial-attr { display:flex; align-items:center; gap:12px; }
-    .avatar { width:40px; height:40px; border-radius:50%; background:var(--teal); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#fff; flex-shrink:0; }
-    .attr-name { font-size:13px; font-weight:700; color:var(--navy); }
-    .attr-practice { font-size:12px; color:var(--muted); }
+    /* OBJECTIONS */
+    .obj { border:1px solid var(--border); border-radius:12px; margin-bottom:8px; overflow:hidden; background:#fff; }
+    .obj-q { padding:16px 20px; font-size:14px; font-weight:600; color:var(--navy); cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:background .15s; user-select:none; }
+    .obj-q:hover { background:var(--bg); }
+    .arr { color:var(--muted); font-size:18px; transition:transform .2s; flex-shrink:0; margin-left:12px; }
+    .obj-a { padding:0 20px 18px; font-size:13px; color:var(--slate); line-height:1.75; display:none; }
+    .obj.open .obj-a { display:block; }
+    .obj.open .arr { transform:rotate(180deg); }
 
-    /* ── OBJECTIONS ── */
-    .objections { display:flex; flex-direction:column; gap:12px; }
-    .objection { border:1px solid var(--border); border-radius:12px; overflow:hidden; }
-    .objection-q { padding:16px 20px; font-size:14px; font-weight:600; color:var(--navy); cursor:pointer; display:flex; justify-content:space-between; align-items:center; background:#fff; transition:background .15s; }
-    .objection-q:hover { background:var(--canvas); }
-    .objection-q .arrow { font-size:16px; color:var(--muted); transition:transform .2s; }
-    .objection-a { padding:0 20px 16px; font-size:13px; color:var(--slate); line-height:1.7; display:none; background:#fff; }
-    .objection.open .objection-a { display:block; }
-    .objection.open .arrow { transform:rotate(180deg); }
-
-    /* ── COMPETITIVE ── */
-    .comp-table-wrap { overflow-x:auto; border-radius:14px; border:1px solid var(--border); }
+    /* TABLE */
+    .tw { border:1px solid var(--border); border-radius:14px; overflow:hidden; overflow-x:auto; }
     table { width:100%; border-collapse:collapse; font-size:13px; }
-    thead th { padding:14px 16px; text-align:left; font-weight:700; color:var(--navy); background:var(--canvas); border-bottom:1px solid var(--border); }
+    thead th { padding:13px 16px; text-align:left; font-weight:700; color:var(--navy); background:var(--bg); border-bottom:1px solid var(--border); }
     thead th:not(:first-child) { text-align:center; }
     thead th.pe { background:var(--blue-lt); color:var(--blue); }
-    tbody td { padding:12px 16px; border-bottom:1px solid #F8FAFC; color:var(--slate); }
+    tbody td { padding:12px 16px; border-bottom:1px solid #F1F5F9; color:var(--slate); }
     tbody td:not(:first-child) { text-align:center; }
     tbody td.pe { background:#F8FBFF; }
     tbody td.win { color:var(--green); font-weight:700; }
     tbody tr:last-child td { border-bottom:none; }
-    tbody tr:hover td { background:var(--canvas); }
+    tbody tr:hover td { background:var(--bg); }
     tbody tr:hover td.pe { background:var(--blue-lt); }
-    .table-note { font-size:11px; color:var(--muted); margin-top:10px; }
+    .tnote { font-size:11px; color:var(--muted); margin-top:10px; }
 
-    /* ── LOGOS ── */
-    .logos-strip { padding:28px 48px; border-top:1px solid var(--border); border-bottom:1px solid var(--border); text-align:center; }
-    .logos-strip p { font-size:12px; color:var(--muted); margin-bottom:14px; }
-    .logo-pills { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; }
-    .logo-pill { padding:5px 16px; border:1px solid var(--border); border-radius:20px; font-size:12px; font-weight:600; color:var(--muted); }
-
-    /* ── CTA ── */
-    .cta-section { padding:96px 48px; text-align:center; background:var(--canvas); border-top:1px solid var(--border); }
-    .cta-section h2 { margin-bottom:14px; }
-    .cta-sub { font-size:16px; color:var(--slate); margin-bottom:32px; line-height:1.7; }
+    /* CTA */
+    .cta { padding:80px 40px; text-align:center; background:var(--bg); border-top:1px solid var(--border); }
+    .cta h2 { margin-bottom:12px; }
+    .cta-sub { font-size:15px; color:var(--slate); margin-bottom:28px; line-height:1.7; }
+    .cta-btns { display:flex; gap:10px; justify-content:center; flex-wrap:wrap; }
+    .btn-teal-pill { padding:13px 30px; border-radius:30px; border:none; background:var(--teal); color:#fff; font-size:14px; font-weight:700; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background .2s; }
+    .btn-teal-pill:hover { background:#008f8f; }
     .cta-fine { font-size:12px; color:var(--muted); margin-top:16px; }
     .cta-fine a { color:var(--blue); text-decoration:underline; cursor:pointer; }
 
-    /* ── FOOTER ── */
-    footer { padding:24px 48px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); }
-    .footer-logo { font-family:'DM Serif Display',serif; font-size:16px; color:var(--navy); }
-    .footer-copy { font-size:12px; color:var(--muted); }
+    /* FOOTER */
+    footer { padding:22px 40px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); }
+    .flogo { font-size:15px; font-weight:800; color:var(--navy); }
+    .fcopy { font-size:12px; color:var(--muted); }
 
-    /* ── RESPONSIVE ── */
-    @media (max-width:768px) {
+    /* RESPONSIVE */
+    @media (max-width:720px) {
       nav { padding:14px 20px; }
       .nav-links { display:none; }
-      h1 { font-size:36px; }
+      h1 { font-size:34px; }
       .hero { padding:56px 20px 48px; }
-      .stats { grid-template-columns:1fr; }
+      .stats { flex-direction:column; }
       .stat { border-right:none; border-bottom:1px solid var(--border); }
       .stat:last-child { border-bottom:none; }
       .section { padding:56px 20px; }
-      .before-grid, .steps, .benefits-grid { grid-template-columns:1fr; }
-      .screenshot-block { grid-template-columns:1fr; }
-      .screenshot-block.flip { direction:ltr; }
+      .before-grid,.steps { grid-template-columns:1fr; }
+      .pair,.pair.flip { grid-template-columns:1fr; gap:24px; direction:ltr; }
       .case-stats { grid-template-columns:1fr 1fr; }
-      .case-stat:nth-child(2) { border-right:none; }
-      .case-stat:nth-child(3) { border-top:1px solid var(--border); }
-      .cta-section { padding:56px 20px; }
-      footer { flex-direction:column; gap:8px; padding:20px; }
+      .cs:nth-child(2) { border-right:none; }
+      .cs:nth-child(3) { border-top:1px solid var(--border); }
+      h2 { font-size:28px; }
+      .cta { padding:56px 20px; }
+      footer { flex-direction:column; gap:8px; padding:20px; text-align:center; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">PatientEngage</a>
   <ul class="nav-links">
@@ -205,9 +195,9 @@
     <li><a href="#">Reminders</a></li>
     <li><a href="#">Pricing</a></li>
   </ul>
-  <div class="nav-cta">
-    <button class="btn-ghost">Sign in</button>
-    <button class="btn-navy">Get started</button>
+  <div class="nav-actions">
+    <button class="btn-outline">Sign in</button>
+    <button class="btn-dark">Get started</button>
   </div>
 </nav>
 
@@ -215,42 +205,35 @@
 <section class="hero">
   <div class="badge"><span class="badge-dot"></span>Used by 125+ independent optometry practices</div>
   <h1>The moment a patient is ready to book, <em>someone has to be there.</em></h1>
-  <p class="hero-sub">PatientEngage Real-Time Scheduler captures new patients at the exact moment of intent — on your website, in Google Search, and after hours.</p>
-  <div class="problem-stmt">
-    Most practices think they have online booking. What they actually have is a contact form that collects leads and hands them to the front desk to chase. Phone tag. Manual data entry. Unconfirmed appointments. Patients who booked somewhere else while they were waiting to hear back.<br><br>
-    <strong>That's not a booking system. That's a leaky funnel.</strong>
-  </div>
+  <p class="hero-sub">PatientEngage Real-Time Scheduler captures new patients at the exact moment of intent — on your website, in Google Search, and after hours — and confirms their appointment instantly, without your staff lifting a finger.</p>
   <div class="hero-cta">
-    <button class="btn-teal">Book a live demo</button>
-    <button class="btn-outline-lg">Watch 2-min demo</button>
+    <button class="btn-navy-pill">Book a live demo</button>
+    <button class="btn-ghost-pill">Watch 2-min demo</button>
   </div>
   <p class="hero-fine">Free 14-day trial &middot; No credit card &middot; Setup in one day</p>
-  <div class="hero-img-wrap">
-    <img src="screenshots/ss_scheduler_01_google_reserve.png" alt="PatientEngage Real-Time Scheduler Book Online button in Google Search via Google Reserve">
+  <div class="hero-frame">
+    <div class="frame-bar">
+      <div class="fdot" style="background:#FF5F57"></div>
+      <div class="fdot" style="background:#FEBC2E"></div>
+      <div class="fdot" style="background:#28C840"></div>
+      <div class="furl">Book an appointment — PatientEngage Real-Time Scheduler</div>
+    </div>
+    <img src="screenshots/ss_scheduler_02_widget_slots.png" alt="PatientEngage Real-Time Scheduler showing real available appointment slots">
   </div>
-  <p class="img-caption">PatientEngage is an approved Google Reserve partner — your "Book online" button appears directly in Google Search, not just on your website.</p>
+  <p class="hero-cap"><strong>Real available slots from your live EHR.</strong> Not a contact form — a real booking system.</p>
 </section>
 
 <!-- STATS -->
 <div class="stats">
-  <div class="stat">
-    <div class="stat-n">7,500+</div>
-    <div class="stat-l">appointments booked<br>online every month</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n">89%</div>
-    <div class="stat-l">of requests confirmed<br>across the network</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n">125+</div>
-    <div class="stat-l">independent optometry<br>practices and growing</div>
-  </div>
+  <div class="stat"><div class="stat-n">7,500+</div><div class="stat-l">appointments booked<br>online every month</div></div>
+  <div class="stat"><div class="stat-n">89%</div><div class="stat-l">of requests confirmed<br>across the network</div></div>
+  <div class="stat"><div class="stat-n">1 day</div><div class="stat-l">average setup time<br>no IT required</div></div>
 </div>
 
 <!-- LOGOS -->
-<div class="logos-strip">
+<div class="logos">
   <p>Trusted by independent optometry practices across the US</p>
-  <div class="logo-pills">
+  <div class="logo-row">
     <span class="logo-pill">Forney Eye Associates</span>
     <span class="logo-pill">Advanced Eyecare Center</span>
     <span class="logo-pill">Lowcountry Eye Care</span>
@@ -259,54 +242,51 @@
   </div>
 </div>
 
-<!-- BEFORE STATES -->
+<!-- THE PROBLEM -->
 <section class="section">
-  <div class="section-inner">
+  <div class="si">
     <div class="eyebrow">The problem</div>
     <h2>Three ways practices lose patients before they ever walk in.</h2>
-    <p class="section-sub">Each one looks different. All three have the same result: a patient who was ready to book just booked somewhere else.</p>
-
+    <p class="ssub">Each one looks different on the surface. All three end the same way — a patient who was ready to book just booked somewhere else.</p>
     <div class="before-grid">
-      <div class="before-card">
-        <div class="before-label">Before state A</div>
-        <div class="before-title">Phone only</div>
-        <div class="before-desc">Every booking happens by phone during business hours. Calls at 7pm go to voicemail. Calls during exams go to voicemail. New patients who don't leave a message simply call the next practice on Google. The phone never shows you who you lost — the leakage is invisible.</div>
+      <div class="bc">
+        <div class="btag">Before state A</div>
+        <div class="btitle">Phone only</div>
+        <div class="bbody">Every booking happens by phone during business hours. Calls at 7pm go to voicemail. Calls during exams go to voicemail. New patients who don't leave a message call the next practice on Google. The phone never shows you who you lost — the leakage is invisible.</div>
       </div>
-      <div class="before-card worst">
-        <div class="before-label bad">Before state B — most common</div>
-        <div class="before-title">The form fallacy</div>
-        <div class="before-desc">The practice has a "Book Now" button that sends an email to the front desk. Not a booking — a lead. Staff call back. Phone tag. Manual EHR entry. No confirmation sent. Patient shows up on a day the practice didn't know about. Walk-in conflict. Backed-up waiting room.</div>
+      <div class="bc hl">
+        <div class="btag bad">Most common</div>
+        <div class="btitle">The form fallacy</div>
+        <div class="bbody">The "Book Now" button sends an email to the front desk. Not a booking — a lead. Staff call back. Phone tag. Manual EHR entry. No confirmation sent. The patient who submitted at 10pm is still waiting the next afternoon. By then, they've already booked somewhere else.</div>
       </div>
-      <div class="before-card">
-        <div class="before-label">Before state C</div>
-        <div class="before-title">Both — the hybrid</div>
-        <div class="before-desc">Phone line and a contact form — two separate inboxes, neither connected to the EHR. Double the channels, double the manual work. Nothing is confirmed until a human intervenes on every single request.</div>
+      <div class="bc">
+        <div class="btag">Before state C</div>
+        <div class="btitle">Both — the hybrid</div>
+        <div class="bbody">A phone line and a contact form — two inboxes, neither connected to the EHR. Double the channels. Double the manual work. Nothing is confirmed until a human intervenes on every single request, every single day.</div>
       </div>
     </div>
-
-    <div class="before-quote">
-      <p>"You didn't lose that patient because of your care. You lost them because you weren't available when they were ready."</p>
-      <span>— The core problem the Real-Time Scheduler solves</span>
+    <div class="pullquote">
+      <p>"You didn't lose that patient because of your care. You lost them because you weren't there when they were ready."</p>
+      <span>— The problem the Real-Time Scheduler solves</span>
     </div>
   </div>
 </section>
 
-<!-- GOOGLE RESERVE FEATURE BLOCK -->
+<!-- GOOGLE RESERVE -->
 <section class="section section-alt">
-  <div class="section-inner">
+  <div class="si">
     <div class="eyebrow">Google Reserve</div>
-    <h2>Your booking button lives inside Google Search.</h2>
-    <p class="section-sub">Most practices think online booking means a button on their website. PatientEngage puts that button where patients are already looking — directly on your Google listing.</p>
-
-    <div class="screenshot-block">
-      <div class="screenshot-frame">
+    <h2>Your booking button is already in Google Search.</h2>
+    <p class="ssub">Most practices think online booking means a button on their website. PatientEngage puts that button where patients are already looking.</p>
+    <div class="pair">
+      <div class="pframe">
         <img src="screenshots/ss_scheduler_01_google_reserve.png" alt="Book online button on Google Business Profile via Google Reserve">
       </div>
-      <div class="screenshot-text">
-        <h3>Book before they ever visit your website.</h3>
-        <p>PatientEngage is an approved Google Reserve partner. When a patient searches "eye doctor near me" and finds your Google listing, they see a blue "Book online" button right there in the results. One tap. Real-time availability. Instant confirmation.</p>
-        <p>They don't need to find your website, navigate to a booking page, or fill out a contact form. The point of intent is captured at the source — in Google — the moment they decide they want an appointment.</p>
-        <span class="proof-tag">Approved Google Reserve partner</span>
+      <div class="ptext">
+        <h3>One tap from Google to confirmed.</h3>
+        <p>PatientEngage is an approved Google Reserve partner. When a patient searches "eye doctor near me," they see a blue "Book online" button right on your Google listing — before they even visit your website.</p>
+        <p>The point of intent is captured at the source. No website visit required. No contact form. No waiting. They tap, they pick a time, they're confirmed.</p>
+        <span class="proof-pill">Approved Google Reserve partner</span>
       </div>
     </div>
   </div>
@@ -314,176 +294,85 @@
 
 <!-- HOW IT WORKS -->
 <section class="section">
-  <div class="section-inner">
+  <div class="si">
     <div class="eyebrow">How it works</div>
     <h2>Three things happen automatically, every day.</h2>
-    <p class="section-sub">Without anyone on your team lifting a finger.</p>
-
+    <p class="ssub">Without anyone on your team lifting a finger.</p>
     <div class="steps">
       <div class="step">
         <div class="step-n">Step 1</div>
         <div class="step-t">Patient finds your booking page</div>
-        <div class="step-d">From Google, your website, or a reminder text. They see real available slots from your live EHR — not a contact form. No account needed.</div>
+        <div class="step-b">From Google, your website, or a reminder text. They see your real available slots from your live EHR. No account needed. Works on any device, any time of day.</div>
       </div>
       <div class="step">
         <div class="step-n">Step 2</div>
         <div class="step-t">They pick a time and tap "Book Now"</div>
-        <div class="step-d">Name, date of birth, email, phone, insurance — all captured at booking. They tap "Book Now" and receive an instant confirmation. Not "we'll be in touch." Confirmed.</div>
+        <div class="step-b">Name, DOB, email, phone, insurance — captured at booking. They tap "Book Now" and receive an instant confirmation. Not "we'll be in touch." Confirmed.</div>
       </div>
       <div class="step">
         <div class="step-n">Step 3</div>
         <div class="step-t">It's already in your EHR</div>
-        <div class="step-d">The appointment writes to your EHR automatically. Your front desk opens the schedule in the morning and the overnight bookings are already there. Nothing to copy. Nothing to enter.</div>
+        <div class="step-b">The appointment writes to your EHR automatically. Your front desk opens the schedule and overnight bookings are already there — confirmed, entered, nothing to do.</div>
       </div>
     </div>
 
-    <!-- Booking widget screenshot -->
-    <div class="screenshot-block">
-      <div class="screenshot-text">
-        <h3>Real available slots. Not a request form.</h3>
-        <p>The patient sees your actual open inventory — specific dates, specific times, specific doctors. They select exactly when they want to come in. That's what "online booking" actually means.</p>
-        <p>Compare that to a contact form: "We'll be in touch within 1–2 business days." One is a booking. One is a waiting game that new patients won't play.</p>
-        <span class="proof-tag">Real-time EHR availability</span>
-      </div>
-      <div class="screenshot-frame">
-        <img src="screenshots/ss_scheduler_02_widget_slots.png" alt="PatientEngage Real-Time Scheduler booking widget showing available time slots">
-      </div>
-    </div>
-
-    <!-- Book Now screenshot -->
-    <div class="screenshot-block flip">
-      <div class="screenshot-text">
+    <div class="pair">
+      <div class="ptext">
         <h3>"Book Now" — not "Submit Request."</h3>
-        <p>When a patient selects a time, they see their doctor's photo, the appointment details, the practice address, and a complete intake form. They fill it in once. They tap "Book Now." Done.</p>
-        <p>Instant confirmation by email and SMS. Patient intake captured. Staff have everything they need before the patient walks in the door.</p>
-        <span class="proof-tag">Instant confirmation · Full intake at booking</span>
+        <p>When a patient selects a time, they see their doctor's photo, the appointment details, the practice address, and a full intake form. They fill it in once and tap "Book Now."</p>
+        <p>Instant confirmation by email and SMS. Full patient intake captured before they walk in.</p>
+        <span class="proof-pill">Instant confirmation · Full intake at booking</span>
       </div>
-      <div class="screenshot-frame">
-        <img src="screenshots/ss_scheduler_03_book_now.png" alt="PatientEngage booking confirmation form with Book Now button">
+      <div class="pframe">
+        <img src="screenshots/ss_scheduler_03_book_now.png" alt="PatientEngage booking form showing Book Now button">
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ZERO PENDING -->
-<section class="section section-alt">
-  <div class="section-inner">
-    <div class="eyebrow">Inside the practice</div>
-    <h2>Zero pending. Zero rejected. 598 confirmed.</h2>
-    <p class="section-sub">This is what a fully automated practice looks like from the inside. Every appointment confirmed automatically. Every one written to the EHR. Nothing waiting for a human to action.</p>
-
-    <div class="screenshot-block">
-      <div class="screenshot-frame">
-        <img src="screenshots/ss_scheduler_04_queue_zero.png" alt="PatientEngage scheduler queue showing zero pending appointments">
+    <div class="pair flip">
+      <div class="ptext">
+        <h3>Zero pending. Zero rejected. 598 confirmed.</h3>
+        <p>When automatic approval is on, the front desk doesn't confirm appointments — the system does. Instantly. The queue exists to show staff what came in, not to create work for them.</p>
+        <p>Nothing waiting. Nothing to action. Just a growing list of confirmed future patients.</p>
+        <span class="proof-pill">Automatic approval · Automatic EHR writeback</span>
       </div>
-      <div class="screenshot-text">
-        <h3>The queue your front desk doesn't have to manage.</h3>
-        <p>When automatic approval is enabled, the front desk doesn't confirm appointments — the system does. Instantly. The queue exists to show staff what came in, not to create work for them.</p>
-        <p>This practice has 598 confirmed appointments in their pipeline. Zero pending. Zero rejected. Zero writeback failures. That's the Real-Time Scheduler running exactly as designed.</p>
-        <span class="proof-tag">Automatic approval · Automatic EHR writeback</span>
+      <div class="pframe">
+        <img src="screenshots/ss_scheduler_04_queue_zero.png" alt="PatientEngage scheduler queue showing zero pending">
       </div>
     </div>
   </div>
 </section>
 
 <!-- CASE STUDY -->
-<section class="section">
-  <div class="section-inner">
+<section class="section section-alt">
+  <div class="si">
     <div class="eyebrow">Real results</div>
     <h2>77 new patients a month. Zero staff intervention.</h2>
-
-    <div class="case-study">
+    <div class="case">
       <div class="case-stats">
-        <div class="case-stat">
-          <div class="case-stat-n">385</div>
-          <div class="case-stat-l">new patients in<br>5 months</div>
-        </div>
-        <div class="case-stat">
-          <div class="case-stat-n">0%</div>
-          <div class="case-stat-l">rejection rate<br>since launch</div>
-        </div>
-        <div class="case-stat">
-          <div class="case-stat-n">100%</div>
-          <div class="case-stat-l">automatic EHR<br>writeback</div>
-        </div>
-        <div class="case-stat">
-          <div class="case-stat-n">↑477%</div>
-          <div class="case-stat-l">booking volume<br>in 5 months</div>
-        </div>
+        <div class="cs"><div class="cs-n">385</div><div class="cs-l">new patients<br>in 5 months</div></div>
+        <div class="cs"><div class="cs-n">0%</div><div class="cs-l">rejection rate<br>since launch</div></div>
+        <div class="cs"><div class="cs-n">100%</div><div class="cs-l">automatic EHR<br>writeback</div></div>
+        <div class="cs"><div class="cs-n">↑477%</div><div class="cs-l">booking volume<br>in 5 months</div></div>
       </div>
-
-      <div class="testimonial">
-        <p class="testimonial-text">"We assumed patients were booking through our website form. What we didn't realize was that half of them never heard back, or they heard back too late and had already gone somewhere else. We turned on the Real-Time Scheduler and within a few months we had more new patients coming in every month than we'd seen in years — and our front desk wasn't doing anything differently. The appointments just showed up."</p>
-        <div class="testimonial-attr">
-          <div class="avatar">CE</div>
-          <div>
-            <div class="attr-name">Independent optometry practice</div>
-            <div class="attr-practice">Celebration, FL · Launched October 2025</div>
-          </div>
+      <p class="qtext">"We assumed patients were booking through our website form. What we didn't realize was that half of them never heard back, or they heard back too late and had already gone somewhere else. We turned on the Real-Time Scheduler and within a few months we had more new patients coming in every month than we'd seen in years — and our front desk wasn't doing anything differently. The appointments just showed up."</p>
+      <div class="qattr">
+        <div class="avatar">CE</div>
+        <div>
+          <div class="qname">Independent optometry practice</div>
+          <div class="qloc">Celebration, FL &middot; Launched October 2025</div>
         </div>
       </div>
     </div>
 
-    <!-- Monthly report screenshot -->
-    <div style="margin-top:48px">
-      <div class="screenshot-block">
-        <div class="screenshot-text">
-          <h3>New patients every month, like clockwork.</h3>
-          <p>Since launching the Real-Time Scheduler in October 2025, this practice has brought in new patients every single month — averaging 77 per month, accelerating to 102 in March 2026.</p>
-          <p>These aren't patients who called. They didn't fill out a form and wait. They booked themselves at 10pm, got an instant confirmation, and showed up. The practice never lifted a finger.</p>
-          <span class="proof-tag">73% of all bookings are new patients</span>
-        </div>
-        <div class="screenshot-frame">
-          <img src="screenshots/ss_scheduler_07_monthly_report.png" alt="PatientEngage scheduler monthly report showing consistent new patient bookings">
-        </div>
+    <div class="pair">
+      <div class="pframe">
+        <img src="screenshots/ss_scheduler_07_monthly_report.png" alt="Monthly report showing consistent new patient bookings">
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- BENEFITS -->
-<section class="section section-alt">
-  <div class="section-inner">
-    <div class="eyebrow">Why it works</div>
-    <h2>Built for independent optometry. Not adapted from something else.</h2>
-    <p class="section-sub">Every feature was designed around how independent practices actually work — not how enterprise health systems work.</p>
-
-    <div class="benefits-grid">
-      <div class="benefit">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 18 18" fill="none" stroke="#1B5FA8" stroke-width="1.5" stroke-linecap="round">
-            <circle cx="9" cy="9" r="7.5"/><path d="M9 5.5v4l2.5 2.5"/>
-          </svg>
-        </div>
-        <div class="benefit-title">Available 168 hours a week</div>
-        <div class="benefit-desc">Your front desk is available 30 hours a week. Your patients need to book 168. The Real-Time Scheduler covers the other 138 — evenings, weekends, holidays — without adding to anyone's workload.</div>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 18 18" fill="none" stroke="#1B5FA8" stroke-width="1.5" stroke-linecap="round">
-            <rect x="2" y="3" width="14" height="12" rx="2.5"/><path d="M5 1.5v3M13 1.5v3M2 8h14"/>
-          </svg>
-        </div>
-        <div class="benefit-title">Appointment types from your EHR</div>
-        <div class="benefit-desc">Appointment types are pulled directly from your EHR and mapped to the scheduler. Patients only see slots appropriate for their exam type. No one books a contact lens fitting into a routine exam slot.</div>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 18 18" fill="none" stroke="#00A3A3" stroke-width="1.5" stroke-linecap="round">
-            <path d="M9 2L11 7h5l-4 3 1.5 5L9 12l-4.5 3L6 10 2 7h5z"/>
-          </svg>
-        </div>
-        <div class="benefit-title">New patient acquisition — tracked</div>
-        <div class="benefit-desc">Every booking is flagged as New Patient or Returning at intake. You always know exactly how many new patients the Scheduler is bringing in — by month, by provider, by location.</div>
-      </div>
-      <div class="benefit">
-        <div class="benefit-icon">
-          <svg viewBox="0 0 18 18" fill="none" stroke="#00A3A3" stroke-width="1.5" stroke-linecap="round">
-            <path d="M3 13l4-4 3 3 5-6"/>
-          </svg>
-        </div>
-        <div class="benefit-title">8 EHR integrations with auto-writeback</div>
-        <div class="benefit-desc">Eyefinity Cloud, OfficeMate, RevolutionEHR, Uprise/VisionWeb, OD Office Pro, and FoxFire all support automatic writeback. Appointment confirmed → EHR updated. No copying, no pasting, no reconciling.</div>
+      <div class="ptext">
+        <h3>New patients every month, like clockwork.</h3>
+        <p>Since launching in October 2025, this practice brought in new patients every single month — averaging 77 per month, accelerating to 102 in March 2026.</p>
+        <p>These patients didn't fill out a form and wait. They booked at 10pm, got an instant confirmation, and showed up. Nobody on staff touched a single booking.</p>
+        <span class="proof-pill">73% of all bookings are new patients</span>
       </div>
     </div>
   </div>
@@ -491,48 +380,45 @@
 
 <!-- OBJECTIONS -->
 <section class="section">
-  <div class="section-inner">
+  <div class="si">
     <div class="eyebrow">Common questions</div>
     <h2>Things practice owners ask before saying yes.</h2>
-    <p class="section-sub">Every objection below is one we hear regularly. Here's the honest answer to each one.</p>
+    <p class="ssub">Every objection below is one we hear regularly. Here's the honest answer to each one.</p>
 
-    <div class="objections">
-      <div class="objection" onclick="toggleObj(this)">
-        <div class="objection-q">"I don't want patients dropping themselves into the wrong slots." <span class="arrow">↓</span></div>
-        <div class="objection-a">Appointment types in the Real-Time Scheduler are mapped directly from your EHR. A patient booking a comprehensive exam can only land in a comprehensive exam slot. A contact lens fitting goes into a contact lens fitting slot. The EHR's own scheduling rules govern what's available — PatientEngage respects them. Practices that want an additional layer of human review can enable manual approval and confirm each request before it's finalized.</div>
-      </div>
-      <div class="objection" onclick="toggleObj(this)">
-        <div class="objection-q">"I already have a Book Now button on my site." <span class="arrow">↓</span></div>
-        <div class="objection-a">If your button sends an email to your front desk, you don't have online booking — you have a contact form. The difference is confirmation. A contact form creates a lead that someone has to chase. The Real-Time Scheduler creates a confirmed patient who received an instant confirmation and is already in your EHR calendar before anyone on your team sees the request. One captures patients. One loses them while you sleep.</div>
-      </div>
-      <div class="objection" onclick="toggleObj(this)">
-        <div class="objection-q">"I already pay for Weave or SolutionReach." <span class="arrow">↓</span></div>
-        <div class="objection-a">Weave is a phone system with scheduling features added. SolutionReach is a recall and retention platform. Neither was designed as a new patient acquisition channel, and neither has Google Reserve integration. The Real-Time Scheduler captures patients at the moment they're searching — in Google, after hours, on mobile — before they ever reach your front desk. It works alongside your existing tools, not instead of them.</div>
-      </div>
-      <div class="objection" onclick="toggleObj(this)">
-        <div class="objection-q">"My front desk is already overwhelmed." <span class="arrow">↓</span></div>
-        <div class="objection-a">That's exactly why this exists. Every appointment the Real-Time Scheduler confirms automatically is one fewer callback, one fewer data entry task, and one fewer "did that get added to the schedule?" conversation. The queue shrinks. The phone stops ringing for bookings. Staff attention shifts to the patients already in the room.</div>
-      </div>
-      <div class="objection" onclick="toggleObj(this)">
-        <div class="objection-q">"Our patients prefer to call. We don't want to push them online." <span class="arrow">↓</span></div>
-        <div class="objection-a">Nobody is pushing your patients anywhere. The Real-Time Scheduler sits alongside your phone line — it doesn't replace it. Patients who prefer to call still call. The Scheduler captures the ones who searched Google at 9pm, the ones who hate being put on hold, the ones who are new to the area and weren't going to call a practice they've never heard of. Those patients weren't going to call anyway. Without the Scheduler, you simply never hear from them.</div>
-      </div>
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"I don't want patients dropping themselves into the wrong slots." <span class="arr">↓</span></div>
+      <div class="obj-a">Appointment types in the Real-Time Scheduler are mapped directly from your EHR. A patient booking a comprehensive exam can only land in a comprehensive exam slot. The EHR's own scheduling rules govern what's available — PatientEngage respects them entirely. Practices that want an extra layer of review can enable manual approval and confirm each request before it's finalized.</div>
+    </div>
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"I already have a Book Now button on my site." <span class="arr">↓</span></div>
+      <div class="obj-a">If your button sends an email to your front desk, you don't have online booking — you have a contact form. A contact form creates a lead someone has to chase. The Real-Time Scheduler creates a confirmed patient who received an instant confirmation and is already in your EHR before anyone on your team sees the request. One captures patients. One loses them while you sleep.</div>
+    </div>
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"I already pay for Weave or SolutionReach." <span class="arr">↓</span></div>
+      <div class="obj-a">Weave is a phone system with scheduling features added. SolutionReach is a recall and retention platform. Neither was designed as a new patient acquisition channel, and neither has Google Reserve integration. The Real-Time Scheduler works alongside your existing tools, not instead of them.</div>
+    </div>
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"My front desk is already overwhelmed." <span class="arr">↓</span></div>
+      <div class="obj-a">That's exactly why this exists. Every appointment the Real-Time Scheduler confirms automatically is one fewer callback, one fewer data entry task, and one fewer "did that get added to the schedule?" conversation. The queue shrinks. The phone stops ringing for bookings. Staff attention shifts to the patients already in the room.</div>
+    </div>
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"Our patients prefer to call. We don't want to push them online." <span class="arr">↓</span></div>
+      <div class="obj-a">Nobody is pushing your patients anywhere. The Real-Time Scheduler sits alongside your phone line — it doesn't replace it. Patients who prefer to call still call. The Scheduler captures the ones who searched Google at 9pm, the ones who hate being put on hold, and the ones who are new to the area and weren't going to call a practice they've never heard of. Those patients weren't going to call anyway. Without the Scheduler, you simply never hear from them.</div>
     </div>
   </div>
 </section>
 
-<!-- COMPETITIVE -->
+<!-- COMPARISON TABLE -->
 <section class="section section-alt">
-  <div class="section-inner">
-    <div class="eyebrow">How we compare</div>
+  <div class="si">
+    <div class="eyebrow">Why PatientEngage</div>
     <h2>The only scheduler built as a new patient acquisition channel.</h2>
-    <p class="section-sub">Every other scheduling tool was designed to make it easier for existing patients to rebook. PatientEngage was designed to capture new patients at the moment they decide they want an appointment.</p>
-
-    <div class="comp-table-wrap">
+    <p class="ssub">Every other tool was designed to make it easier for existing patients to rebook. PatientEngage was designed to capture new patients at the moment they decide they want an appointment.</p>
+    <div class="tw">
       <table>
         <thead>
           <tr>
-            <th style="width:30%">Feature</th>
+            <th style="width:28%">Feature</th>
             <th class="pe">PatientEngage</th>
             <th>NexHealth</th>
             <th>Weave</th>
@@ -541,99 +427,39 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>Real-time EHR booking</td>
-            <td class="pe win">Yes</td>
-            <td>Yes</td>
-            <td>Partial</td>
-            <td>Yes</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <td>Auto EHR writeback</td>
-            <td class="pe win">Yes (6 EHRs)</td>
-            <td>Yes</td>
-            <td>Partial</td>
-            <td>Partial</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <td>Google Reserve integration</td>
-            <td class="pe win">Yes</td>
-            <td>Partial*</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-          </tr>
-          <tr>
-            <td>Built for optometry</td>
-            <td class="pe win">Yes</td>
-            <td>No</td>
-            <td>No</td>
-            <td>Yes</td>
-            <td>No</td>
-          </tr>
-          <tr>
-            <td>New patient acquisition focus</td>
-            <td class="pe win">Yes</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-            <td>No</td>
-          </tr>
-          <tr>
-            <td>HIPAA compliant</td>
-            <td class="pe win">Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-            <td>Yes</td>
-          </tr>
-          <tr>
-            <td>Independent practice pricing</td>
-            <td class="pe win">Yes</td>
-            <td>No</td>
-            <td>Partial</td>
-            <td>Yes</td>
-            <td>No</td>
-          </tr>
-          <tr>
-            <td>Setup time</td>
-            <td class="pe win">1 day</td>
-            <td>Weeks</td>
-            <td>Weeks</td>
-            <td>Days</td>
-            <td>Days</td>
-          </tr>
+          <tr><td>Real-time EHR booking</td><td class="pe win">Yes</td><td>Yes</td><td>Partial</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Auto EHR writeback</td><td class="pe win">Yes — 6 EHRs</td><td>Yes</td><td>Partial</td><td>Partial</td><td>Yes</td></tr>
+          <tr><td>Google Reserve</td><td class="pe win">Yes</td><td>Partial*</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Built for optometry</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>Yes</td><td>No</td></tr>
+          <tr><td>New patient acquisition focus</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>HIPAA compliant</td><td class="pe win">Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Independent practice pricing</td><td class="pe win">Yes</td><td>No</td><td>Partial</td><td>Yes</td><td>No</td></tr>
+          <tr><td>Setup time</td><td class="pe win">1 day</td><td>Weeks</td><td>Weeks</td><td>Days</td><td>Days</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="table-note">*NexHealth Google Reserve integration available on select plans and requires additional configuration.</p>
+    <p class="tnote">*NexHealth Google Reserve integration available on select plans and requires additional configuration.</p>
   </div>
 </section>
 
 <!-- CTA -->
-<section class="cta-section">
+<section class="cta">
   <h2>Try it free for 14 days.</h2>
   <p class="cta-sub">No credit card. No commitment.<br>See it working in your practice before you decide anything.</p>
-  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-    <button class="btn-teal" style="font-size:15px;padding:15px 36px">Book a live demo</button>
-    <button class="btn-outline-lg" style="font-size:15px;padding:15px 36px">Sign up now</button>
+  <div class="cta-btns">
+    <button class="btn-teal-pill">Book a live demo</button>
+    <button class="btn-ghost-pill">Sign up now</button>
   </div>
   <p class="cta-fine">Free 14-day trial &middot; No credit card &middot; Setup in one day &middot; Or <a>talk to us first</a></p>
 </section>
 
-<!-- FOOTER -->
 <footer>
-  <span class="footer-logo">PatientEngage</span>
-  <span class="footer-copy">© 2026 · patientengage.ai</span>
+  <span class="flogo">PatientEngage</span>
+  <span class="fcopy">&copy; 2026 &middot; patientengage.ai</span>
 </footer>
 
 <script>
-function toggleObj(el) {
-  el.classList.toggle('open');
-}
+function toggle(el) { el.classList.toggle('open'); }
 </script>
-
 </body>
 </html>
