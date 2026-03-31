@@ -9,261 +9,142 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --navy:   #0F2A4A;
-      --blue:   #1B5FA8;
-      --teal:   #00A3A3;
-      --green:  #0F6E56;
-      --red:    #DC2626;
-      --amber:  #D97706;
-      --bg:     #F5F7FA;
-      --card:   #ffffff;
-      --border: #E2E8F0;
-      --muted:  #94A3B8;
-      --text:   #0F2A4A;
-      --sub:    #64748B;
+      --navy:#0F2A4A; --blue:#1B5FA8; --teal:#00A3A3; --green:#0F6E56;
+      --red:#DC2626; --amber:#D97706; --bg:#F5F7FA; --card:#fff;
+      --border:#E2E8F0; --muted:#94A3B8; --text:#0F2A4A; --sub:#64748B;
     }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      min-height: 100vh;
-      -webkit-font-smoothing: antialiased;
-    }
-
-    /* ── HEADER ── */
-    header {
-      background: var(--navy);
-      padding: 0 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 56px;
-    }
-    .header-logo { font-family: 'Syne', sans-serif; font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -.2px; }
-    .header-sub { font-size: 12px; color: rgba(255,255,255,.4); }
-    .live-link { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #5DCAA5; text-decoration: none; font-weight: 600; }
-    .live-dot { width: 6px; height: 6px; border-radius: 50%; background: #5DCAA5; animation: pulse 2s infinite; }
+    body { font-family:'DM Sans',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; -webkit-font-smoothing:antialiased; }
+    header { background:var(--navy); padding:0 40px; display:flex; align-items:center; justify-content:space-between; height:56px; }
+    .header-logo { font-family:'Syne',sans-serif; font-size:15px; font-weight:800; color:#fff; }
+    .header-sub { font-size:12px; color:rgba(255,255,255,.4); }
+    .live-link { display:flex; align-items:center; gap:6px; font-size:12px; color:#5DCAA5; text-decoration:none; font-weight:600; }
+    .live-dot { width:6px; height:6px; border-radius:50%; background:#5DCAA5; animation:pulse 2s infinite; }
     @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
-
-    /* ── LAYOUT ── */
-    .layout { display: grid; grid-template-columns: 400px 1fr; gap: 24px; padding: 28px 40px; max-width: 1100px; margin: 0 auto; }
-
-    /* ── CARD ── */
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
-    .card-head { padding: 18px 22px 14px; border-bottom: 1px solid var(--border); }
-    .card-title { font-family: 'Syne', sans-serif; font-size: 14px; font-weight: 700; color: var(--navy); }
-    .card-desc { font-size: 12px; color: var(--muted); margin-top: 3px; }
-    .card-body { padding: 22px; }
-
-    /* ── DROP ZONE ── */
+    .layout { display:grid; grid-template-columns:420px 1fr; gap:24px; padding:28px 40px; max-width:1100px; margin:0 auto; }
+    .card { background:var(--card); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+    .card-head { padding:18px 22px 14px; border-bottom:1px solid var(--border); }
+    .card-title { font-family:'Syne',sans-serif; font-size:14px; font-weight:700; color:var(--navy); }
+    .card-desc { font-size:12px; color:var(--muted); margin-top:3px; }
+    .card-body { padding:22px; }
+    .field-label { display:block; font-size:12px; font-weight:600; color:var(--sub); margin-bottom:6px; letter-spacing:.2px; }
+    select {
+      width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:8px;
+      font-family:'DM Sans',sans-serif; font-size:13px; color:var(--navy);
+      background:#fff; margin-bottom:16px; cursor:pointer;
+    }
+    select:focus { outline:none; border-color:var(--teal); }
     .dropzone {
-      border: 2px dashed var(--border);
-      border-radius: 10px;
-      padding: 32px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: all .2s;
-      margin-bottom: 16px;
-      position: relative;
+      border:2px dashed var(--border); border-radius:10px; padding:28px 20px;
+      text-align:center; cursor:pointer; transition:all .2s; margin-bottom:16px; position:relative;
     }
-    .dropzone:hover, .dropzone.over { border-color: var(--teal); background: #F0FDFB; }
-    .dropzone.has-file { border-color: var(--green); background: #F0FDF9; border-style: solid; }
-    .dropzone input[type=file] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
-    .dz-icon { width: 40px; height: 40px; border-radius: 10px; background: var(--bg); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; }
-    .dz-icon svg { width: 20px; height: 20px; }
-    .dz-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
-    .dz-sub { font-size: 12px; color: var(--muted); }
-    .dz-file { font-size: 13px; font-weight: 600; color: var(--green); }
-
-    /* ── FORM ── */
-    label { display: block; font-size: 12px; font-weight: 600; color: var(--sub); margin-bottom: 6px; letter-spacing: .2px; }
-    textarea {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 13px;
-      color: var(--navy);
-      resize: vertical;
-      min-height: 80px;
-      transition: border-color .2s;
-      background: #fff;
-    }
-    textarea:focus { outline: none; border-color: var(--teal); }
-    textarea::placeholder { color: var(--muted); }
-
-    /* ── DEPLOY BUTTON ── */
-    .btn-deploy {
-      width: 100%;
-      background: var(--navy);
-      color: #fff;
-      border: none;
-      padding: 13px;
-      border-radius: 10px;
-      font-family: 'Syne', sans-serif;
-      font-size: 14px;
-      font-weight: 700;
-      cursor: pointer;
-      margin-top: 16px;
-      transition: background .2s, transform .1s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-    .btn-deploy:hover { background: #1a3d6b; }
-    .btn-deploy:active { transform: scale(.98); }
-    .btn-deploy:disabled { background: var(--muted); cursor: not-allowed; }
-    .btn-deploy.deploying { background: var(--teal); }
-
-    /* ── STATUS ── */
-    .status-box {
-      margin-top: 14px;
-      padding: 12px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 500;
-      display: none;
-    }
-    .status-box.success { background: #F0FDF9; color: var(--green); border: 1px solid #99F6E4; display: block; }
-    .status-box.error { background: #FEF2F2; color: var(--red); border: 1px solid #FECACA; display: block; }
-    .status-box.deploying { background: #EFF6FF; color: var(--blue); border: 1px solid #BFDBFE; display: block; }
-
-    /* ── VERSION HISTORY ── */
-    .version-list { display: flex; flex-direction: column; gap: 1px; }
-    .version-item {
-      padding: 14px 22px;
-      display: grid;
-      grid-template-columns: 52px 1fr auto;
-      gap: 12px;
-      align-items: center;
-      border-bottom: 1px solid var(--border);
-      transition: background .15s;
-    }
-    .version-item:last-child { border-bottom: none; }
-    .version-item:hover { background: #FAFCFE; }
-    .version-badge {
-      font-family: 'Syne', sans-serif;
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--blue);
-      background: #EEF4FF;
-      padding: 3px 8px;
-      border-radius: 6px;
-      text-align: center;
-    }
-    .version-badge.restored { background: #FEF3C7; color: var(--amber); }
-    .version-msg { font-size: 13px; font-weight: 500; color: var(--navy); margin-bottom: 2px; }
-    .version-ts { font-size: 11px; color: var(--muted); }
-    .version-actions { display: flex; gap: 6px; align-items: center; }
-    .git-ok { width: 8px; height: 8px; border-radius: 50%; background: var(--green); flex-shrink: 0; }
-    .git-fail { width: 8px; height: 8px; border-radius: 50%; background: var(--red); flex-shrink: 0; }
-    .btn-restore {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--sub);
-      background: var(--bg);
-      border: 1px solid var(--border);
-      padding: 4px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-family: 'DM Sans', sans-serif;
-      transition: all .15s;
-      white-space: nowrap;
-    }
-    .btn-restore:hover { border-color: var(--navy); color: var(--navy); }
-
-    .empty-state { padding: 40px 22px; text-align: center; color: var(--muted); font-size: 13px; }
-
-    /* ── RESTORE CONFIRM ── */
-    .overlay {
-      position: fixed; inset: 0; background: rgba(15,42,74,.5);
-      display: none; align-items: center; justify-content: center; z-index: 100;
-    }
-    .overlay.show { display: flex; }
-    .confirm-box {
-      background: #fff; border-radius: 14px; padding: 28px; max-width: 380px; width: 90%;
-      box-shadow: 0 20px 60px rgba(0,0,0,.2);
-    }
-    .confirm-title { font-family: 'Syne', sans-serif; font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-    .confirm-sub { font-size: 13px; color: var(--sub); line-height: 1.6; margin-bottom: 20px; }
-    .confirm-actions { display: flex; gap: 8px; justify-content: flex-end; }
-    .btn-cancel { padding: 8px 18px; border-radius: 8px; border: 1px solid var(--border); background: #fff; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
-    .btn-confirm-restore { padding: 8px 18px; border-radius: 8px; border: none; background: var(--navy); color: #fff; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; }
+    .dropzone:hover, .dropzone.over { border-color:var(--teal); background:#F0FDFB; }
+    .dropzone.has-file { border-color:var(--green); background:#F0FDF9; border-style:solid; }
+    .dropzone input[type=file] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+    .dz-title { font-size:14px; font-weight:600; color:var(--navy); margin-bottom:4px; }
+    .dz-sub { font-size:12px; color:var(--muted); }
+    .dz-file { font-size:13px; font-weight:600; color:var(--green); }
+    textarea { width:100%; padding:10px 14px; border:1px solid var(--border); border-radius:8px; font-family:'DM Sans',sans-serif; font-size:13px; color:var(--navy); resize:vertical; min-height:80px; transition:border-color .2s; background:#fff; }
+    textarea:focus { outline:none; border-color:var(--teal); }
+    textarea::placeholder { color:var(--muted); }
+    .btn-deploy { width:100%; background:var(--navy); color:#fff; border:none; padding:13px; border-radius:10px; font-family:'Syne',sans-serif; font-size:14px; font-weight:700; cursor:pointer; margin-top:16px; transition:background .2s, transform .1s; display:flex; align-items:center; justify-content:center; gap:8px; }
+    .btn-deploy:hover { background:#1a3d6b; }
+    .btn-deploy:active { transform:scale(.98); }
+    .btn-deploy:disabled { background:var(--muted); cursor:not-allowed; }
+    .btn-deploy.deploying { background:var(--teal); }
+    .status-box { margin-top:14px; padding:12px 14px; border-radius:8px; font-size:13px; font-weight:500; display:none; }
+    .status-box.success { background:#F0FDF9; color:var(--green); border:1px solid #99F6E4; display:block; }
+    .status-box.error { background:#FEF2F2; color:var(--red); border:1px solid #FECACA; display:block; }
+    .status-box.deploying { background:#EFF6FF; color:var(--blue); border:1px solid #BFDBFE; display:block; }
+    .version-list { display:flex; flex-direction:column; gap:1px; }
+    .version-item { padding:14px 22px; display:grid; grid-template-columns:52px 80px 1fr auto; gap:10px; align-items:center; border-bottom:1px solid var(--border); transition:background .15s; }
+    .version-item:last-child { border-bottom:none; }
+    .version-item:hover { background:#FAFCFE; }
+    .version-badge { font-family:'Syne',sans-serif; font-size:11px; font-weight:800; color:var(--blue); background:#EEF4FF; padding:3px 8px; border-radius:6px; text-align:center; }
+    .version-badge.restored { background:#FEF3C7; color:var(--amber); }
+    .page-tag { font-size:10px; font-weight:700; padding:2px 8px; border-radius:10px; background:var(--bg); color:var(--sub); text-align:center; }
+    .version-msg { font-size:13px; font-weight:500; color:var(--navy); margin-bottom:2px; }
+    .version-ts { font-size:11px; color:var(--muted); }
+    .version-actions { display:flex; gap:6px; align-items:center; }
+    .git-ok { width:8px; height:8px; border-radius:50%; background:var(--green); flex-shrink:0; }
+    .git-fail { width:8px; height:8px; border-radius:50%; background:var(--red); flex-shrink:0; }
+    .btn-restore { font-size:11px; font-weight:600; color:var(--sub); background:var(--bg); border:1px solid var(--border); padding:4px 10px; border-radius:6px; cursor:pointer; font-family:'DM Sans',sans-serif; transition:all .15s; white-space:nowrap; }
+    .btn-restore:hover { border-color:var(--navy); color:var(--navy); }
+    .empty-state { padding:40px 22px; text-align:center; color:var(--muted); font-size:13px; }
+    .overlay { position:fixed; inset:0; background:rgba(15,42,74,.5); display:none; align-items:center; justify-content:center; z-index:100; }
+    .overlay.show { display:flex; }
+    .confirm-box { background:#fff; border-radius:14px; padding:28px; max-width:380px; width:90%; }
+    .confirm-title { font-family:'Syne',sans-serif; font-size:16px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+    .confirm-sub { font-size:13px; color:var(--sub); line-height:1.6; margin-bottom:20px; }
+    .confirm-actions { display:flex; gap:8px; justify-content:flex-end; }
+    .btn-cancel { padding:8px 18px; border-radius:8px; border:1px solid var(--border); background:#fff; font-size:13px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
+    .btn-confirm-restore { padding:8px 18px; border-radius:8px; border:none; background:var(--navy); color:#fff; font-size:13px; font-weight:600; cursor:pointer; font-family:'DM Sans',sans-serif; }
   </style>
 </head>
 <body>
-
 <header>
   <div>
     <div class="header-logo">PatientEngage</div>
     <div class="header-sub">Deploy Dashboard</div>
   </div>
-  <a class="live-link" href="https://lennyeyecarepro.github.io/patientengage-scheduler" target="_blank">
-    <span class="live-dot"></span>
-    Live site ↗
+  <a class="live-link" href="https://patientengage.vercel.app" target="_blank">
+    <span class="live-dot"></span>Live site &#8599;
   </a>
 </header>
 
 <div class="layout">
-
-  <!-- LEFT: DEPLOY -->
   <div>
     <div class="card">
       <div class="card-head">
         <div class="card-title">Deploy a new version</div>
-        <div class="card-desc">Drop in your HTML file, describe what changed, hit deploy.</div>
+        <div class="card-desc">Choose a page, drop in the HTML file, describe what changed, hit deploy.</div>
       </div>
       <div class="card-body">
+        <label class="field-label">Which page are you updating?</label>
+        <select id="pageSelect">
+          <option value="scheduler">Scheduler</option>
+          <option value="google-reserve">Google Reserve</option>
+          <option value="ai-voice-agent">AI Voice Agent</option>
+          <option value="reminders">Reminders</option>
+        </select>
 
         <div class="dropzone" id="dropzone">
           <input type="file" id="fileInput" accept=".html">
-          <div class="dz-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="#94A3B8" stroke-width="1.5" stroke-linecap="round">
-              <path d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/>
-            </svg>
-          </div>
           <div class="dz-title" id="dz-title">Drop HTML file here</div>
           <div class="dz-sub" id="dz-sub">or click to browse</div>
         </div>
 
         <div style="margin-bottom:16px">
-          <label>What changed in this version?</label>
-          <textarea id="message" placeholder="e.g. Updated headline copy, added testimonial from Dr. Reid, fixed mobile layout"></textarea>
+          <label class="field-label">What changed in this version?</label>
+          <textarea id="message" placeholder="e.g. Updated headline, fixed image paths, added testimonial"></textarea>
         </div>
 
         <button class="btn-deploy" id="deployBtn" onclick="deploy()" disabled>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Deploy to GitHub
+          Deploy to Vercel
         </button>
 
         <div class="status-box" id="statusBox"></div>
-
       </div>
     </div>
   </div>
 
-  <!-- RIGHT: VERSION HISTORY -->
   <div>
     <div class="card">
       <div class="card-head">
         <div class="card-title">Version history</div>
-        <div class="card-desc">Every deploy is saved. Click restore to roll back to any version.</div>
+        <div class="card-desc">Every deploy is saved. Click restore to roll back any page to any version.</div>
       </div>
       <div class="version-list" id="versionList">
-        <div class="empty-state">No deploys yet — deploy your first version to see history here.</div>
+        <div class="empty-state">No deploys yet.</div>
       </div>
     </div>
   </div>
-
 </div>
 
-<!-- RESTORE CONFIRM OVERLAY -->
 <div class="overlay" id="overlay">
   <div class="confirm-box">
     <div class="confirm-title">Restore this version?</div>
-    <div class="confirm-sub" id="confirmSub">This will overwrite the current live page with the selected version and push it to GitHub.</div>
+    <div class="confirm-sub" id="confirmSub">This will overwrite the current live page and push to GitHub.</div>
     <div class="confirm-actions">
       <button class="btn-cancel" onclick="closeOverlay()">Cancel</button>
       <button class="btn-confirm-restore" id="confirmBtn">Yes, restore it</button>
@@ -275,7 +156,6 @@
   let selectedFile = null;
   let restoreVersion = null;
 
-  // ── FILE HANDLING ──
   const dropzone = document.getElementById('dropzone');
   const fileInput = document.getElementById('fileInput');
 
@@ -287,43 +167,38 @@
     const file = e.dataTransfer.files[0];
     if (file && file.name.endsWith('.html')) setFile(file);
   });
-  fileInput.addEventListener('change', () => {
-    if (fileInput.files[0]) setFile(fileInput.files[0]);
-  });
+  fileInput.addEventListener('change', () => { if (fileInput.files[0]) setFile(fileInput.files[0]); });
 
   function setFile(file) {
     selectedFile = file;
     dropzone.classList.add('has-file');
     document.getElementById('dz-title').innerHTML = `<span class="dz-file">${file.name}</span>`;
-    document.getElementById('dz-sub').textContent = `${(file.size / 1024).toFixed(1)} KB — ready to deploy`;
+    document.getElementById('dz-sub').textContent = `${(file.size/1024).toFixed(1)} KB — ready to deploy`;
     document.getElementById('deployBtn').disabled = false;
   }
 
-  // ── DEPLOY ──
   async function deploy() {
     if (!selectedFile) return;
     const message = document.getElementById('message').value.trim();
-    if (!message) {
-      showStatus('Please describe what changed in this version.', 'error');
-      return;
-    }
+    const page    = document.getElementById('pageSelect').value;
+    if (!message) { showStatus('Please describe what changed.', 'error'); return; }
 
     const btn = document.getElementById('deployBtn');
     btn.disabled = true;
     btn.classList.add('deploying');
-    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Deploying...';
-    showStatus('Uploading file and pushing to GitHub...', 'deploying');
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg> Deploying...';
+    showStatus(`Deploying ${page} to Vercel...`, 'deploying');
 
     const formData = new FormData();
     formData.append('file', selectedFile);
     formData.append('message', message);
+    formData.append('page', page);
 
     try {
-      const res  = await fetch('/api/deploy', { method: 'POST', body: formData });
+      const res  = await fetch('/api/deploy', { method:'POST', body:formData });
       const data = await res.json();
-
       if (data.ok) {
-        showStatus(`Version ${data.version} deployed successfully. Live in ~60 seconds.`, 'success');
+        showStatus(`Version ${data.version} deployed. Live at patientengage.vercel.app/${page} in ~30 seconds.`, 'success');
         document.getElementById('message').value = '';
         selectedFile = null;
         dropzone.classList.remove('has-file');
@@ -333,13 +208,13 @@
       } else {
         showStatus(`Deploy failed: ${data.error || 'Unknown error'}`, 'error');
       }
-    } catch (e) {
+    } catch(e) {
       showStatus('Could not reach the deploy server. Make sure deploy_server.py is running.', 'error');
     }
 
     btn.disabled = false;
     btn.classList.remove('deploying');
-    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Deploy to GitHub';
+    btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> Deploy to Vercel';
   }
 
   function showStatus(msg, type) {
@@ -348,68 +223,48 @@
     box.className = `status-box ${type}`;
   }
 
-  // ── VERSION HISTORY ──
   async function loadLog() {
     try {
-      const res  = await fetch('/api/log');
-      const log  = await res.json();
+      const res = await fetch('/api/log');
+      const log = await res.json();
       const list = document.getElementById('versionList');
-
-      if (!log.length) {
-        list.innerHTML = '<div class="empty-state">No deploys yet — deploy your first version to see history here.</div>';
-        return;
-      }
-
-      list.innerHTML = log.map(entry => `
+      if (!log.length) { list.innerHTML = '<div class="empty-state">No deploys yet.</div>'; return; }
+      list.innerHTML = log.map(e => `
         <div class="version-item">
-          <div class="version-badge ${entry.restored_from ? 'restored' : ''}">v${entry.version}</div>
+          <div class="version-badge ${e.restored_from ? 'restored':''}"">v${e.version}</div>
+          <div class="page-tag">${e.page || 'scheduler'}</div>
           <div>
-            <div class="version-msg">${entry.message}</div>
-            <div class="version-ts">${entry.timestamp}${entry.restored_from ? ` · restored from v${entry.restored_from}` : ''}</div>
+            <div class="version-msg">${e.message}</div>
+            <div class="version-ts">${e.timestamp}${e.restored_from ? ` · restored from v${e.restored_from}`:''}</div>
           </div>
           <div class="version-actions">
-            <div class="${entry.git_ok ? 'git-ok' : 'git-fail'}" title="${entry.git_ok ? 'Pushed to GitHub' : 'Git push failed'}"></div>
-            <button class="btn-restore" onclick="confirmRestore('${entry.version}', '${entry.message.replace(/'/g, "\\'")}')">Restore</button>
+            <div class="${e.git_ok ? 'git-ok':'git-fail'}" title="${e.git_ok ? 'Pushed':'Push failed'}"></div>
+            <button class="btn-restore" onclick="confirmRestore('${e.version}','${(e.message||'').replace(/'/g,"\\'")}')">Restore</button>
           </div>
-        </div>
-      `).join('');
-    } catch (e) {
-      console.error('Could not load log', e);
-    }
+        </div>`).join('');
+    } catch(e) { console.error(e); }
   }
 
-  // ── RESTORE ──
   function confirmRestore(version, message) {
     restoreVersion = version;
-    document.getElementById('confirmSub').textContent =
-      `This will restore v${version} ("${message}") as the live page and push it to GitHub.`;
+    document.getElementById('confirmSub').textContent = `This will restore v${version} ("${message}") and push to GitHub.`;
     document.getElementById('overlay').classList.add('show');
     document.getElementById('confirmBtn').onclick = doRestore;
   }
 
-  function closeOverlay() {
-    document.getElementById('overlay').classList.remove('show');
-    restoreVersion = null;
-  }
+  function closeOverlay() { document.getElementById('overlay').classList.remove('show'); restoreVersion = null; }
 
   async function doRestore() {
     closeOverlay();
     showStatus(`Restoring v${restoreVersion}...`, 'deploying');
     try {
-      const res  = await fetch(`/api/restore/${restoreVersion}`, { method: 'POST' });
+      const res  = await fetch(`/api/restore/${restoreVersion}`, {method:'POST'});
       const data = await res.json();
-      if (data.ok) {
-        showStatus(`Restored to v${restoreVersion}. Deployed as v${data.version}. Live in ~60 seconds.`, 'success');
-        loadLog();
-      } else {
-        showStatus(`Restore failed: ${data.error}`, 'error');
-      }
-    } catch (e) {
-      showStatus('Could not reach the deploy server.', 'error');
-    }
+      if (data.ok) { showStatus(`Restored as v${data.version}. Live in ~30 seconds.`, 'success'); loadLog(); }
+      else { showStatus(`Restore failed: ${data.error}`, 'error'); }
+    } catch(e) { showStatus('Could not reach the deploy server.', 'error'); }
   }
 
-  // ── INIT ──
   loadLog();
 </script>
 </body>

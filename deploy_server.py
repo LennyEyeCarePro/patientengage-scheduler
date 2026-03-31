@@ -4,10 +4,17 @@ from datetime import datetime
 
 app = Flask(__name__, static_folder='.')
 
-REPO_DIR     = os.path.expanduser("~/Documents/ClaudeProjects/PatientEngageWebsite")
+REPO_DIR     = os.path.expanduser("~/Documents/ClaudeProjects/patientengage")
 VERSIONS_DIR = os.path.join(REPO_DIR, ".versions")
 LOG_FILE     = os.path.join(VERSIONS_DIR, "changelog.json")
 PORT         = 8081
+
+PAGES = {
+    "scheduler":     "scheduler",
+    "google-reserve":"google-reserve",
+    "ai-voice-agent":"ai-voice-agent",
+    "reminders":     "reminders",
+}
 
 def ensure_dirs():
     os.makedirs(VERSIONS_DIR, exist_ok=True)
@@ -51,6 +58,10 @@ def index():
 def get_log():
     return jsonify(load_log())
 
+@app.route("/api/pages")
+def get_pages():
+    return jsonify(list(PAGES.keys()))
+
 @app.route("/api/deploy", methods=["POST"])
 def deploy():
     ensure_dirs()
@@ -59,32 +70,39 @@ def deploy():
 
     file    = request.files["file"]
     message = request.form.get("message", "Update page").strip()
-    html    = file.read().decode("utf-8")
-    log     = load_log()
-    version = next_version(log)
-    ts      = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    ts_file = datetime.now().strftime("%Y%m%d_%H%M%S")
+    page    = request.form.get("page", "scheduler").strip()
 
-    current_path = os.path.join(REPO_DIR, "index.html")
+    if page not in PAGES:
+        return jsonify({"ok": False, "error": f"Unknown page: {page}"}), 400
 
-    # Snapshot current version before overwriting
-    if os.path.exists(current_path) and log:
-        prev_snap = f"v{log[0]['version']}_{ts_file}_before.html"
-        shutil.copy(current_path, os.path.join(VERSIONS_DIR, prev_snap))
+    html        = file.read().decode("utf-8")
+    log         = load_log()
+    version     = next_version(log)
+    ts          = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    ts_file     = datetime.now().strftime("%Y%m%d_%H%M%S")
+    page_dir    = os.path.join(REPO_DIR, PAGES[page])
+    target_path = os.path.join(page_dir, "index.html")
+
+    os.makedirs(page_dir, exist_ok=True)
+
+    # Snapshot previous version
+    if os.path.exists(target_path) and log:
+        prev_snap = f"{page}_v{log[0]['version']}_{ts_file}_before.html"
+        shutil.copy(target_path, os.path.join(VERSIONS_DIR, prev_snap))
 
     # Save new version snapshot
-    new_snapshot = f"v{version}_{ts_file}.html"
+    new_snapshot = f"{page}_v{version}_{ts_file}.html"
     with open(os.path.join(VERSIONS_DIR, new_snapshot), "w", encoding="utf-8") as f:
         f.write(html)
 
     # Write to repo
-    with open(current_path, "w", encoding="utf-8") as f:
+    with open(target_path, "w", encoding="utf-8") as f:
         f.write(html)
 
     # Git commit and push
     git_results = run_git([
-        "git add index.html",
-        f'git commit -m "v{version} — {message}"',
+        f"git add {PAGES[page]}/index.html",
+        f'git commit -m "v{version} [{page}] — {message}"',
         "git push"
     ], cwd=REPO_DIR)
 
@@ -92,11 +110,12 @@ def deploy():
 
     entry = {
         "version":   version,
+        "page":      page,
         "timestamp": ts,
         "message":   message,
         "snapshot":  new_snapshot,
         "git_ok":    git_ok,
-        "live_url":  "https://lennyeyecarepro.github.io/patientengage-scheduler"
+        "live_url":  f"https://patientengage.vercel.app/{page}"
     }
     log.insert(0, entry)
     save_log(log)
@@ -115,26 +134,31 @@ def restore(version_id):
     if not os.path.exists(snap_path):
         return jsonify({"ok": False, "error": "Snapshot file missing"}), 404
 
-    shutil.copy(snap_path, os.path.join(REPO_DIR, "index.html"))
+    page     = entry.get("page", "scheduler")
+    page_dir = os.path.join(REPO_DIR, PAGES.get(page, page))
+    target   = os.path.join(page_dir, "index.html")
+
+    shutil.copy(snap_path, target)
 
     ts      = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     new_ver = next_version(log)
     message = f"Restored to v{version_id}"
 
     git_results = run_git([
-        "git add index.html",
-        f'git commit -m "v{new_ver} — {message}"',
+        f"git add {page}/index.html",
+        f'git commit -m "v{new_ver} [{page}] — {message}"',
         "git push"
     ], cwd=REPO_DIR)
 
     new_entry = {
-        "version":        new_ver,
-        "timestamp":      ts,
-        "message":        message,
-        "snapshot":       entry["snapshot"],
-        "git_ok":         all(r["ok"] for r in git_results),
-        "live_url":       "https://lennyeyecarepro.github.io/patientengage-scheduler",
-        "restored_from":  version_id
+        "version":       new_ver,
+        "page":          page,
+        "timestamp":     ts,
+        "message":       message,
+        "snapshot":      entry["snapshot"],
+        "git_ok":        all(r["ok"] for r in git_results),
+        "live_url":      f"https://patientengage.vercel.app/{page}",
+        "restored_from": version_id
     }
     log.insert(0, new_entry)
     save_log(log)

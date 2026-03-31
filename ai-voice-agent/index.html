@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Voice Agent for Optometry Practices | PatientEngage</title>
+  <meta name="description" content="Stop missing calls during lunch, after hours, and busy periods. PatientEngage AI Voice Agent answers every call and books appointments around the clock.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #0F2A4A;
+      --blue:    #1B5FA8;
+      --teal:    #00A3A3;
+      --green:   #0F6E56;
+      --green-bg:#F0FDF9;
+      --green-bd:#A7F3D0;
+      --red:     #DC2626;
+      --red-bg:  #FEF2F2;
+      --red-bd:  #FECACA;
+      --amber:   #D97706;
+      --amber-bg:#FFFBEB;
+      --slate:   #4B6278;
+      --muted:   #7A96A8;
+      --border:  #E2E8F0;
+      --bg:      #F8FAFC;
+      --blue-lt: #EEF4FF;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family:'DM Sans',sans-serif; color:var(--navy); background:#fff; -webkit-font-smoothing:antialiased; font-size:17px; line-height:1.65; }
+
+    /* NAV */
+    nav { display:flex; align-items:center; justify-content:space-between; padding:18px 48px; background:#fff; border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+    .nav-logo { font-size:17px; font-weight:800; color:var(--navy); text-decoration:none; letter-spacing:-.3px; }
+    .nav-links { display:flex; gap:28px; list-style:none; }
+    .nav-links a { font-size:14px; color:var(--muted); text-decoration:none; transition:color .2s; }
+    .nav-links a:hover { color:var(--navy); }
+    .nav-links .active { color:var(--navy); font-weight:600; border-bottom:2px solid var(--teal); padding-bottom:2px; }
+    .nav-actions { display:flex; gap:8px; }
+    .btn-outline { padding:9px 22px; border-radius:30px; border:1.5px solid var(--border); background:#fff; color:var(--navy); font-size:14px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:border-color .2s; }
+    .btn-outline:hover { border-color:var(--navy); }
+    .btn-dark { padding:9px 22px; border-radius:30px; border:none; background:var(--navy); color:#fff; font-size:14px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background .2s; }
+    .btn-dark:hover { background:#1a3d6b; }
+
+    /* HERO */
+    .hero { padding:88px 48px 72px; text-align:center; }
+    .badge { display:inline-flex; align-items:center; gap:7px; padding:6px 18px; background:var(--green-bg); border:1px solid var(--green-bd); border-radius:30px; font-size:13px; font-weight:600; color:var(--green); margin-bottom:24px; }
+    .badge-dot { width:7px; height:7px; border-radius:50%; background:var(--green); }
+    h1 { font-family:'DM Serif Display',serif; font-size:56px; font-weight:400; color:var(--navy); line-height:1.08; letter-spacing:-.5px; margin-bottom:20px; max-width:680px; margin-left:auto; margin-right:auto; }
+    h1 em { font-style:italic; color:var(--teal); }
+    .hero-sub { font-size:19px; color:var(--slate); line-height:1.7; max-width:560px; margin:0 auto 32px; }
+    .hero-cta { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
+    .btn-navy-pill { padding:14px 32px; border-radius:30px; border:none; background:var(--navy); color:#fff; font-size:15px; font-weight:700; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background .2s; }
+    .btn-navy-pill:hover { background:#1a3d6b; }
+    .btn-ghost-pill { padding:14px 32px; border-radius:30px; border:1.5px solid var(--border); background:#fff; color:var(--navy); font-size:15px; font-weight:600; font-family:'DM Sans',sans-serif; cursor:pointer; transition:border-color .2s; }
+    .btn-ghost-pill:hover { border-color:var(--navy); }
+    .hero-fine { font-size:14px; color:var(--muted); margin-bottom:0; }
+    .hero-fine strong { color:var(--navy); }
+
+    /* PHONE CTA HERO */
+    .phone-hero { margin-top:48px; padding:32px; background:var(--navy); border-radius:16px; max-width:560px; margin-left:auto; margin-right:auto; text-align:center; }
+    .phone-hero-label { font-size:13px; color:rgba(255,255,255,.5); margin-bottom:8px; letter-spacing:.3px; }
+    .phone-hero-number { font-family:'DM Serif Display',serif; font-size:42px; color:#fff; letter-spacing:1px; margin-bottom:8px; }
+    .phone-hero-sub { font-size:14px; color:rgba(255,255,255,.6); }
+    .phone-hero-sub strong { color:var(--teal); }
+
+    /* STATS */
+    .stats { display:flex; border-top:1px solid var(--border); border-bottom:1px solid var(--border); background:var(--bg); }
+    .stat { flex:1; padding:32px 24px; text-align:center; border-right:1px solid var(--border); }
+    .stat:last-child { border-right:none; }
+    .stat-n { font-family:'DM Serif Display',serif; font-size:42px; color:var(--navy); line-height:1; margin-bottom:7px; }
+    .stat-n.zero { color:var(--green); }
+    .stat-l { font-size:14px; color:var(--muted); line-height:1.5; }
+
+    /* SECTIONS */
+    .section { padding:80px 48px; }
+    .section-alt { background:var(--bg); }
+    .si { max-width:900px; margin:0 auto; }
+    .eyebrow { font-size:12px; font-weight:700; color:var(--teal); letter-spacing:1.2px; text-transform:uppercase; margin-bottom:12px; }
+    h2 { font-family:'DM Serif Display',serif; font-size:40px; font-weight:400; color:var(--navy); line-height:1.15; margin-bottom:12px; letter-spacing:-.3px; }
+    .ssub { font-size:17px; color:var(--slate); line-height:1.75; max-width:520px; margin-bottom:44px; }
+
+    /* DEAD ZONES */
+    .dz-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:40px; }
+    .dz { padding:26px; border-radius:14px; border:1px solid var(--border); background:#fff; transition:border-color .2s; }
+    .dz:hover { border-color:var(--teal); }
+    .dz-num { font-size:11px; font-weight:700; color:var(--teal); letter-spacing:.5px; margin-bottom:10px; }
+    .dz-title { font-size:16px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+    .dz-body { font-size:14px; color:var(--slate); line-height:1.7; }
+
+    .pullquote { background:var(--navy); border-radius:14px; padding:32px 40px; text-align:right; }
+    .pullquote p { font-family:'DM Serif Display',serif; font-size:22px; color:#fff; line-height:1.5; font-style:italic; margin-bottom:10px; }
+    .pullquote span { font-size:14px; color:var(--muted); }
+
+    /* STEPS */
+    .steps { display:grid; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+    .step { padding:26px; border:1px solid var(--border); border-radius:14px; background:#fff; transition:border-color .2s; }
+    .step:hover { border-color:var(--teal); }
+    .step-n { font-size:12px; font-weight:700; color:var(--teal); margin-bottom:10px; letter-spacing:.3px; }
+    .step-t { font-size:16px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+    .step-b { font-size:14px; color:var(--slate); line-height:1.7; }
+
+    /* PAIRS */
+    .pair { display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center; margin-top:56px; }
+    .pair.flip { direction:rtl; }
+    .pair.flip > * { direction:ltr; }
+    .pframe { border-radius:14px; overflow:hidden; border:1px solid var(--border); box-shadow:0 4px 28px rgba(15,42,74,.09); }
+    .pframe img { width:100%; display:block; }
+    .ptext h3 { font-family:'DM Serif Display',serif; font-size:30px; font-weight:400; color:var(--navy); line-height:1.2; margin-bottom:14px; }
+    .ptext p { font-size:15px; color:var(--slate); line-height:1.75; margin-bottom:14px; }
+    .proof-pill { display:inline-block; padding:5px 16px; background:var(--blue-lt); color:var(--blue); border-radius:20px; font-size:13px; font-weight:600; }
+    .proof-pill.green { background:var(--green-bg); color:var(--green); }
+
+    /* BEFORE/AFTER */
+    .ba-wrap { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:48px; }
+    .ba-card { padding:28px; border-radius:14px; text-align:center; }
+    .ba-card.before { background:var(--red-bg); border:1px solid var(--red-bd); }
+    .ba-card.after { background:var(--green-bg); border:1px solid var(--green-bd); }
+    .ba-label { font-size:11px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; margin-bottom:12px; }
+    .ba-card.before .ba-label { color:var(--red); }
+    .ba-card.after .ba-label { color:var(--green); }
+    .ba-number { font-family:'DM Serif Display',serif; font-size:64px; line-height:1; margin-bottom:8px; }
+    .ba-card.before .ba-number { color:var(--red); }
+    .ba-card.after .ba-number { color:var(--green); }
+    .ba-desc { font-size:14px; color:var(--slate); line-height:1.5; }
+    .ba-arrow { display:flex; align-items:center; justify-content:center; font-size:32px; color:var(--muted); }
+
+    /* CASE STUDY */
+    .case { background:linear-gradient(135deg,#F0F7FF,#F0FDFB); border:1px solid #DBEAFE; border-radius:16px; padding:40px; }
+    .case-stats { display:grid; grid-template-columns:repeat(4,1fr); border:1px solid var(--border); border-radius:12px; overflow:hidden; background:#fff; margin:22px 0 32px; }
+    .cs { padding:20px 14px; text-align:center; border-right:1px solid var(--border); }
+    .cs:last-child { border-right:none; }
+    .cs-n { font-family:'DM Serif Display',serif; font-size:34px; color:var(--navy); line-height:1; margin-bottom:5px; }
+    .cs-n.good { color:var(--green); }
+    .cs-l { font-size:13px; color:var(--muted); line-height:1.4; }
+    .qtext { font-family:'DM Serif Display',serif; font-size:20px; color:var(--navy); line-height:1.65; font-style:italic; margin-bottom:20px; }
+    .qattr { display:flex; align-items:center; gap:14px; }
+    .avatar { width:42px; height:42px; border-radius:50%; background:var(--teal); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:700; color:#fff; flex-shrink:0; }
+    .qname { font-size:14px; font-weight:700; color:var(--navy); }
+    .qloc { font-size:13px; color:var(--muted); margin-top:2px; }
+
+    /* OBJECTIONS */
+    .obj { border:1px solid var(--border); border-radius:12px; margin-bottom:10px; overflow:hidden; background:#fff; }
+    .obj-q { padding:18px 24px; font-size:15px; font-weight:600; color:var(--navy); cursor:pointer; display:flex; justify-content:space-between; align-items:center; transition:background .15s; user-select:none; line-height:1.4; }
+    .obj-q:hover { background:var(--bg); }
+    .arr { color:var(--muted); font-size:20px; transition:transform .2s; flex-shrink:0; margin-left:16px; }
+    .obj-a { padding:0 24px 20px; font-size:15px; color:var(--slate); line-height:1.75; display:none; }
+    .obj.open .obj-a { display:block; }
+    .obj.open .arr { transform:rotate(180deg); }
+
+    /* TABLE */
+    .tw { border:1px solid var(--border); border-radius:14px; overflow:hidden; overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; font-size:14px; }
+    thead th { padding:15px 18px; text-align:left; font-weight:700; color:var(--navy); background:var(--bg); border-bottom:1px solid var(--border); }
+    thead th:not(:first-child) { text-align:center; }
+    thead th.pe { background:var(--blue-lt); color:var(--blue); }
+    tbody td { padding:13px 18px; border-bottom:1px solid #F1F5F9; color:var(--slate); }
+    tbody td:not(:first-child) { text-align:center; }
+    tbody td.pe { background:#F8FBFF; }
+    tbody td.win { color:var(--green); font-weight:700; }
+    tbody tr:last-child td { border-bottom:none; }
+    tbody tr:hover td { background:var(--bg); }
+    tbody tr:hover td.pe { background:var(--blue-lt); }
+
+    /* PHONE CTA */
+    .phone-cta { padding:88px 48px; text-align:center; background:var(--navy); }
+    .phone-cta h2 { color:#fff; margin-bottom:14px; }
+    .phone-cta .ssub { color:rgba(255,255,255,.6); max-width:480px; margin-left:auto; margin-right:auto; }
+    .phone-number { font-family:'DM Serif Display',serif; font-size:56px; color:var(--teal); letter-spacing:2px; margin:28px 0 12px; line-height:1; }
+    .phone-desc { font-size:15px; color:rgba(255,255,255,.5); margin-bottom:32px; }
+    .btn-teal-pill { padding:14px 32px; border-radius:30px; border:none; background:var(--teal); color:#fff; font-size:15px; font-weight:700; font-family:'DM Sans',sans-serif; cursor:pointer; transition:background .2s; }
+    .btn-teal-pill:hover { background:#008f8f; }
+    .phone-fine { font-size:13px; color:rgba(255,255,255,.3); margin-top:16px; }
+
+    /* FOOTER */
+    footer { padding:24px 48px; display:flex; justify-content:space-between; align-items:center; border-top:1px solid var(--border); }
+    .flogo { font-size:16px; font-weight:800; color:var(--navy); }
+    .fcopy { font-size:13px; color:var(--muted); }
+
+    /* RESPONSIVE */
+    @media (max-width:768px) {
+      nav { padding:16px 20px; }
+      .nav-links { display:none; }
+      h1 { font-size:38px; }
+      .hero { padding:60px 20px 52px; }
+      .phone-hero { margin-top:36px; padding:24px 20px; }
+      .phone-hero-number { font-size:34px; }
+      .stats { flex-direction:column; }
+      .stat { border-right:none; border-bottom:1px solid var(--border); }
+      .stat:last-child { border-bottom:none; }
+      .section { padding:60px 20px; }
+      .dz-grid, .steps { grid-template-columns:1fr; }
+      .pair, .pair.flip { grid-template-columns:1fr; gap:28px; direction:ltr; }
+      .ba-wrap { grid-template-columns:1fr; }
+      .ba-arrow { transform:rotate(90deg); }
+      .case-stats { grid-template-columns:1fr 1fr; }
+      .cs:nth-child(2) { border-right:none; }
+      .cs:nth-child(3) { border-top:1px solid var(--border); }
+      h2 { font-size:30px; }
+      .pullquote { text-align:left; padding:24px; }
+      .phone-cta { padding:60px 20px; }
+      .phone-number { font-size:38px; }
+      footer { flex-direction:column; gap:8px; padding:20px; text-align:center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">PatientEngage</a>
+  <ul class="nav-links">
+    <li><a href="/scheduler">Real-Time Scheduler</a></li>
+    <li><a href="/ai-voice-agent" class="active">AI Voice Agent</a></li>
+    <li><a href="/reminders">Reminders</a></li>
+    <li><a href="#">Pricing</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-outline">Sign in</button>
+    <button class="btn-dark">Get started</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge"><span class="badge-dot"></span>Answers every call. Books appointments around the clock.</div>
+  <h1>Do you know what your <em>phone capture rate</em> is?</h1>
+  <p class="hero-sub">Most practices assume their phones are covered. They are not. PatientEngage AI Voice Agent answers every call, handles the intake, and submits the appointment request, during lunch, after hours, and on weekends, without adding a single hour to your staff's day.</p>
+  <div class="hero-cta">
+    <button class="btn-navy-pill" onclick="document.getElementById('cta').scrollIntoView({behavior:'smooth'})">Hear it for yourself</button>
+    <button class="btn-ghost-pill">Book a demo</button>
+  </div>
+  <p class="hero-fine">Call <strong>(561) 944-9490</strong> right now. That is the AI.</p>
+
+  <div class="phone-hero">
+    <div class="phone-hero-label">Try it right now</div>
+    <div class="phone-hero-number">(561) 944-9490</div>
+    <div class="phone-hero-sub">Call this number and hear exactly <strong>what your patients will hear.</strong></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-n zero">0</div>
+    <div class="stat-l">missed calls since launch<br>at active practices</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">84%</div>
+    <div class="stat-l">of calls handled<br>completely off-hours</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">4:34</div>
+    <div class="stat-l">average call duration<br>full intake conversations</div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">The problem</div>
+    <h2>Your front desk spends 80% of its day on the phone. Calls still go unanswered.</h2>
+    <p class="ssub">Every practice has four windows where the phone goes unanswered. Most have accepted them as normal.</p>
+
+    <div class="dz-grid">
+      <div class="dz">
+        <div class="dz-num">Dead Zone 1</div>
+        <div class="dz-title">The lunch hour</div>
+        <div class="dz-body">Many offices close from 12 to 1pm. Every call in that window goes to voicemail. Most patients do not leave a message. They call the next practice on Google.</div>
+      </div>
+      <div class="dz">
+        <div class="dz-num">Dead Zone 2</div>
+        <div class="dz-title">After hours</div>
+        <div class="dz-body">After 5pm, on weekends, and on holidays, every call goes to voicemail. Patients who search for an eye doctor at 8pm on a Sunday are ready to book. They will not wait until Monday morning for a callback.</div>
+      </div>
+      <div class="dz">
+        <div class="dz-num">Dead Zone 3</div>
+        <div class="dz-title">Busy periods</div>
+        <div class="dz-body">The front desk is already on a call. Another call rings through. It goes unanswered. This happens dozens of times per week at a typical practice. Staff cannot be in two conversations at once.</div>
+      </div>
+      <div class="dz">
+        <div class="dz-num">Dead Zone 4</div>
+        <div class="dz-title">Complex calls</div>
+        <div class="dz-body">A patient calls about picking up glasses and mentions their spouse needs an exam. A patient calls to ask about insurance before committing to a booking. These calls take 8 to 12 minutes and back up everyone waiting.</div>
+      </div>
+    </div>
+
+    <div class="pullquote">
+      <p>"Every missed call is a patient who found someone else. You just do not know their name."</p>
+      <span>The problem the AI Voice Agent solves</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">How it works</div>
+    <h2>Three things happen automatically, on every call.</h2>
+    <p class="ssub">Whether it is 7am, 1pm, or 11pm on a Sunday.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">Step 1</div>
+        <div class="step-t">Every call is answered</div>
+        <div class="step-b">The AI greets patients as your virtual assistant and asks how it can help. No voicemail. No busy signal. No "we will call you back." Every call gets a live response during configured hours.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">Step 2</div>
+        <div class="step-t">Full intake collected</div>
+        <div class="step-b">Name, date of birth, phone number, and insurance status are collected in conversation. Details are read back for confirmation. Before handing off, the AI asks if anyone else needs an appointment.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">Step 3</div>
+        <div class="step-t">Appointment request submitted</div>
+        <div class="step-b">The request goes directly into your PatientEngage Scheduler queue, fully documented, ready to approve or already confirmed if automatic approval is on. Nothing for staff to re-enter.</div>
+      </div>
+    </div>
+
+    <div class="pair">
+      <div class="pframe">
+        <img src="screenshots/ss_ava_01_dashboard.png" alt="AI Voice Agent dashboard showing zero missed calls">
+      </div>
+      <div class="ptext">
+        <h3>Missed Calls: 0.</h3>
+        <p>This is what the dashboard looks like when the AI Voice Agent is running. The Missed Calls metric tracks every call that went unanswered, a busy signal, or a hangup before the AI responded.</p>
+        <p>At every active practice in the network, that number is zero. Not reduced. Zero.</p>
+        <span class="proof-pill green">Zero missed calls across all active practices</span>
+      </div>
+    </div>
+
+    <div class="pair flip">
+      <div class="ptext">
+        <h3>Every call documented. No listening required.</h3>
+        <p>Every call is recorded, transcribed, and summarized automatically. The practice manager can review any call in seconds by reading the AI summary, without listening to a single recording.</p>
+        <p>Sentiment is scored per call: Positive, Neutral, or Negative. Your practice now has complete visibility into every patient phone interaction, with no additional work.</p>
+        <span class="proof-pill">Full transcript and sentiment on every call</span>
+      </div>
+      <div class="pframe">
+        <img src="screenshots/ss_ava_05_call_detail.png" alt="AI Voice Agent call detail showing transcript and sentiment scoring">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE/AFTER -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">Real results</div>
+    <h2>Before the AI. After the AI.</h2>
+    <p class="ssub">One independent optometry practice in Ida Grove, IA entered their baseline at setup. Here is what happened.</p>
+
+    <div class="ba-wrap">
+      <div class="ba-card before">
+        <div class="ba-label">Before AI Voice Agent</div>
+        <div class="ba-number">18%</div>
+        <div class="ba-desc">of all inbound calls were going unanswered. Nearly 1 in 5 patients who called never got through.</div>
+      </div>
+      <div class="ba-card after">
+        <div class="ba-label">After AI Voice Agent</div>
+        <div class="ba-number">0%</div>
+        <div class="ba-desc">missed calls. Every call answered. Every patient got a response. No exceptions.</div>
+      </div>
+    </div>
+
+    <div class="case">
+      <div class="case-stats">
+        <div class="cs"><div class="cs-n good">0%</div><div class="cs-l">missed calls<br>after launch</div></div>
+        <div class="cs"><div class="cs-n">84%</div><div class="cs-l">of calls handled<br>completely off-hours</div></div>
+        <div class="cs"><div class="cs-n">43</div><div class="cs-l">total calls handled<br>Q1 2026</div></div>
+        <div class="cs"><div class="cs-n">4:34</div><div class="cs-l">average call<br>duration</div></div>
+      </div>
+      <p class="qtext">"I did not realize how many calls we were missing. I thought we were covered. Then I saw the number. Almost one in five calls was going unanswered. Those are patients who called us, did not get through, and found someone else. We had no idea."</p>
+      <div class="qattr">
+        <div class="avatar">IG</div>
+        <div>
+          <div class="qname">Independent optometry practice</div>
+          <div class="qloc">Ida Grove, IA &middot; Running 24/7 on one dedicated line</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pair" style="margin-top:56px">
+      <div class="ptext">
+        <h3>84% of calls come in when no one is available to answer.</h3>
+        <p>At this practice, 36 of 43 total calls in Q1 2026 came in off-hours, before the office opened, during lunch, or after 5pm. Without the AI, 84% of their call volume would have gone to voicemail.</p>
+        <p>Most would not have called back. The practice would never have known they called.</p>
+        <span class="proof-pill">84% off-hours call volume — observed Q1 2026</span>
+      </div>
+      <div class="pframe">
+        <img src="screenshots/ss_ava_03_heatmap.png" alt="Call volume heatmap showing heavy off-hours activity">
+      </div>
+    </div>
+
+    <div class="pair flip" style="margin-top:56px">
+      <div class="ptext">
+        <h3>Booked before the office opens.</h3>
+        <p>Calls at 7:17am. 7:28am. 7:33am. All handled. All documented. All appointment requests submitted before a single staff member arrived at work.</p>
+        <p>These patients did not fill out a form and wait. They called, got an immediate response, and had their appointment booked before breakfast.</p>
+        <span class="proof-pill">Early morning bookings — observed call log</span>
+      </div>
+      <div class="pframe">
+        <img src="screenshots/ss_ava_04_call_log.png" alt="Call log showing early morning bookings before office opens">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJECTIONS -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">Common questions</div>
+    <h2>Things practice owners ask before saying yes.</h2>
+    <p class="ssub">These are the real objections. Here are the honest answers.</p>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"My patients are primarily seniors. If they hear a bot, they will hang up." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">The AI does not put patients through a phone tree or ask them to press numbers. It has a conversation. It greets patients warmly, listens to what they need, and responds naturally. Patients who want to speak with a staff member are transferred right away, no loop, no friction, no holding.<br><br>The experience is conversational, not robotic. The AI reads details back, confirms spelling of names, and handles the kind of careful back-and-forth that patients appreciate. And the alternative, a phone that rings and goes to voicemail, is not a warmer experience. It is just a quieter one.<br><br>Call (561) 944-9490 right now and hear it for yourself before deciding.</div>
+    </div>
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"What if a patient calls with a medical emergency? I am not comfortable with the AI handling that." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">The AI is not performing triage. It is handling appointment scheduling. Any patient who indicates urgency or asks to speak with someone is transferred to staff immediately. The AI does not attempt to assess clinical symptoms. It gets out of the way.<br><br>Consider the alternative: a patient who calls at 7pm with a concerning symptom and reaches voicemail. They leave a message that no one hears until Monday morning. The AI answers immediately, listens, and transfers to the emergency line you have configured. That is a faster path to human attention, not a slower one.</div>
+    </div>
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"I have spent years cleaning up my EHR. If the AI puts things in the wrong slots, it will wreck my clinical flow." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">The AI Voice Agent does not write to your EHR directly. It submits an appointment request into your PatientEngage Scheduler queue, exactly the same as a request from the online booking widget. The same appointment type mapping, the same approval workflow, the same EHR writeback rules your practice has already configured. Nothing bypasses your existing scheduling controls.<br><br>If your Scheduler is set to manual approval, every AI-sourced appointment waits for staff confirmation before it touches the EHR. Your clinical flow is not at risk.</div>
+    </div>
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"My patients come to me because we are not a big-box retailer. A voice bot creates a digital wall." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">A voicemail that no one listens to until Monday morning is a digital wall. A phone that rings and goes unanswered during lunch is a digital wall. A patient who calls your practice three times and never gets through and ends up at LensCrafters — that is a digital wall.<br><br>The AI Voice Agent is a warm, conversational response to every call your practice receives. It does not feel corporate to a patient who just wanted to book an appointment and got an immediate, helpful response at 7pm on a Tuesday. What feels corporate is being ignored.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">Why PatientEngage</div>
+    <h2>The only AI voice agent built for optometry.</h2>
+    <p class="ssub">Every alternative either sends a human to take a message or sends a text after you miss the call. Neither answers the phone, conducts full intake, and submits the appointment into your EHR workflow.</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:28%">Feature</th>
+            <th class="pe">PatientEngage</th>
+            <th>Ruby</th>
+            <th>PATLive</th>
+            <th>Weave</th>
+            <th>NexHealth</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>24/7 inbound AI voice</td><td class="pe win">Yes</td><td>Human</td><td>Human</td><td>No</td><td>No</td></tr>
+          <tr><td>Full booking intake</td><td class="pe win">Yes</td><td>Message only</td><td>Message only</td><td>No</td><td>No</td></tr>
+          <tr><td>EHR integration</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>Partial</td><td>Yes</td></tr>
+          <tr><td>Built for optometry</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Call analytics and heatmap</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>Partial</td><td>No</td></tr>
+          <tr><td>Before/after baseline</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Sentiment scoring</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Per-number attribution</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>HIPAA compliant</td><td class="pe win">Yes</td><td>Yes</td><td>Yes</td><td>Yes</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="phone-cta" id="cta">
+  <h2>Hear it before you decide.</h2>
+  <p class="ssub">Call this number right now. That is the AI. Same voice. Same experience. Exactly what your patients will hear.</p>
+  <div class="phone-number">(561) 944-9490</div>
+  <p class="phone-desc">Live demo line &middot; Available 24/7 &middot; No appointment needed</p>
+  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+    <button class="btn-teal-pill">Book a full demo</button>
+    <button class="btn-ghost-pill" style="border-color:rgba(255,255,255,.2);color:#fff">Sign up now</button>
+  </div>
+  <p class="phone-fine">Free 14-day trial &middot; No credit card &middot; Setup in one day</p>
+</section>
+
+<footer>
+  <span class="flogo">PatientEngage</span>
+  <span class="fcopy">&copy; 2026 &middot; patientengage.ai</span>
+</footer>
+
+<script>
+function toggle(el) { el.classList.toggle('open'); }
+</script>
+</body>
+</html>
