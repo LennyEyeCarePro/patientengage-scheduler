@@ -1,5 +1,13 @@
 [
   {
+    "version": "1.4",
+    "timestamp": "2026-03-31 13:14:12",
+    "message": "Size fixes and general front end enhancements",
+    "snapshot": "v1.4_20260331_131412.html",
+    "git_ok": true,
+    "live_url": "https://lennyeyecarepro.github.io/patientengage-scheduler"
+  },
+  {
     "version": "1.3",
     "timestamp": "2026-03-31 02:58:55",
     "message": "Google Reserve was removed",
