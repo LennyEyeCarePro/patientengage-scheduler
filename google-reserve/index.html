@@ -1,712 +1,732 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Google Reserve for Optometry | Book Online from Google | PatientEngage</title>
-  <meta name="description" content="Add a 'Book online' button to your Google Business Profile with PatientEngage Google Reserve. 1,200+ practices active. Top practices see 73% of Google visitors take action.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
-      --navy:    #0F2A4A;
-      --blue:    #1B5FA8;
-      --teal:    #00A3A3;
-      --green:   #0F6E56;
-      --green-bg:#F0FDF9;
-      --green-bd:#A7F3D0;
-      --slate:   #4B6278;
-      --muted:   #7A96A8;
-      --border:  #E2E8F0;
-      --bg:      #F8FAFC;
-      --blue-lt: #EEF4FF;
-    }
-    html { scroll-behavior: smooth; }
-    body {
-      font-family: 'DM Sans', sans-serif;
-      color: var(--navy);
-      background: #fff;
-      -webkit-font-smoothing: antialiased;
-      font-size: 17px;
-      line-height: 1.65;
-    }
-
-    /* NAV */
-    nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 48px;
-      background: #fff;
-      border-bottom: 1px solid var(--border);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-logo { font-size: 17px; font-weight: 800; color: var(--navy); text-decoration: none; letter-spacing: -.3px; }
-    .nav-links { display: flex; gap: 28px; list-style: none; }
-    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color .2s; }
-    .nav-links a:hover { color: var(--navy); }
-    .nav-links .active { color: var(--navy); font-weight: 600; border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
-    .nav-actions { display: flex; gap: 8px; }
-    .btn-outline { padding: 9px 22px; border-radius: 30px; border: 1.5px solid var(--border); background: #fff; color: var(--navy); font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color .2s; }
-    .btn-outline:hover { border-color: var(--navy); }
-    .btn-dark { padding: 9px 22px; border-radius: 30px; border: none; background: var(--navy); color: #fff; font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; }
-    .btn-dark:hover { background: #1a3d6b; }
-
-    /* HERO */
-    .hero { padding: 88px 48px 72px; text-align: center; }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 6px 18px;
-      background: var(--green-bg);
-      border: 1px solid var(--green-bd);
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--green);
-      margin-bottom: 24px;
-    }
-    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
-    h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 56px;
-      font-weight: 400;
-      color: var(--navy);
-      line-height: 1.08;
-      letter-spacing: -.5px;
-      margin-bottom: 20px;
-      max-width: 640px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    h1 em { font-style: italic; color: var(--teal); }
-    .hero-sub {
-      font-size: 19px;
-      color: var(--slate);
-      line-height: 1.7;
-      max-width: 560px;
-      margin: 0 auto 30px;
-    }
-    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
-    .btn-navy-pill { padding: 14px 32px; border-radius: 30px; border: none; background: var(--navy); color: #fff; font-size: 15px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; }
-    .btn-navy-pill:hover { background: #1a3d6b; }
-    .btn-ghost-pill { padding: 14px 32px; border-radius: 30px; border: 1.5px solid var(--border); background: #fff; color: var(--navy); font-size: 15px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color .2s; }
-    .btn-ghost-pill:hover { border-color: var(--navy); }
-    .hero-fine { font-size: 14px; color: var(--muted); margin-bottom: 56px; }
-
-    .hero-frame {
-      max-width: 700px;
-      margin: 0 auto;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 8px 48px rgba(15,42,74,.12);
-    }
-    .frame-bar {
-      background: var(--bg);
-      padding: 11px 18px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .fdot { width: 10px; height: 10px; border-radius: 50%; }
-    .furl {
-      background: #EDF2F7;
-      border-radius: 5px;
-      padding: 4px 16px;
-      font-size: 12px;
-      color: var(--muted);
-      margin-left: 12px;
-      flex: 1;
-      max-width: 340px;
-      text-align: center;
-    }
-    .hero-frame img { width: 100%; display: block; background: #f5f5f5; }
-    .hero-cap {
-      font-size: 15px;
-      color: var(--slate);
-      text-align: center;
-      margin-top: 14px;
-      line-height: 1.6;
-    }
-    .hero-cap strong { color: var(--navy); }
-
-    /* STATS */
-    .stats {
-      display: flex;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      background: var(--bg);
-    }
-    .stat { flex: 1; padding: 32px 24px; text-align: center; border-right: 1px solid var(--border); }
-    .stat:last-child { border-right: none; }
-    .stat-n {
-      font-family: 'DM Serif Display', serif;
-      font-size: 42px;
-      color: var(--navy);
-      line-height: 1;
-      margin-bottom: 7px;
-    }
-    .stat-l { font-size: 14px; color: var(--muted); line-height: 1.5; }
-
-    /* SECTIONS */
-    .section { padding: 80px 48px; }
-    .section-alt { background: var(--bg); }
-    .si { max-width: 900px; margin: 0 auto; }
-    .eyebrow {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--teal);
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-    h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 40px;
-      font-weight: 400;
-      color: var(--navy);
-      line-height: 1.15;
-      margin-bottom: 12px;
-      letter-spacing: -.3px;
-    }
-    .ssub {
-      font-size: 17px;
-      color: var(--slate);
-      line-height: 1.75;
-      max-width: 520px;
-      margin-bottom: 44px;
-    }
-
-    /* BEFORE STATES */
-    .before-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 40px; }
-    .bc { padding: 26px; border-radius: 14px; border: 1px solid var(--border); background: #fff; }
-    .bc.hl { border-color: #FECACA; background: #FEF9F9; }
-    .btag {
-      display: inline-block;
-      padding: 3px 12px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-      background: var(--bg);
-      color: var(--muted);
-    }
-    .btag.bad { background: #FEE2E2; color: #DC2626; }
-    .btitle { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
-    .bbody { font-size: 14px; color: var(--slate); line-height: 1.7; }
-
-    .pullquote {
-      background: var(--navy);
-      border-radius: 14px;
-      padding: 32px 40px;
-      text-align: right;
-    }
-    .pullquote p {
-      font-family: 'DM Serif Display', serif;
-      font-size: 22px;
-      color: #fff;
-      line-height: 1.5;
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-    .pullquote span { font-size: 14px; color: var(--muted); }
-
-    /* STEPS */
-    .steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-    .step { padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: #fff; transition: border-color .2s; }
-    .step:hover { border-color: var(--teal); }
-    .step-n { font-size: 12px; font-weight: 700; color: var(--teal); margin-bottom: 10px; letter-spacing: .3px; }
-    .step-t { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-    .step-b { font-size: 14px; color: var(--slate); line-height: 1.7; }
-
-    /* FEATURE CARDS */
-    .feature-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-    .fc { padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: #fff; }
-    .fc-t { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
-    .fc-b { font-size: 14px; color: var(--slate); line-height: 1.7; }
-
-    /* PAIRS */
-    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 56px; }
-    .pair.flip { direction: rtl; }
-    .pair.flip > * { direction: ltr; }
-    .pframe {
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      box-shadow: 0 4px 28px rgba(15,42,74,.09);
-    }
-    .pframe img { width: 100%; display: block; background: #f5f5f5; }
-    .ptext h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 30px;
-      font-weight: 400;
-      color: var(--navy);
-      line-height: 1.2;
-      margin-bottom: 14px;
-    }
-    .ptext p { font-size: 15px; color: var(--slate); line-height: 1.75; margin-bottom: 14px; }
-    .proof-pill {
-      display: inline-block;
-      padding: 5px 16px;
-      background: var(--blue-lt);
-      color: var(--blue);
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    /* CASE STUDY */
-    .case {
-      background: linear-gradient(135deg, #F0F7FF, #F0FDFB);
-      border: 1px solid #DBEAFE;
-      border-radius: 16px;
-      padding: 40px;
-    }
-    .case-stats {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      overflow: hidden;
-      background: #fff;
-      margin: 22px 0 32px;
-    }
-    .cs { padding: 20px 14px; text-align: center; border-right: 1px solid var(--border); }
-    .cs:last-child { border-right: none; }
-    .cs-n {
-      font-family: 'DM Serif Display', serif;
-      font-size: 34px;
-      color: var(--navy);
-      line-height: 1;
-      margin-bottom: 5px;
-    }
-    .cs-l { font-size: 13px; color: var(--muted); line-height: 1.4; }
-    .qtext {
-      font-family: 'DM Serif Display', serif;
-      font-size: 20px;
-      color: var(--navy);
-      line-height: 1.65;
-      font-style: italic;
-      margin-bottom: 20px;
-    }
-    .qattr { display: flex; align-items: center; gap: 14px; }
-    .avatar {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: var(--teal);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-      color: #fff;
-      flex-shrink: 0;
-    }
-    .qname { font-size: 14px; font-weight: 700; color: var(--navy); }
-    .qloc { font-size: 13px; color: var(--muted); margin-top: 2px; }
-
-    /* OBJECTIONS */
-    .obj {
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      margin-bottom: 10px;
-      overflow: hidden;
-      background: #fff;
-    }
-    .obj-q {
-      padding: 18px 24px;
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--navy);
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background .15s;
-      user-select: none;
-      line-height: 1.4;
-    }
-    .obj-q:hover { background: var(--bg); }
-    .arr { color: var(--muted); font-size: 20px; transition: transform .2s; flex-shrink: 0; margin-left: 16px; }
-    .obj-a {
-      padding: 0 24px 20px;
-      font-size: 15px;
-      color: var(--slate);
-      line-height: 1.75;
-      display: none;
-    }
-    .obj.open .obj-a { display: block; }
-    .obj.open .arr { transform: rotate(180deg); }
-
-    /* TABLE */
-    .tw {
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      overflow: hidden;
-      overflow-x: auto;
-    }
-    table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    thead th {
-      padding: 15px 18px;
-      text-align: left;
-      font-weight: 700;
-      color: var(--navy);
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      font-size: 14px;
-    }
-    thead th:not(:first-child) { text-align: center; }
-    thead th.pe { background: var(--blue-lt); color: var(--blue); }
-    tbody td {
-      padding: 13px 18px;
-      border-bottom: 1px solid #F1F5F9;
-      color: var(--slate);
-      font-size: 14px;
-    }
-    tbody td:not(:first-child) { text-align: center; }
-    tbody td.pe { background: #F8FBFF; }
-    tbody td.win { color: var(--green); font-weight: 700; }
-    tbody tr:last-child td { border-bottom: none; }
-    tbody tr:hover td { background: var(--bg); }
-    tbody tr:hover td.pe { background: var(--blue-lt); }
-    .tnote { font-size: 13px; color: var(--muted); margin-top: 12px; }
-
-    /* CTA */
-    .cta {
-      padding: 88px 48px;
-      text-align: center;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-    }
-    .cta h2 { margin-bottom: 14px; }
-    .cta-sub { font-size: 17px; color: var(--slate); margin-bottom: 32px; line-height: 1.7; }
-    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-    .btn-teal-pill {
-      padding: 14px 32px;
-      border-radius: 30px;
-      border: none;
-      background: var(--teal);
-      color: #fff;
-      font-size: 15px;
-      font-weight: 700;
-      font-family: 'DM Sans', sans-serif;
-      cursor: pointer;
-      transition: background .2s;
-    }
-    .btn-teal-pill:hover { background: #008f8f; }
-    .cta-fine { font-size: 14px; color: var(--muted); margin-top: 18px; }
-    .cta-fine a { color: var(--blue); text-decoration: underline; cursor: pointer; }
-
-    /* FOOTER */
-    footer {
-      padding: 24px 48px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border);
-      background: var(--navy);
-    }
-    .flogo { font-size: 16px; font-weight: 800; color: #fff; }
-    .fcopy { font-size: 13px; color: rgba(255,255,255,.6); }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      nav { padding: 16px 20px; }
-      .nav-links { display: none; }
-      h1 { font-size: 38px; }
-      .hero { padding: 60px 20px 52px; }
-      .hero-sub { font-size: 17px; }
-      .stats { flex-direction: column; }
-      .stat { border-right: none; border-bottom: 1px solid var(--border); }
-      .stat:last-child { border-bottom: none; }
-      .section { padding: 60px 20px; }
-      .before-grid, .steps, .feature-grid { grid-template-columns: 1fr; }
-      .pair, .pair.flip { grid-template-columns: 1fr; gap: 28px; direction: ltr; }
-      .case-stats { grid-template-columns: 1fr 1fr; }
-      .cs:nth-child(2) { border-right: none; }
-      .cs:nth-child(3) { border-top: 1px solid var(--border); }
-      h2 { font-size: 30px; }
-      .pullquote { text-align: left; padding: 24px; }
-      .cta { padding: 60px 20px; }
-      footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
-    }
-  </style>
-</head>
-<body>
-
-<!-- NAV -->
-<nav>
-  <a href="/" class="nav-logo">PatientEngage</a>
-  <ul class="nav-links">
-    <li><a href="/scheduler">Real-Time Scheduler</a></li>
-    <li><a href="/ai-voice-agent">AI Voice Agent</a></li>
-    <li><a href="/google-reserve" class="active">Google Reserve</a></li>
-    <li><a href="/reminders">Reminders</a></li>
-  </ul>
-  <div class="nav-actions">
-    <button class="btn-outline">Sign in</button>
-    <button class="btn-dark">Book a demo</button>
-  </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="badge">
-    <span class="badge-dot"></span>
-    Part of the PatientEngage platform serving 2,500+ practices
-  </div>
-  <div class="eyebrow" style="text-align: center; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;">Google Reserve Integration</div>
-  <h1>Turn Every Google Search Into a <em>Booked Appointment</em></h1>
-  <p class="hero-sub">PatientEngage integrates with Google Reserve to place a "Book online" button directly on your Google Business Profile in Search and Maps. Patients book in one click, without ever leaving Google.</p>
-  <div class="hero-cta">
-    <button class="btn-navy-pill">Activate Google Reserve</button>
-    <button class="btn-ghost-pill">Book a Live Demo</button>
-  </div>
-  <p class="hero-fine">No credit card required, setup in 24 hours, no technical work</p>
-  <div class="hero-frame">
-    <div class="frame-bar">
-      <div class="fdot" style="background:#FF5F57"></div>
-      <div class="fdot" style="background:#FEBC2E"></div>
-      <div class="fdot" style="background:#28C840"></div>
-      <div class="furl">Google Maps, PatientEngage Google Reserve</div>
-    </div>
-    <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #F0F7FF 0%, #F0FDFB 100%); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--slate);">Google Maps listing with Book Online button preview</div>
-  </div>
-  <p class="hero-cap"><strong>Your Google listing gets a "Book online" button.</strong> Patients tap it and go straight to your booking page.</p>
-</section>
-
-<!-- STATS -->
-<div class="stats">
-  <div class="stat">
-    <div class="stat-n">227,000+</div>
-    <div class="stat-l">Google Reserve clicks<br>across our network, March 2026</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n">1,200+</div>
-    <div class="stat-l">practices with Google<br>Reserve active</div>
-  </div>
-  <div class="stat">
-    <div class="stat-n">73%</div>
-    <div class="stat-l">action rate on top-performing<br>Google profiles</div>
-  </div>
-</div>
-
-<!-- THE PROBLEM -->
-<section class="section">
-  <div class="si">
-    <div class="eyebrow">The Problem</div>
-    <h2>Your Google Visibility Is Leaking Patients</h2>
-    <p class="ssub">You invest in reviews, SEO, and Google Business Profile optimization. Patients find you. Then they have to click "Website," navigate your site, find the scheduler, and fill out a form. Every extra click is a patient who gives up.</p>
-    <div class="before-grid">
-      <div class="bc">
-        <div class="btag">Phone Only</div>
-        <div class="btitle">The phone stops working after 5pm.</div>
-        <div class="bbody">Every booking happens by phone during business hours. Calls at 7pm go to voicemail. Patients who do not leave a message simply call the next practice on Google. The leakage is completely invisible.</div>
-      </div>
-      <div class="bc hl">
-        <div class="btag bad">Website Detour</div>
-        <div class="btitle">The website click is just the beginning.</div>
-        <div class="bbody">Patient clicks Website, navigates multiple pages, finds a form. May submit, may bounce. Even if they submit, staff have to call back. Meanwhile, they booked somewhere else.</div>
-      </div>
-      <div class="bc">
-        <div class="btag">Extra Friction</div>
-        <div class="btitle">Scheduler without Google Reserve loses patients.</div>
-        <div class="bbody">Patient leaves Google, navigates to your website, finds your scheduler. Extra clicks equal friction. Friction equals drop-off. They never see the booking page.</div>
-      </div>
-    </div>
-    <div class="pullquote">
-      <p>"Our patients can book directly from our Google listing. They do not even need to visit our website."</p>
-      <span>Practice owner, 3-location optometry practice, Arkansas</span>
-    </div>
-  </div>
-</section>
-
-<!-- THE SOLUTION -->
-<section class="section section-alt">
-  <div class="si">
-    <div class="eyebrow">The Solution</div>
-    <h2>One Button. Zero Navigation. <em>Appointments Booked.</em></h2>
-    <p class="ssub">Google Reserve adds a "Book online" button directly to your Google Business Profile in Search and Maps. Patients tap it and go straight to your booking page. No website visit required. No extra steps.</p>
-
-    <div class="pair">
-      <div class="ptext">
-        <h3>Patients book from Google Search.</h3>
-        <p>When a patient searches "eye doctor near me" on Google, they see a "Book online" button. Tap it, and they are at your booking page in one click. No navigation. No friction.</p>
-        <p>Patients at their peak intent moment can book instantly, 24/7, even when your office is closed.</p>
-        <span class="proof-pill">One click, instant booking</span>
-      </div>
-      <div class="pframe">
-        <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #F0F7FF 0%, #F0FDFB 100%); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--slate);">Google Search listing with Book Online button</div>
-      </div>
-    </div>
-
-    <div class="pair flip">
-      <div class="ptext">
-        <h3>Same for Google Maps.</h3>
-        <p>Your Google Maps listing also displays the "Book online" button. Patients navigating Maps see it immediately. Tap it, and they book. The button links to your PatientEngage Scheduler, your website, or any URL you choose.</p>
-        <span class="proof-pill">Links to your system, you control the destination</span>
-      </div>
-      <div class="pframe">
-        <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #F0F7FF 0%, #F0FDFB 100%); display: flex; align-items: center; justify-content: center; font-size: 14px; color: var(--slate);">Google Maps listing with Book Online button</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section">
-  <div class="si">
-    <div class="eyebrow">How It Works</div>
-    <h2>Live on Google in <em>24 Hours</em></h2>
-    <p class="ssub">No code. No IT. Just a toggle and you are done.</p>
-    <div class="steps">
-      <div class="step">
-        <div class="step-n">Step 1</div>
-        <div class="step-t">Toggle Google Reserve ON</div>
-        <div class="step-b">Navigate to Google Reserve in your PatientEngage dashboard and flip the toggle to On. That is it. One button.</div>
-      </div>
-      <div class="step">
-        <div class="step-n">Step 2</div>
-        <div class="step-t">Choose your destination</div>
-        <div class="step-b">Select where the button links: PatientEngage Scheduler, your website, a third-party scheduler, or any URL. You are in control.</div>
-      </div>
-      <div class="step">
-        <div class="step-n">Step 3</div>
-        <div class="step-t">Live within 24 hours</div>
-        <div class="step-b">The system syncs with Google daily. Within 24 hours, "Book online" appears on your Google listing. Patients start booking.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- YOUR RULES SECTION -->
-<section class="section section-alt">
-  <div class="si">
-    <div class="eyebrow">Your Data, Your Patients</div>
-    <h2>You Own the Patient. Not Google. <em>Not ZocDoc.</em></h2>
-    <p class="ssub">Unlike marketplace platforms, Google Reserve through PatientEngage sends patients to YOUR booking page. You choose the destination. You keep the relationship. No middleman.</p>
-    <div class="feature-grid">
-      <div class="fc">
-        <div class="fc-t">Link to Anything</div>
-        <div class="fc-b">PatientEngage Scheduler, your website, a third-party scheduler, any URL you want. You pick where the button goes.</div>
-      </div>
-      <div class="fc">
-        <div class="fc-t">Your Data, Your Patients</div>
-        <div class="fc-b">Patient information goes to YOUR system, not a marketplace. You own the data. You own the relationship. You own the follow-up.</div>
-      </div>
-      <div class="fc">
-        <div class="fc-t">You Control Activation</div>
-        <div class="fc-b">Simple toggle YOU turn on. No third party can enable it without your consent. You decide when, where, and how.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CASE STUDY -->
-<section class="section">
-  <div class="si">
-    <div class="eyebrow">Results</div>
-    <h2>The Numbers Behind the <em>Button</em></h2>
-    <div class="case">
-      <div class="case-stats">
-        <div class="cs"><div class="cs-n">696</div><div class="cs-l">Google Reserve clicks<br>March 2026</div></div>
-        <div class="cs"><div class="cs-n">654</div><div class="cs-l">website clicks<br>same period</div></div>
-        <div class="cs"><div class="cs-n">73%</div><div class="cs-l">action rate on<br>top location</div></div>
-        <div class="cs"><div class="cs-n">203</div><div class="cs-l">appointments<br>in 30 days</div></div>
-      </div>
-      <p class="qtext">"We activated Google Reserve across our three locations and within the first month, our Google Book online clicks exceeded our total website clicks. We are capturing patients who would have just scrolled past us before."</p>
-      <div class="qattr">
-        <div class="avatar">CO</div>
-        <div>
-          <div class="qname">Independent optometry practice</div>
-          <div class="qloc">Central Arkansas, 3 locations</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- COMPARISON TABLE -->
-<section class="section section-alt">
-  <div class="si">
-    <div class="eyebrow">Compare</div>
-    <h2>How PatientEngage <em>Compares</em></h2>
-    <p class="ssub">Google Reserve is one feature in a complete platform. See what else you get.</p>
-    <div class="tw">
-      <table>
-        <thead>
-          <tr>
-            <th style="width:28%">Feature</th>
-            <th class="pe">PatientEngage</th>
-            <th>EyeCarePro</th>
-            <th>ZocDoc</th>
-            <th>NexHealth</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr><td>Google Reserve integration</td><td class="pe win">Yes</td><td>Service</td><td>Yes</td><td>Yes</td></tr>
-          <tr><td>Link to any URL</td><td class="pe win">Yes</td><td>Unknown</td><td>No</td><td>No</td></tr>
-          <tr><td>Practice owns patient data</td><td class="pe win">Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
-          <tr><td>AI Voice Agent included</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>No</td></tr>
-          <tr><td>Full platform included</td><td class="pe win">Yes</td><td>Partial</td><td>No</td><td>Yes</td></tr>
-          <tr><td>No per-booking fees</td><td class="pe win">Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
-        </tbody>
-      </table>
-    </div>
-    <p class="tnote">Google Reserve is a Google program that places a "Book online" button directly on your Google Business Profile listing in Search and Maps. PatientEngage integrates with Google Reserve.</p>
-  </div>
-</section>
-
-<!-- OBJECTIONS / FAQ -->
-<section class="section">
-  <div class="si">
-    <div class="eyebrow">FAQ</div>
-    <h2>Questions Practice Owners <em>Ask</em></h2>
-    <p class="ssub">Every question below is one we hear regularly. Here is the honest answer to each one.</p>
-
-    <div class="obj" onclick="toggle(this)">
-      <div class="obj-q">"Won't Google own my patient data?" <span class="arr">&#8595;</span></div>
-      <div class="obj-a">No. Google Reserve is a button that directs patients to YOUR booking page. Google does not receive or store the patient's appointment details, health information, or contact data. The patient clicks through to your system, and from that point forward, everything happens on your terms. This is fundamentally different from ZocDoc, where the patient books within ZocDoc's system and is treated as a ZocDoc customer.</div>
-    </div>
-
-    <div class="obj" onclick="toggle(this)">
-      <div class="obj-q">"Could someone activate this on my listing without my consent?" <span class="arr">&#8595;</span></div>
-      <div class="obj-a">Not through PatientEngage. Google Reserve is a toggle that only you control within your PatientEngage dashboard. No third party can activate it on your behalf. This addresses a real concern in the industry: some practices have reported that platforms like ZocDoc have activated booking on their Google listings without them realizing they gave consent. With PatientEngage, nothing happens until you flip the switch.</div>
-    </div>
-
-    <div class="obj" onclick="toggle(this)">
-      <div class="obj-q">"Will this increase my no-show rate?" <span class="arr">&#8595;</span></div>
-      <div class="obj-a">Google Reserve links patients to the same booking flow they would use on your website. They still complete your full intake process, select a time, and confirm. The only difference is how they got there: one click instead of three or four. Patients who actively search for and book an appointment have high intent, making impulsive no-shows unlikely.</div>
-    </div>
-
-    <div class="obj" onclick="toggle(this)">
-      <div class="obj-q">"I already have online booking on my website." <span class="arr">&#8595;</span></div>
-      <div class="obj-a">Google Reserve is an additional booking channel, not a replacement. It catches patients BEFORE they even visit your website. Data shows that for some practices, Google Reserve clicks match or exceed website booking clicks. It is additive to your existing system.</div>
-    </div>
-
-    <div class="obj" onclick="toggle(this)">
-      <div class="obj-q">"How hard is the setup?" <span class="arr">&#8595;</span></div>
-      <div class="obj-a">One toggle. That is it. Navigate to Google Reserve in your PatientEngage dashboard, flip it to On, and choose where the button links. It syncs with Google automatically and goes live within 24 hours. No code. No IT department. No technical work.</div>
-    </div>
-  </div>
-</section>
-
-<!-- FINAL CTA -->
-<section class="cta">
-  <div class="badge" style="margin-bottom: 28px;">
-    <span class="badge-dot"></span>
-    Part of the PatientEngage platform serving 2,500+ practices
-  </div>
-  <h2>Turn Google Searches Into <em>Booked Appointments</em></h2>
-  <p class="cta-sub">Activate Google Reserve in your PatientEngage dashboard today.<br>One toggle. No code. Live in 24 hours.</p>
-  <d
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Google Reserve for Optometry | Book Online from Google | PatientEngage</title>
+  <meta name="description" content="Add a 'Book online' button to your Google Business Profile with PatientEngage Google Reserve. 1,200+ practices active. Top practices see 73% of Google visitors take action.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #0F2A4A;
+      --blue:    #1B5FA8;
+      --teal:    #00A3A3;
+      --green:   #0F6E56;
+      --green-bg:#F0FDF9;
+      --green-bd:#A7F3D0;
+      --slate:   #4B6278;
+      --muted:   #7A96A8;
+      --border:  #E2E8F0;
+      --bg:      #F8FAFC;
+      --blue-lt: #EEF4FF;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--navy);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { font-size: 17px; font-weight: 800; color: var(--navy); text-decoration: none; letter-spacing: -.3px; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-links .active { color: var(--navy); font-weight: 600; border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
+    .nav-actions { display: flex; gap: 8px; }
+    .btn-outline { padding: 9px 22px; border-radius: 30px; border: 1.5px solid var(--border); background: #fff; color: var(--navy); font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color .2s; }
+    .btn-outline:hover { border-color: var(--navy); }
+    .btn-dark { padding: 9px 22px; border-radius: 30px; border: none; background: var(--navy); color: #fff; font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; }
+    .btn-dark:hover { background: #1a3d6b; }
+
+    /* HERO */
+    .hero { padding: 88px 48px 72px; text-align: center; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 18px;
+      background: var(--green-bg);
+      border: 1px solid var(--green-bd);
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 24px;
+    }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.08;
+      letter-spacing: -.5px;
+      margin-bottom: 20px;
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 em { font-style: italic; color: var(--teal); }
+    .hero-sub {
+      font-size: 19px;
+      color: var(--slate);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 30px;
+    }
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
+    .btn-navy-pill { padding: 14px 32px; border-radius: 30px; border: none; background: var(--navy); color: #fff; font-size: 15px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; }
+    .btn-navy-pill:hover { background: #1a3d6b; }
+    .btn-ghost-pill { padding: 14px 32px; border-radius: 30px; border: 1.5px solid var(--border); background: #fff; color: var(--navy); font-size: 15px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color .2s; }
+    .btn-ghost-pill:hover { border-color: var(--navy); }
+    .hero-fine { font-size: 14px; color: var(--muted); margin-bottom: 56px; }
+
+    .hero-frame {
+      max-width: 700px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 48px rgba(15,42,74,.12);
+    }
+    .frame-bar {
+      background: var(--bg);
+      padding: 11px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .fdot { width: 10px; height: 10px; border-radius: 50%; }
+    .furl {
+      background: #EDF2F7;
+      border-radius: 5px;
+      padding: 4px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: 12px;
+      flex: 1;
+      max-width: 340px;
+      text-align: center;
+    }
+    .hero-frame img { width: 100%; display: block; background: #f5f5f5; }
+    .hero-cap {
+      font-size: 15px;
+      color: var(--slate);
+      text-align: center;
+      margin-top: 14px;
+      line-height: 1.6;
+    }
+    .hero-cap strong { color: var(--navy); }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .stat { flex: 1; padding: 32px 24px; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+    .stat-l { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+    /* SECTIONS */
+    .section { padding: 80px 48px; }
+    .section-alt { background: var(--bg); }
+    .si { max-width: 900px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -.3px;
+    }
+    .ssub {
+      font-size: 17px;
+      color: var(--slate);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 44px;
+    }
+
+    /* BEFORE STATES */
+    .before-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+    .bc { padding: 26px; border-radius: 14px; border: 1px solid var(--border); background: #fff; }
+    .bc.hl { border-color: #FECACA; background: #FEF9F9; }
+    .btag {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      background: var(--bg);
+      color: var(--muted);
+    }
+    .btag.bad { background: #FEE2E2; color: #DC2626; }
+    .btitle { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .bbody { font-size: 14px; color: var(--slate); line-height: 1.7; }
+
+    .pullquote {
+      background: var(--navy);
+      border-radius: 14px;
+      padding: 32px 40px;
+      text-align: right;
+    }
+    .pullquote p {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: #fff;
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    .pullquote span { font-size: 14px; color: var(--muted); }
+
+    /* STEPS */
+    .steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .step { padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: #fff; transition: border-color .2s; }
+    .step:hover { border-color: var(--teal); }
+    .step-n { font-size: 12px; font-weight: 700; color: var(--teal); margin-bottom: 10px; letter-spacing: .3px; }
+    .step-t { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .step-b { font-size: 14px; color: var(--slate); line-height: 1.7; }
+
+    /* FEATURE CARDS */
+    .feature-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .fc { padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: #fff; }
+    .fc-t { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .fc-b { font-size: 14px; color: var(--slate); line-height: 1.7; }
+
+    /* PAIRS */
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 56px; }
+    .pair.flip { direction: rtl; }
+    .pair.flip > * { direction: ltr; }
+    .pframe {
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 28px rgba(15,42,74,.09);
+    }
+    .pframe img { width: 100%; display: block; background: #f5f5f5; }
+    .ptext h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 14px;
+    }
+    .ptext p { font-size: 15px; color: var(--slate); line-height: 1.75; margin-bottom: 14px; }
+    .proof-pill {
+      display: inline-block;
+      padding: 5px 16px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* CASE STUDY */
+    .case {
+      background: linear-gradient(135deg, #F0F7FF, #F0FDFB);
+      border: 1px solid #DBEAFE;
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .case-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      margin: 22px 0 32px;
+    }
+    .cs { padding: 20px 14px; text-align: center; border-right: 1px solid var(--border); }
+    .cs:last-child { border-right: none; }
+    .cs-n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 34px;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .cs-l { font-size: 13px; color: var(--muted); line-height: 1.4; }
+    .qtext {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--navy);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .qattr { display: flex; align-items: center; gap: 14px; }
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .qname { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .qloc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* OBJECTIONS */
+    .obj {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .obj-q {
+      padding: 18px 24px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background .15s;
+      user-select: none;
+      line-height: 1.4;
+    }
+    .obj-q:hover { background: var(--bg); }
+    .arr { color: var(--muted); font-size: 20px; transition: transform .2s; flex-shrink: 0; margin-left: 16px; }
+    .obj-a {
+      padding: 0 24px 20px;
+      font-size: 15px;
+      color: var(--slate);
+      line-height: 1.75;
+      display: none;
+    }
+    .obj.open .obj-a { display: block; }
+    .obj.open .arr { transform: rotate(180deg); }
+
+    /* TABLE */
+    .tw {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead th {
+      padding: 15px 18px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    thead th:not(:first-child) { text-align: center; }
+    thead th.pe { background: var(--blue-lt); color: var(--blue); }
+    tbody td {
+      padding: 13px 18px;
+      border-bottom: 1px solid #F1F5F9;
+      color: var(--slate);
+      font-size: 14px;
+    }
+    tbody td:not(:first-child) { text-align: center; }
+    tbody td.pe { background: #F8FBFF; }
+    tbody td.win { color: var(--green); font-weight: 700; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: var(--bg); }
+    tbody tr:hover td.pe { background: var(--blue-lt); }
+    .tnote { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+    /* CTA */
+    .cta {
+      padding: 88px 48px;
+      text-align: center;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .cta h2 { margin-bottom: 14px; }
+    .cta-sub { font-size: 17px; color: var(--slate); margin-bottom: 32px; line-height: 1.7; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-teal-pill {
+      padding: 14px 32px;
+      border-radius: 30px;
+      border: none;
+      background: var(--teal);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background .2s;
+    }
+    .btn-teal-pill:hover { background: #008f8f; }
+    .cta-fine { font-size: 14px; color: var(--muted); margin-top: 18px; }
+    .cta-fine a { color: var(--blue); text-decoration: underline; cursor: pointer; }
+
+    /* FOOTER */
+    footer {
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+      background: var(--navy);
+    }
+    .flogo { font-size: 16px; font-weight: 800; color: #fff; }
+    .fcopy { font-size: 13px; color: rgba(255,255,255,.6); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      h1 { font-size: 38px; }
+      .hero { padding: 60px 20px 52px; }
+      .hero-sub { font-size: 17px; }
+      .stats { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
+      .section { padding: 60px 20px; }
+      .before-grid, .steps, .feature-grid { grid-template-columns: 1fr; }
+      .pair, .pair.flip { grid-template-columns: 1fr; gap: 28px; direction: ltr; }
+      .case-stats { grid-template-columns: 1fr 1fr; }
+      .cs:nth-child(2) { border-right: none; }
+      .cs:nth-child(3) { border-top: 1px solid var(--border); }
+      h2 { font-size: 30px; }
+      .pullquote { text-align: left; padding: 24px; }
+      .cta { padding: 60px 20px; }
+      footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">PatientEngage</a>
+  <ul class="nav-links">
+    <li><a href="/scheduler">Real-Time Scheduler</a></li>
+    <li><a href="/ai-voice-agent">AI Voice Agent</a></li>
+    <li><a href="/google-reserve" class="active">Google Reserve</a></li>
+    <li><a href="/reminders">Reminders</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="btn-outline">Sign in</button>
+    <button class="btn-dark">Book a demo</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">
+    <span class="badge-dot"></span>
+    Part of the PatientEngage platform serving 2,500+ practices
+  </div>
+  <div class="eyebrow" style="text-align: center; color: var(--teal); font-size: 12px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 12px;">Google Reserve Integration</div>
+  <h1>Turn Every Google Search Into a <em>Booked Appointment</em></h1>
+  <p class="hero-sub">PatientEngage integrates with Google Reserve to place a "Book online" button directly on your Google Business Profile in Search and Maps. Patients book in one click, without ever leaving Google.</p>
+  <div class="hero-cta">
+    <button class="btn-navy-pill">Activate Google Reserve</button>
+    <button class="btn-ghost-pill">Book a Live Demo</button>
+  </div>
+  <p class="hero-fine">No credit card required, setup in 24 hours, no technical work</p>
+  <div class="hero-frame">
+    <div class="frame-bar">
+      <div class="fdot" style="background:#FF5F57"></div>
+      <div class="fdot" style="background:#FEBC2E"></div>
+      <div class="fdot" style="background:#28C840"></div>
+      <div class="furl">Google Maps, PatientEngage Google Reserve</div>
+    </div>
+    <img src="/google-reserve/screenshots/ss_scheduler_01_google_reserve.png" alt="Google Maps listing showing the Book online button powered by PatientEngage Google Reserve" style="width:100%; display:block;">
+  </div>
+  <p class="hero-cap"><strong>Your Google listing gets a "Book online" button.</strong> Patients tap it and go straight to your booking page.</p>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-n">227,000+</div>
+    <div class="stat-l">Google Reserve clicks<br>across our network, March 2026</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">1,200+</div>
+    <div class="stat-l">practices with Google<br>Reserve active</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">73%</div>
+    <div class="stat-l">action rate on top-performing<br>Google profiles</div>
+  </div>
+</div>
+
+<!-- THE PROBLEM -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">The Problem</div>
+    <h2>Your Google Visibility Is Leaking Patients</h2>
+    <p class="ssub">You invest in reviews, SEO, and Google Business Profile optimization. Patients find you. Then they have to click "Website," navigate your site, find the scheduler, and fill out a form. Every extra click is a patient who gives up.</p>
+    <div class="before-grid">
+      <div class="bc">
+        <div class="btag">Phone Only</div>
+        <div class="btitle">The phone stops working after 5pm.</div>
+        <div class="bbody">Every booking happens by phone during business hours. Calls at 7pm go to voicemail. Patients who do not leave a message simply call the next practice on Google. The leakage is completely invisible.</div>
+      </div>
+      <div class="bc hl">
+        <div class="btag bad">Website Detour</div>
+        <div class="btitle">The website click is just the beginning.</div>
+        <div class="bbody">Patient clicks Website, navigates multiple pages, finds a form. May submit, may bounce. Even if they submit, staff have to call back. Meanwhile, they booked somewhere else.</div>
+      </div>
+      <div class="bc">
+        <div class="btag">Extra Friction</div>
+        <div class="btitle">Scheduler without Google Reserve loses patients.</div>
+        <div class="bbody">Patient leaves Google, navigates to your website, finds your scheduler. Extra clicks equal friction. Friction equals drop-off. They never see the booking page.</div>
+      </div>
+    </div>
+    <div class="pullquote">
+      <p>"Our patients can book directly from our Google listing. They do not even need to visit our website."</p>
+      <span>Practice owner, 3-location optometry practice, Arkansas</span>
+    </div>
+  </div>
+</section>
+
+<!-- THE SOLUTION -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">The Solution</div>
+    <h2>One Button. Zero Navigation. <em>Appointments Booked.</em></h2>
+    <p class="ssub">Google Reserve adds a "Book online" button directly to your Google Business Profile in Search and Maps. Patients tap it and go straight to your booking page. No website visit required. No extra steps.</p>
+
+    <div class="pair">
+      <div class="ptext">
+        <h3>Patients book from Google Search.</h3>
+        <p>When a patient searches "eye doctor near me" on Google, they see a "Book online" button. Tap it, and they are at your booking page in one click. No navigation. No friction.</p>
+        <p>Patients at their peak intent moment can book instantly, 24/7, even when your office is closed.</p>
+        <span class="proof-pill">One click, instant booking</span>
+      </div>
+      <div class="pframe">
+        <img src="/google-reserve/screenshots/ss_google-reserve_1.jpg" alt="PatientEngage Google Reserve Overview dashboard showing bookings, uptime, and conversion rate" style="width:100%; display:block; border-radius:12px;">
+      </div>
+    </div>
+
+    <div class="pair flip">
+      <div class="ptext">
+        <h3>Same for Google Maps.</h3>
+        <p>Your Google Maps listing also displays the "Book online" button. Patients navigating Maps see it immediately. Tap it, and they book. The button links to your PatientEngage Scheduler, your website, or any URL you choose.</p>
+        <span class="proof-pill">Links to your system, you control the destination</span>
+      </div>
+      <div class="pframe">
+        <img src="/google-reserve/screenshots/ss_google-reserve_3.jpg" alt="PatientEngage Google Reserve Settings showing simple setup steps" style="width:100%; display:block; border-radius:12px;">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">How It Works</div>
+    <h2>Live on Google in <em>24 Hours</em></h2>
+    <p class="ssub">No code. No IT. Just a toggle and you are done.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">Step 1</div>
+        <div class="step-t">Toggle Google Reserve ON</div>
+        <div class="step-b">Navigate to Google Reserve in your PatientEngage dashboard and flip the toggle to On. That is it. One button.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">Step 2</div>
+        <div class="step-t">Choose your destination</div>
+        <div class="step-b">Select where the button links: PatientEngage Scheduler, your website, a third-party scheduler, or any URL. You are in control.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">Step 3</div>
+        <div class="step-t">Live within 24 hours</div>
+        <div class="step-b">The system syncs with Google daily. Within 24 hours, "Book online" appears on your Google listing. Patients start booking.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- YOUR RULES SECTION -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">Your Data, Your Patients</div>
+    <h2>You Own the Patient. Not Google. <em>Not ZocDoc.</em></h2>
+    <p class="ssub">Unlike marketplace platforms, Google Reserve through PatientEngage sends patients to YOUR booking page. You choose the destination. You keep the relationship. No middleman.</p>
+    <div class="feature-grid">
+      <div class="fc">
+        <div class="fc-t">Link to Anything</div>
+        <div class="fc-b">PatientEngage Scheduler, your website, a third-party scheduler, any URL you want. You pick where the button goes.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-t">Your Data, Your Patients</div>
+        <div class="fc-b">Patient information goes to YOUR system, not a marketplace. You own the data. You own the relationship. You own the follow-up.</div>
+      </div>
+      <div class="fc">
+        <div class="fc-t">You Control Activation</div>
+        <div class="fc-b">Simple toggle YOU turn on. No third party can enable it without your consent. You decide when, where, and how.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">Results</div>
+    <h2>The Numbers Behind the <em>Button</em></h2>
+    <div class="case">
+      <div class="case-stats">
+        <div class="cs"><div class="cs-n">696</div><div class="cs-l">Google Reserve clicks<br>March 2026</div></div>
+        <div class="cs"><div class="cs-n">654</div><div class="cs-l">website clicks<br>same period</div></div>
+        <div class="cs"><div class="cs-n">73%</div><div class="cs-l">action rate on<br>top location</div></div>
+        <div class="cs"><div class="cs-n">203</div><div class="cs-l">appointments<br>in 30 days</div></div>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:28px;">
+        <img src="/google-reserve/screenshots/ss_google-reserve_2.jpg" alt="Google Reserve Analytics showing bookings direct from search" style="width:100%; border-radius:12px; border:1px solid var(--border);">
+        <img src="/google-reserve/screenshots/ss_google-reserve_4.jpg" alt="Before and after PatientEngage Google Reserve comparison" style="width:100%; border-radius:12px; border:1px solid var(--border);">
+      </div>
+      <p class="qtext">"We activated Google Reserve across our three locations and within the first month, our Google Book online clicks exceeded our total website clicks. We are capturing patients who would have just scrolled past us before."</p>
+      <div class="qattr">
+        <div class="avatar">CO</div>
+        <div>
+          <div class="qname">Independent optometry practice</div>
+          <div class="qloc">Central Arkansas, 3 locations</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">Compare</div>
+    <h2>How PatientEngage <em>Compares</em></h2>
+    <p class="ssub">Google Reserve is one feature in a complete platform. See what else you get.</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:28%">Feature</th>
+            <th class="pe">PatientEngage</th>
+            <th>EyeCarePro</th>
+            <th>ZocDoc</th>
+            <th>NexHealth</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Google Reserve integration</td><td class="pe win">Yes</td><td>Service</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>Link to any URL</td><td class="pe win">Yes</td><td>Unknown</td><td>No</td><td>No</td></tr>
+          <tr><td>Practice owns patient data</td><td class="pe win">Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+          <tr><td>AI Voice Agent included</td><td class="pe win">Yes</td><td>No</td><td>No</td><td>No</td></tr>
+          <tr><td>Full platform included</td><td class="pe win">Yes</td><td>Partial</td><td>No</td><td>Yes</td></tr>
+          <tr><td>No per-booking fees</td><td class="pe win">Yes</td><td>Yes</td><td>No</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">Google Reserve is a Google program that places a "Book online" button directly on your Google Business Profile listing in Search and Maps. PatientEngage integrates with Google Reserve.</p>
+  </div>
+</section>
+
+<!-- OBJECTIONS / FAQ -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">FAQ</div>
+    <h2>Questions Practice Owners <em>Ask</em></h2>
+    <p class="ssub">Every question below is one we hear regularly. Here is the honest answer to each one.</p>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"Won't Google own my patient data?" <span class="arr">&#8595;</span></div>
+      <div class="obj-a">No. Google Reserve is a button that directs patients to YOUR booking page. Google does not receive or store the patient's appointment details, health information, or contact data. The patient clicks through to your system, and from that point forward, everything happens on your terms. This is fundamentally different from ZocDoc, where the patient books within ZocDoc's system and is treated as a ZocDoc customer.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"Could someone activate this on my listing without my consent?" <span class="arr">&#8595;</span></div>
+      <div class="obj-a">Not through PatientEngage. Google Reserve is a toggle that only you control within your PatientEngage dashboard. No third party can activate it on your behalf. This addresses a real concern in the industry: some practices have reported that platforms like ZocDoc have activated booking on their Google listings without them realizing they gave consent. With PatientEngage, nothing happens until you flip the switch.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"Will this increase my no-show rate?" <span class="arr">&#8595;</span></div>
+      <div class="obj-a">Google Reserve links patients to the same booking flow they would use on your website. They still complete your full intake process, select a time, and confirm. The only difference is how they got there: one click instead of three or four. Patients who actively search for and book an appointment have high intent, making impulsive no-shows unlikely.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"I already have online booking on my website." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">Google Reserve is an additional booking channel, not a replacement. It catches patients BEFORE they even visit your website. Data shows that for some practices, Google Reserve clicks match or exceed website booking clicks. It is additive to your existing system.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"How hard is the setup?" <span class="arr">&#8595;</span></div>
+      <div class="obj-a">One toggle. That is it. Navigate to Google Reserve in your PatientEngage dashboard, flip it to On, and choose where the button links. It syncs with Google automatically and goes live within 24 hours. No code. No IT department. No technical work.</div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="cta">
+  <div class="badge" style="margin-bottom: 28px;">
+    <span class="badge-dot"></span>
+    Part of the PatientEngage platform serving 2,500+ practices
+  </div>
+  <h2>Turn Google Searches Into <em>Booked Appointments</em></h2>
+  <p class="cta-sub">Activate Google Reserve in your PatientEngage dashboard today.<br>One toggle. No code. Live in 24 hours.</p>
+  <div class="cta-btns">
+    <button class="btn-navy-pill" onclick="window.open('https://patientengage.ai/demo','_blank')">Activate Google Reserve</button>
+    <button class="btn-ghost-pill" onclick="window.open('https://patientengage.ai/demo','_blank')">Book a Live Demo</button>
+  </div>
+  <p class="cta-fine">No credit card required &middot; Setup in 24 hours &middot; No technical work &middot; Or <a href="https://patientengage.ai/contact">talk to us first</a></p>
+</section>
+
+<footer>
+  <span class="flogo">PatientEngage</span>
+  <span class="fcopy">&copy; 2026 &middot; patientengage.ai</span>
+</footer>
+
+<script>
+function toggle(el) { el.classList.toggle('open'); }
+</script>
+</body>
+</html>
