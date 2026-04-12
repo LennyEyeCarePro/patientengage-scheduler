@@ -106,7 +106,7 @@
     .btn-ghost-pill:hover { border-color: var(--navy); }
     .hero-fine { font-size: 14px; color: var(--muted); margin-bottom: 56px; }
 
-    /* HERO VISUAL — ecosystem mockup */
+    /* HERO FRAME */
     .hero-frame {
       max-width: 700px;
       margin: 0 auto;
@@ -135,56 +135,7 @@
       max-width: 340px;
       text-align: center;
     }
-    .eco-visual-inner {
-      padding: 32px;
-      background: #fff;
-    }
-    .eco-label {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--teal);
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 6px;
-    }
-    .eco-title {
-      font-family: 'DM Serif Display', serif;
-      font-size: 20px;
-      color: var(--navy);
-      text-align: center;
-      margin-bottom: 20px;
-    }
-    .eco-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-    .eco-item {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 14px 10px;
-      text-align: center;
-      transition: border-color .2s;
-    }
-    .eco-item:hover { border-color: var(--teal); }
-    .eco-icon { font-size: 22px; margin-bottom: 6px; }
-    .eco-name { font-size: 12px; font-weight: 700; color: var(--navy); }
-    .eco-ch { font-size: 10px; color: var(--muted); margin-top: 2px; }
-    .eco-item.wide { grid-column: 1 / -1; max-width: 160px; margin: 0 auto; }
-    .eco-footer {
-      text-align: center;
-      margin-top: 16px;
-      padding: 8px 20px;
-      background: var(--navy);
-      color: #fff;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: 600;
-      display: inline-block;
-    }
-    .eco-footer-wrap { text-align: center; margin-top: 14px; }
+    .hero-frame img { width: 100%; display: block; }
 
     /* STATS */
     .stats {
@@ -276,6 +227,23 @@
     .step-n { font-size: 12px; font-weight: 700; color: var(--teal); margin-bottom: 10px; letter-spacing: .3px; }
     .step-t { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
     .step-b { font-size: 14px; color: var(--slate); line-height: 1.7; }
+
+    /* PAIRS (image + text) */
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 56px; }
+    .pair.flip { direction: rtl; }
+    .pair.flip > * { direction: ltr; }
+    .pframe { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 28px rgba(15,42,74,.09); }
+    .pframe img { width: 100%; display: block; }
+    .ptext h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px; font-weight: 400; color: var(--navy); line-height: 1.2; margin-bottom: 14px;
+    }
+    .ptext p { font-size: 15px; color: var(--slate); line-height: 1.75; margin-bottom: 14px; }
+    .proof-pill {
+      display: inline-block; padding: 5px 16px;
+      background: var(--blue-lt); color: var(--blue); border-radius: 20px;
+      font-size: 13px; font-weight: 600;
+    }
 
     /* CHANNEL CARDS (ecosystem section) */
     .channels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -437,6 +405,7 @@
       .stat:last-child { border-bottom: none; }
       .section { padding: 60px 20px; }
       .before-grid, .steps, .adv-grid { grid-template-columns: 1fr; }
+      .pair, .pair.flip { grid-template-columns: 1fr; gap: 28px; direction: ltr; }
       .channels { grid-template-columns: 1fr; }
       .case-stats { grid-template-columns: 1fr 1fr; }
       .cs:nth-child(2) { border-right: none; }
@@ -445,7 +414,7 @@
       .pullquote { text-align: left; padding: 24px; }
       .cta { padding: 60px 20px; }
       footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
-      .eco-grid { grid-template-columns: repeat(2, 1fr); }
+
     }
   </style>
 </head>
@@ -486,50 +455,7 @@
       <span class="fdot" style="background:#27C93F"></span>
       <span class="furl">patientengage.com/campaigns</span>
     </div>
-    <div class="eco-visual-inner">
-      <div class="eco-label">One click generates</div>
-      <div class="eco-title">Eye Allergy Season Campaign</div>
-      <div class="eco-grid">
-        <div class="eco-item">
-          <div class="eco-icon">📧</div>
-          <div class="eco-name">Email</div>
-          <div class="eco-ch">Patient list</div>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon">🌐</div>
-          <div class="eco-name">Landing Page</div>
-          <div class="eco-ch">Appointment CTA</div>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon">📘</div>
-          <div class="eco-name">Facebook Posts</div>
-          <div class="eco-ch">4 weekly posts</div>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon">📍</div>
-          <div class="eco-name">Google Posts</div>
-          <div class="eco-ch">4 weekly posts</div>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon">📸</div>
-          <div class="eco-name">Instagram</div>
-          <div class="eco-ch">1 post</div>
-        </div>
-        <div class="eco-item">
-          <div class="eco-icon">🖼️</div>
-          <div class="eco-name">FB Cover</div>
-          <div class="eco-ch">Auto-swap</div>
-        </div>
-        <div class="eco-item wide">
-          <div class="eco-icon">🖨️</div>
-          <div class="eco-name">Poster</div>
-          <div class="eco-ch">Print for your office</div>
-        </div>
-      </div>
-      <div class="eco-footer-wrap">
-        <span class="eco-footer">Same message · Every channel · One click</span>
-      </div>
-    </div>
+    <img src="/campaigns/screenshots/ss_campaigns_01_dashboard.png" alt="PatientEngage One-Click Campaigns dashboard showing campaign library with optometry-specific topics">
   </div>
 </section>
 
@@ -666,8 +592,43 @@
         <div>
           <div class="ch-title">Everything connects back to your chair</div>
           <div class="ch-body">Every piece — email, landing page, social post, Google post, poster — carries the same call to action. The patient can enter your campaign from any channel and end up in the same place: your appointment book.</div>
-          <span class="ch-proof">108 appointments from one campaign (Coastal Eye)</span>
+          <span class="ch-proof">108 appointments from one campaign</span>
         </div>
+      </div>
+    </div>
+
+    <!-- Image + Text pairs showing real screenshots -->
+    <div class="pair">
+      <div class="ptext">
+        <h3>The email your patients actually open.</h3>
+        <p>Not a Canva template. Not a Mailchimp generic. A fully branded campaign email — your logo, your colors, your phone number, your appointment link. Sent directly from the EHR to your patient list.</p>
+        <p>21% open rate across the network. This Houston practice hit 33%.</p>
+        <span class="proof-pill">21% avg open rate · 33% for this practice</span>
+      </div>
+      <div class="pframe">
+        <img src="/campaigns/screenshots/ss_campaigns_02_email_preview.png" alt="Branded campaign email showing practice logo, campaign imagery, and appointment CTA">
+      </div>
+    </div>
+
+    <div class="pair flip">
+      <div class="ptext">
+        <h3>A landing page that keeps them inside your world.</h3>
+        <p>Every campaign auto-generates a dedicated landing page — branded to your practice, themed to the campaign topic, with a clear appointment CTA. When patients click through from the email, they stay in your ecosystem. Not a generic website. Your world.</p>
+        <span class="proof-pill">10% of recipients visited the landing page</span>
+      </div>
+      <div class="pframe">
+        <img src="/campaigns/screenshots/ss_campaigns_03_landing_page.png" alt="Auto-generated campaign landing page with practice branding and appointment booking CTA">
+      </div>
+    </div>
+
+    <div class="pair">
+      <div class="ptext">
+        <h3>Social posts that match the inbox.</h3>
+        <p>Four weekly Facebook posts, Google Business posts, and an Instagram post — all carrying the same campaign imagery and message. Your patients see you in their feed, reinforcing what they saw in their email. No separate social strategy needed.</p>
+        <span class="proof-pill">Auto-scheduled weekly · Branded per practice</span>
+      </div>
+      <div class="pframe">
+        <img src="/campaigns/screenshots/ss_campaigns_04_social_posts.png" alt="Campaign social media posts for Facebook, Instagram, and Google showing consistent branding">
       </div>
     </div>
   </div>
@@ -705,12 +666,12 @@
 <!-- CASE STUDY -->
 <section class="section">
   <div class="si">
-    <div class="eyebrow">Practice spotlight</div>
-    <h2>Coastal Eye Associates</h2>
-    <p class="ssub">Independent practice · Single location · ~3,300 patients</p>
+    <div class="eyebrow">Real results</div>
+    <h2>One campaign. Same message everywhere. 108 appointments.</h2>
+    <p class="ssub">Independent practice · Single location · Houston, TX</p>
     <div class="case">
       <div style="font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 6px;">One campaign. Same message everywhere. 108 appointments.</div>
-      <p style="font-size: 15px; color: var(--slate); line-height: 1.7; margin-bottom: 8px;">Coastal Eye Associates selected an Eye Allergy campaign from the library. The system generated a branded email, a landing page, Facebook posts, Google Business posts, an Instagram post, a cover photo, and a poster — all in one click.</p>
+      <p style="font-size: 15px; color: var(--slate); line-height: 1.7; margin-bottom: 8px;">This Houston practice selected an Eye Allergy campaign from the library. The system generated a branded email, a landing page, Facebook posts, Google Business posts, an Instagram post, a cover photo, and a poster — all in one click.</p>
       <p style="font-size: 15px; color: var(--slate); line-height: 1.7;">The email went to 3,286 patients. A third of them opened it. One in ten visited the campaign landing page. And 108 booked appointments — because every touchpoint pointed back to the same place: their chair.</p>
       <div class="case-stats">
         <div class="cs">
@@ -735,7 +696,7 @@
         <div class="avatar">PM</div>
         <div>
           <div class="qname">Practice Manager</div>
-          <div class="qloc">Coastal Eye Associates</div>
+          <div class="qloc">Independent practice · Houston, TX</div>
         </div>
       </div>
       <p style="font-size: 13px; color: var(--muted); font-style: italic; margin-top: 20px;">Data reflects March 2026. Anonymized per practice policy. [OBSERVED] from PatientEngage campaign reports.</p>
