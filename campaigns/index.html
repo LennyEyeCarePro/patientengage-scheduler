@@ -7,676 +7,754 @@
   <meta name="description" content="Auto-generate 7 branded marketing pieces across 5 channels from one click. Email, social, landing pages — all from your EHR patient list.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
   <style>
-    /* CSS Reset & Variables — matches scheduler page exactly */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --blue: #1B5FA8;
-      --blue-dark: #1A4F8F;
-      --blue-darker: #163F72;
-      --teal: #00A3A3;
-      --navy: #0F2A4A;
-      --canvas: #F5F7FA;
-      --white: #FFFFFF;
-      --light-blue: #EFF6FF;
-      --border: #E5E7EB;
-      --heading: #0F2A4A;
-      --body: #374151;
-      --muted: #6B7280;
-      --success: #16A34A;
-      --warning: #D97706;
-      --error: #DC2626;
+      --navy:    #0F2A4A;
+      --blue:    #1B5FA8;
+      --teal:    #00A3A3;
+      --green:   #0F6E56;
+      --green-bg:#F0FDF9;
+      --green-bd:#A7F3D0;
+      --slate:   #4B6278;
+      --muted:   #7A96A8;
+      --border:  #E2E8F0;
+      --bg:      #F8FAFC;
+      --blue-lt: #EEF4FF;
     }
-
     html { scroll-behavior: smooth; }
-
     body {
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      line-height: 1.6;
-      color: var(--body);
-      background-color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      color: var(--navy);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      font-size: 17px;
+      line-height: 1.65;
     }
 
-    h1 { font-size: 48px; font-weight: 700; line-height: 1.1; color: var(--heading); }
-    h2 { font-size: 36px; font-weight: 700; line-height: 1.2; color: var(--heading); }
-    h3 { font-size: 22px; font-weight: 600; line-height: 1.3; color: var(--heading); }
-    h4 { font-size: 18px; font-weight: 600; line-height: 1.3; color: var(--heading); }
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { font-size: 17px; font-weight: 800; color: var(--navy); text-decoration: none; letter-spacing: -.3px; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-links .active { color: var(--navy); font-weight: 600; border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
+    .nav-actions { display: flex; gap: 8px; }
+    .btn-outline { padding: 9px 22px; border-radius: 30px; border: 1.5px solid var(--border); background: #fff; color: var(--navy); font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color .2s; text-decoration: none; }
+    .btn-outline:hover { border-color: var(--navy); }
+    .btn-dark { padding: 9px 22px; border-radius: 30px; border: none; background: var(--navy); color: #fff; font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; text-decoration: none; }
+    .btn-dark:hover { background: #1a3d6b; }
 
-    .body-l { font-size: 18px; font-weight: 400; line-height: 1.7; color: var(--body); }
-    .body-s { font-size: 14px; font-weight: 400; line-height: 1.5; color: var(--body); }
-    .text-muted { color: var(--muted); }
-
-    /* Buttons */
-    button, .btn {
-      display: inline-flex; align-items: center; justify-content: center;
-      font-family: inherit; border: none; border-radius: 8px; cursor: pointer;
-      transition: all 0.2s ease; text-decoration: none; font-weight: 600;
-    }
-    .btn-primary {
-      background-color: var(--blue); color: white; padding: 12px 24px; height: 48px; font-size: 16px;
-    }
-    .btn-primary:hover {
-      background-color: var(--blue-dark); transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(27, 95, 168, 0.24);
-    }
-    .btn-secondary {
-      background-color: white; color: var(--blue); border: 2px solid var(--blue);
-      padding: 10px 24px; height: 48px; font-size: 16px;
-    }
-    .btn-secondary:hover { background-color: var(--light-blue); }
-    .btn-outline {
-      background-color: transparent; color: var(--blue); border: 2px solid var(--blue);
-      padding: 10px 20px; height: 40px; font-size: 14px;
-    }
-    .btn-outline:hover { background-color: var(--light-blue); }
-
-    /* Pill chips */
-    .chip {
-      display: inline-flex; align-items: center; gap: 8px;
-      background-color: var(--teal); color: white;
-      padding: 8px 16px; border-radius: 999px;
-      font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
-    }
-
-    /* Main nav */
-    .main-nav {
-      position: sticky; top: 0; z-index: 98;
-      background-color: white; border-bottom: 1px solid var(--border);
-      height: 64px; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-    }
-    .nav-left { display: flex; align-items: center; gap: 32px; }
-    .nav-brand { font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
-    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
-    .nav-links a {
-      font-size: 15px; font-weight: 500; color: var(--body);
-      text-decoration: none; transition: color 0.2s ease;
-    }
-    .nav-links a:hover { color: var(--blue); }
-    .nav-links a.active { color: var(--blue); border-bottom: 2px solid var(--blue); padding-bottom: 2px; }
-
-    /* Sticky feature nav */
-    #feature-nav {
-      position: fixed; top: -64px; left: 0; right: 0; z-index: 99;
-      background-color: white; border-bottom: 1px solid var(--border);
-      height: 64px; display: flex; align-items: center; justify-content: space-between;
-      padding: 0 48px; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      transition: top 0.3s ease;
-    }
-    #feature-nav.visible { top: 0; }
-    .feature-nav-brand { font-size: 20px; font-weight: 700; color: var(--navy); letter-spacing: -0.5px; }
-    .feature-nav-center { position: absolute; left: 50%; transform: translateX(-50%); }
-    .feature-nav-cta {
-      background-color: var(--blue); color: white; padding: 0 24px; height: 36px;
-      border-radius: 8px; border: none; font-size: 14px; font-weight: 600;
-      cursor: pointer; transition: background-color 0.2s ease;
-    }
-    .feature-nav-cta:hover { background-color: var(--blue-dark); }
-
-    /* Hero Section */
-    #hero {
-      background-color: var(--canvas);
-      padding: 96px 48px 80px;
-    }
-    .hero-container {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 55% 45%; gap: 64px; align-items: center;
-    }
-    .hero-left h1 { margin-top: 16px; }
-    .hero-subhead { font-size: 18px; color: var(--body); line-height: 1.7; margin-top: 24px; }
-    .hero-cta-group { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
-    .hero-cta-group .btn-primary { height: 48px; font-size: 16px; padding: 0 24px; }
-    .hero-cta-group .btn-secondary { height: 48px; font-size: 16px; padding: 0 24px; }
-    .hero-microcopy { font-size: 14px; color: var(--muted); margin-top: 16px; }
-
-    /* Campaign Ecosystem Visual */
-    .ecosystem-visual {
-      position: relative;
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
-      padding: 32px;
-      min-height: 420px;
-    }
-    .eco-center {
-      text-align: center;
+    /* HERO */
+    .hero { padding: 88px 48px 72px; text-align: center; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 18px;
+      background: var(--green-bg);
+      border: 1px solid var(--green-bd);
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
       margin-bottom: 24px;
     }
-    .eco-center-label {
-      font-size: 11px; font-weight: 600; text-transform: uppercase;
-      letter-spacing: 0.08em; color: var(--teal); margin-bottom: 8px;
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.08;
+      letter-spacing: -.5px;
+      margin-bottom: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
-    .eco-center-title {
-      font-size: 18px; font-weight: 700; color: var(--heading);
+    h1 em { font-style: italic; color: var(--teal); }
+    .hero-sub {
+      font-size: 19px;
+      color: var(--slate);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 14px;
     }
-    .eco-pieces {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
+    .hero-detail {
+      font-size: 16px;
+      color: var(--slate);
+      line-height: 1.75;
+      max-width: 600px;
+      margin: 0 auto 30px;
     }
-    .eco-piece {
-      background: var(--canvas); border: 1px solid var(--border);
-      border-radius: 10px; padding: 16px 12px; text-align: center;
-      transition: all 0.3s ease; cursor: default;
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
+    .btn-navy-pill { padding: 14px 32px; border-radius: 30px; border: none; background: var(--navy); color: #fff; font-size: 15px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; text-decoration: none; }
+    .btn-navy-pill:hover { background: #1a3d6b; }
+    .btn-ghost-pill { padding: 14px 32px; border-radius: 30px; border: 1.5px solid var(--border); background: #fff; color: var(--navy); font-size: 15px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color .2s; text-decoration: none; }
+    .btn-ghost-pill:hover { border-color: var(--navy); }
+    .hero-fine { font-size: 14px; color: var(--muted); margin-bottom: 56px; }
+
+    /* HERO VISUAL — ecosystem mockup */
+    .hero-frame {
+      max-width: 700px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 48px rgba(15,42,74,.12);
     }
-    .eco-piece:hover {
-      border-color: var(--teal); box-shadow: 0 2px 8px rgba(0, 163, 163, 0.15);
-      transform: translateY(-2px);
+    .frame-bar {
+      background: var(--bg);
+      padding: 11px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 7px;
     }
-    .eco-piece-icon { font-size: 24px; margin-bottom: 8px; }
-    .eco-piece-name { font-size: 12px; font-weight: 600; color: var(--heading); }
-    .eco-piece-channel { font-size: 10px; color: var(--muted); margin-top: 2px; }
-    .eco-badge {
-      position: absolute; bottom: -12px; left: 50%; transform: translateX(-50%);
-      background: var(--navy); color: white; padding: 8px 20px; border-radius: 999px;
-      font-size: 13px; font-weight: 600; white-space: nowrap;
-      box-shadow: 0 4px 12px rgba(15, 42, 74, 0.3);
+    .fdot { width: 10px; height: 10px; border-radius: 50%; }
+    .furl {
+      background: #EDF2F7;
+      border-radius: 5px;
+      padding: 4px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: 12px;
+      flex: 1;
+      max-width: 340px;
+      text-align: center;
+    }
+    .eco-visual-inner {
+      padding: 32px;
+      background: #fff;
+    }
+    .eco-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .eco-title {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .eco-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+    .eco-item {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      transition: border-color .2s;
+    }
+    .eco-item:hover { border-color: var(--teal); }
+    .eco-icon { font-size: 22px; margin-bottom: 6px; }
+    .eco-name { font-size: 12px; font-weight: 700; color: var(--navy); }
+    .eco-ch { font-size: 10px; color: var(--muted); margin-top: 2px; }
+    .eco-item.wide { grid-column: 1 / -1; max-width: 160px; margin: 0 auto; }
+    .eco-footer {
+      text-align: center;
+      margin-top: 16px;
+      padding: 8px 20px;
+      background: var(--navy);
+      color: #fff;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      display: inline-block;
+    }
+    .eco-footer-wrap { text-align: center; margin-top: 14px; }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .stat { flex: 1; padding: 32px 24px; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+    .stat-l { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+    /* SECTIONS */
+    .section { padding: 80px 48px; }
+    .section-alt { background: var(--bg); }
+    .si { max-width: 900px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -.3px;
+    }
+    .ssub {
+      font-size: 17px;
+      color: var(--slate);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 44px;
     }
 
-    /* Social Proof Bar */
-    .social-proof {
-      background-color: var(--navy); padding: 40px 48px; text-align: center;
+    /* BEFORE / PROBLEM CARDS */
+    .before-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+    .bc { padding: 26px; border-radius: 14px; border: 1px solid var(--border); background: #fff; }
+    .bc.hl { border-color: #FECACA; background: #FEF9F9; }
+    .btag {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      background: var(--bg);
+      color: var(--muted);
     }
-    .social-proof-eyebrow {
-      font-size: 12px; font-weight: 500; text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.6); letter-spacing: 0.06em; margin-bottom: 24px;
-    }
-    .stats-row { display: flex; justify-content: center; gap: 64px; flex-wrap: wrap; }
-    .stat-block { text-align: center; }
-    .stat-value { font-size: 36px; font-weight: 700; color: white; }
-    .stat-label { font-size: 13px; color: rgba(255, 255, 255, 0.7); margin-top: 4px; line-height: 1.4; }
+    .btag.bad { background: #FEE2E2; color: #DC2626; }
+    .btitle { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .bbody { font-size: 14px; color: var(--slate); line-height: 1.7; }
 
-    /* Problem Section */
-    .problem-section { background-color: white; padding: 80px 48px; }
-    .section-center { max-width: 720px; margin: 0 auto; }
-    .section-heading { text-align: center; margin-bottom: 24px; }
-    .section-subhead {
-      font-size: 18px; color: var(--body); line-height: 1.7;
-      text-align: center; margin-bottom: 40px;
+    .pullquote {
+      background: var(--navy);
+      border-radius: 14px;
+      padding: 32px 40px;
+      text-align: right;
     }
-    .problem-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 48px; }
-    .problem-card {
-      background-color: white; border: 1px solid var(--border);
-      border-radius: 12px; padding: 28px; text-align: center;
+    .pullquote p {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: #fff;
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 10px;
     }
-    .problem-card-icon { font-size: 24px; margin-bottom: 16px; }
-    .problem-card-title { font-size: 18px; font-weight: 600; color: var(--heading); margin-bottom: 8px; }
-    .problem-card-body { font-size: 15px; color: var(--body); line-height: 1.5; }
-    .transition-line { text-align: center; font-size: 18px; font-weight: 600; color: var(--blue); margin-top: 40px; }
+    .pullquote span { font-size: 14px; color: var(--muted); }
 
-    /* How It Works Section */
-    .how-section { background-color: var(--canvas); padding: 80px 48px; }
-    .section-intro { text-align: center; margin-bottom: 12px; }
-    .section-intro-sub { text-align: center; color: var(--muted); margin-bottom: 56px; font-size: 16px; }
-    .steps-container {
-      max-width: 1000px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
-      position: relative;
-    }
-    .steps-container::before {
-      content: ''; position: absolute; top: 48px; left: 12.5%; right: 12.5%;
-      height: 1px; background-color: #CBD5E1;
-      background-image: repeating-linear-gradient(90deg, #CBD5E1 0, #CBD5E1 8px, transparent 8px, transparent 16px);
-      z-index: 0;
-    }
-    .step { position: relative; z-index: 1; text-align: center; }
-    .step-number {
-      font-size: 72px; font-weight: 700; color: rgba(27, 95, 168, 0.12);
-      position: absolute; top: -40px; left: 50%; transform: translateX(-50%); width: 100%;
-    }
-    .step-icon { font-size: 32px; color: var(--teal); margin-bottom: 16px; margin-top: 16px; }
-    .step-title { font-size: 20px; font-weight: 600; color: var(--heading); margin-bottom: 12px; }
-    .step-body { font-size: 15px; color: var(--body); line-height: 1.6; max-width: 220px; margin: 0 auto; }
+    /* STEPS */
+    .steps { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 16px; }
+    .step { padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: #fff; transition: border-color .2s; }
+    .step:hover { border-color: var(--teal); }
+    .step-n { font-size: 12px; font-weight: 700; color: var(--teal); margin-bottom: 10px; letter-spacing: .3px; }
+    .step-t { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .step-b { font-size: 14px; color: var(--slate); line-height: 1.7; }
 
-    /* Ecosystem Section — the key differentiator section */
-    .ecosystem-section { background-color: white; padding: 80px 48px; }
-    .ecosystem-grid {
-      max-width: 1100px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;
-    }
-    .channel-card {
-      background-color: white; border: 1px solid var(--border);
-      border-radius: 12px; padding: 32px; display: flex; gap: 20px;
-      transition: box-shadow 0.2s ease;
-    }
-    .channel-card:hover { box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); }
-    .channel-icon { font-size: 32px; flex-shrink: 0; margin-top: 4px; }
-    .channel-title { font-size: 20px; font-weight: 600; color: var(--heading); margin-bottom: 8px; }
-    .channel-body { font-size: 15px; color: var(--body); line-height: 1.6; }
-    .channel-highlight {
-      font-size: 13px; font-weight: 600; color: var(--teal); margin-top: 12px;
-      display: flex; align-items: center; gap: 6px;
+    /* CHANNEL CARDS (ecosystem section) */
+    .channels { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .ch { padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: #fff; display: flex; gap: 18px; transition: border-color .2s; }
+    .ch:hover { border-color: var(--teal); }
+    .ch-icon { font-size: 28px; flex-shrink: 0; margin-top: 2px; }
+    .ch-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .ch-body { font-size: 14px; color: var(--slate); line-height: 1.7; }
+    .ch-proof {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 4px 14px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
     }
 
-    /* Why PatientEngage Section */
-    .why-section { background-color: var(--canvas); padding: 80px 48px; }
-    .advantage-grid {
-      max-width: 1000px; margin: 0 auto;
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px;
-    }
-    .advantage-card { background-color: white; border: 1px solid var(--border); border-radius: 12px; padding: 32px; }
-    .advantage-card-icon { font-size: 32px; margin-bottom: 16px; }
-    .advantage-card-title { font-size: 20px; font-weight: 600; color: var(--heading); margin-bottom: 12px; }
-    .advantage-card-body { font-size: 16px; color: var(--body); line-height: 1.6; margin-bottom: 16px; }
-    .advantage-card-footnote {
-      font-size: 12px; color: var(--muted); font-style: italic;
-      border-top: 1px solid #F3F4F6; padding-top: 12px; margin-top: 16px;
-    }
+    /* ADVANTAGES */
+    .adv-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .adv { padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: #fff; }
+    .adv-icon { font-size: 28px; margin-bottom: 14px; }
+    .adv-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .adv-body { font-size: 14px; color: var(--slate); line-height: 1.7; margin-bottom: 14px; }
+    .adv-fn { font-size: 13px; color: var(--muted); font-style: italic; border-top: 1px solid var(--border); padding-top: 12px; }
 
-    /* Practice Story Section */
-    .story-section { background-color: var(--light-blue); padding: 80px 48px; }
-    .story-container {
-      max-width: 1200px; margin: 0 auto;
-      display: grid; grid-template-columns: 40% 60%; gap: 64px; align-items: start;
+    /* CASE STUDY */
+    .case {
+      background: linear-gradient(135deg, #F0F7FF, #F0FDFB);
+      border: 1px solid #DBEAFE;
+      border-radius: 16px;
+      padding: 40px;
     }
-    .story-left-label { font-size: 14px; font-weight: 500; color: var(--blue); margin-bottom: 8px; }
-    .story-practice-name { font-size: 20px; font-weight: 600; color: var(--blue); margin-bottom: 8px; }
-    .story-practice-note { font-size: 13px; color: var(--muted); margin-bottom: 32px; }
-    .story-stat { font-size: 56px; font-weight: 700; color: var(--heading); line-height: 1; margin-bottom: 8px; }
-    .story-stat-label { font-size: 16px; color: var(--body); margin-bottom: 24px; }
-    .story-supporting-stats { display: flex; flex-direction: column; gap: 12px; }
-    .story-stat-item { font-size: 14px; font-weight: 500; color: var(--body); display: flex; align-items: center; gap: 10px; }
-    .story-stat-bar { width: 4px; height: 16px; background-color: var(--teal); border-radius: 2px; flex-shrink: 0; }
-    .story-card { background-color: white; border-radius: 12px; padding: 32px; border: 1px solid var(--border); }
-    .story-card-title { font-size: 20px; font-weight: 600; color: var(--heading); margin-bottom: 20px; }
-    .story-card-body { font-size: 16px; color: var(--body); line-height: 1.7; margin-bottom: 16px; }
-    .story-context {
-      font-size: 13px; color: var(--muted); font-style: italic;
-      border-top: 1px solid var(--border); padding-top: 16px; margin-top: 20px;
+    .case-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      margin: 22px 0 32px;
     }
+    .cs { padding: 20px 14px; text-align: center; border-right: 1px solid var(--border); }
+    .cs:last-child { border-right: none; }
+    .cs-n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 34px;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .cs-l { font-size: 13px; color: var(--muted); line-height: 1.4; }
+    .qtext {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--navy);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .qattr { display: flex; align-items: center; gap: 14px; }
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .qname { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .qloc { font-size: 13px; color: var(--muted); margin-top: 2px; }
 
-    /* Competitive Comparison Section */
-    .comparison-section { background-color: white; padding: 80px 48px; text-align: center; }
-    .comparison-heading { margin-bottom: 12px; }
-    .comparison-subhead { font-size: 18px; color: var(--body); margin-bottom: 48px; }
-    .table-wrapper { max-width: 900px; margin: 0 auto; overflow-x: auto; }
+    /* TABLE */
+    .tw {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      overflow-x: auto;
+    }
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
-    thead { background-color: var(--canvas); }
-    th { padding: 14px 16px; text-align: left; font-weight: 600; color: var(--heading); border-bottom: 2px solid var(--border); }
-    th.patient-engage { background-color: var(--light-blue); color: var(--blue); }
-    td { padding: 14px 16px; border-bottom: 1px solid var(--border); color: var(--body); }
-    td.patient-engage-col { background-color: var(--light-blue); font-weight: 600; }
-    .check { color: var(--success); font-weight: 700; font-size: 16px; }
-    .cross { color: var(--error); font-weight: 700; font-size: 16px; }
-    .partial { color: var(--warning); font-weight: 700; font-size: 16px; }
-    .table-footnote { font-size: 12px; color: var(--muted); margin-top: 16px; text-align: left; max-width: 900px; margin-left: auto; margin-right: auto; }
-
-    /* Testimonial Section */
-    .testimonial-section { background-color: var(--canvas); padding: 60px 48px; }
-    .testimonial-container { max-width: 720px; margin: 0 auto; text-align: center; }
-    .testimonial-quote {
-      font-size: 20px; font-weight: 400; line-height: 1.7; color: var(--heading);
-      font-style: italic; margin-bottom: 24px;
+    thead th {
+      padding: 15px 18px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
     }
-    .testimonial-quote::before { content: '\201C'; font-size: 48px; color: var(--teal); display: block; margin-bottom: -12px; }
-    .testimonial-attr { font-size: 14px; color: var(--muted); font-weight: 500; }
-
-    /* CTA Banner */
-    .cta-banner { background-color: var(--navy); padding: 80px 48px; text-align: center; }
-    .cta-banner-content { max-width: 600px; margin: 0 auto; }
-    .cta-banner h2 { color: white; margin-bottom: 16px; }
-    .cta-banner-subhead { color: rgba(255,255,255,0.8); font-size: 18px; line-height: 1.6; margin-bottom: 32px; }
-    .cta-banner .btn-primary { height: 52px; font-size: 17px; padding: 0 32px; }
-    .cta-banner-secondary { color: rgba(255,255,255,0.7); font-size: 14px; margin-top: 16px; cursor: pointer; text-decoration: underline; }
-    .cta-banner-micro { color: rgba(255,255,255,0.5); font-size: 13px; margin-top: 12px; }
-
-    /* Footer */
-    footer { background-color: #0A1F35; padding: 64px 48px 32px; color: rgba(255,255,255,0.7); }
-    .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
-    .footer-brand { font-size: 20px; font-weight: 700; color: white; margin-bottom: 8px; }
-    .footer-tagline { font-size: 14px; color: rgba(255,255,255,0.5); }
-    .footer-col-title { font-size: 13px; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 16px; }
-    .footer-links { list-style: none; }
-    .footer-links li { margin-bottom: 10px; }
-    .footer-links a { font-size: 14px; color: rgba(255,255,255,0.6); text-decoration: none; }
-    .footer-links a:hover { color: white; }
-    .footer-cta {
-      background-color: var(--blue); color: white; padding: 10px 20px;
-      border-radius: 8px; font-size: 14px; font-weight: 600; border: none; cursor: pointer;
-      margin-bottom: 16px;
+    thead th:not(:first-child) { text-align: center; }
+    thead th.pe { background: var(--blue-lt); color: var(--blue); }
+    tbody td {
+      padding: 13px 18px;
+      border-bottom: 1px solid #F1F5F9;
+      color: var(--slate);
+      font-size: 14px;
     }
-    .footer-address { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.6; }
-    .footer-bottom {
-      max-width: 1200px; margin: 48px auto 0; padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      display: flex; justify-content: space-between; font-size: 13px; color: rgba(255,255,255,0.4);
+    tbody td:not(:first-child) { text-align: center; }
+    tbody td.pe { background: #F8FBFF; }
+    tbody td.win { color: var(--green); font-weight: 700; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: var(--bg); }
+    tbody tr:hover td.pe { background: var(--blue-lt); }
+    .tnote { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+    /* CTA */
+    .cta {
+      padding: 88px 48px;
+      text-align: center;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
     }
-    .footer-bottom-right { display: flex; gap: 24px; }
-    .footer-bottom-right a { color: rgba(255,255,255,0.4); text-decoration: none; }
-    .footer-bottom-right a:hover { color: rgba(255,255,255,0.7); }
+    .cta h2 { margin-bottom: 14px; }
+    .cta-sub { font-size: 17px; color: var(--slate); margin-bottom: 32px; line-height: 1.7; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-teal-pill {
+      padding: 14px 32px;
+      border-radius: 30px;
+      border: none;
+      background: var(--teal);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background .2s;
+      text-decoration: none;
+    }
+    .btn-teal-pill:hover { background: #008f8f; }
+    .cta-fine { font-size: 14px; color: var(--muted); margin-top: 18px; }
+    .cta-fine a { color: var(--blue); text-decoration: underline; cursor: pointer; }
 
-    /* Animations */
-    .animate-section { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .animate-section.visible { opacity: 1; transform: translateY(0); }
+    /* FOOTER */
+    footer {
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    .flogo { font-size: 16px; font-weight: 800; color: var(--navy); }
+    .fcopy { font-size: 13px; color: var(--muted); }
 
-    /* Responsive */
+    /* RESPONSIVE */
     @media (max-width: 768px) {
-      h1 { font-size: 32px; }
-      h2 { font-size: 28px; }
-      .hero-container { grid-template-columns: 1fr; }
-      .problem-grid, .advantage-grid { grid-template-columns: 1fr; }
-      .steps-container { grid-template-columns: 1fr 1fr; }
-      .story-container { grid-template-columns: 1fr; }
-      .ecosystem-grid { grid-template-columns: 1fr; }
-      .eco-pieces { grid-template-columns: repeat(2, 1fr); }
-      .footer-content { grid-template-columns: 1fr 1fr; }
-      .main-nav, #feature-nav, #hero, .social-proof, .problem-section, .how-section,
-      .ecosystem-section, .why-section, .story-section, .comparison-section,
-      .testimonial-section, .cta-banner, footer { padding-left: 24px; padding-right: 24px; }
-      .stats-row { gap: 32px; }
-      .table-wrapper { margin: 0 -24px; padding: 0 24px; }
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      h1 { font-size: 38px; }
+      .hero { padding: 60px 20px 52px; }
+      .hero-sub { font-size: 17px; }
+      .stats { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
+      .section { padding: 60px 20px; }
+      .before-grid, .steps, .adv-grid { grid-template-columns: 1fr; }
+      .channels { grid-template-columns: 1fr; }
+      .case-stats { grid-template-columns: 1fr 1fr; }
+      .cs:nth-child(2) { border-right: none; }
+      .cs:nth-child(3) { border-top: 1px solid var(--border); }
+      h2 { font-size: 30px; }
+      .pullquote { text-align: left; padding: 24px; }
+      .cta { padding: 60px 20px; }
+      footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
+      .eco-grid { grid-template-columns: repeat(2, 1fr); }
     }
   </style>
 </head>
 <body>
 
-  <!-- Main Navigation -->
-  <nav class="main-nav">
-    <div class="nav-left">
-      <div class="nav-brand">PatientEngage</div>
-      <ul class="nav-links">
-        <li><a href="/scheduler">Real-Time Scheduler</a></li>
-        <li><a href="#" class="active">One-Click Campaigns</a></li>
-        <li><a href="/reminders">Reminders</a></li>
-      </ul>
-    </div>
-    <button class="btn-outline">Book a Demo</button>
-  </nav>
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">PatientEngage</a>
+  <ul class="nav-links">
+    <li><a href="/scheduler">Real-Time Scheduler</a></li>
+    <li><a href="/campaigns" class="active">One-Click Campaigns</a></li>
+    <li><a href="#">AI Voice Agent</a></li>
+    <li><a href="#">Google Reserve</a></li>
+    <li><a href="/reminders">Reminders</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn-outline">Sign in</a>
+    <a href="#" class="btn-dark">Get started</a>
+  </div>
+</nav>
 
-  <!-- Sticky Feature Nav -->
-  <nav id="feature-nav">
-    <div class="feature-nav-brand">PatientEngage</div>
-    <div class="feature-nav-center">
-      <span class="chip">One-Click Campaigns</span>
-    </div>
-    <button class="feature-nav-cta">Book a Demo</button>
-  </nav>
+<!-- HERO -->
+<section class="hero">
+  <div class="badge"><span class="badge-dot"></span> Part of the PatientEngage platform serving 2,500+ practices</div>
+  <h1>Your patients forget about you between visits. <em>This fixes that.</em></h1>
+  <p class="hero-sub">One Campaign. Five Channels. 108 Appointments.</p>
+  <p class="hero-detail">Pick a campaign topic. The system builds the email, the landing page, the social posts, and a poster — all branded to your practice, all driving the same appointment. Your patients stay in your ecosystem whether they're checking email, scrolling Facebook, or searching Google.</p>
+  <div class="hero-cta">
+    <button class="btn-navy-pill">Book a Live Demo</button>
+    <button class="btn-ghost-pill">See How It Works</button>
+  </div>
+  <p class="hero-fine">No contracts · Setup in 1 day · HIPAA compliant</p>
 
-  <!-- Hero Section -->
-  <section id="hero" class="animate-section">
-    <div class="hero-container">
-      <div class="hero-left">
-        <span class="chip">Part of the PatientEngage platform serving 2,500+ practices</span>
-        <h1>Your patients forget about you between visits. This fixes that.</h1>
-        <p class="hero-subhead">One Campaign. Five Channels. 108 Appointments.</p>
-        <p class="body-l" style="margin-top: 16px; color: var(--body);">Pick a campaign topic. The system builds the email, the landing page, the social posts, and a poster — all branded to your practice, all driving the same appointment. Your patients stay in your ecosystem whether they're checking email, scrolling Facebook, or searching Google.</p>
-        <div class="hero-cta-group">
-          <button class="btn-primary">Book a Live Demo</button>
-          <button class="btn-secondary">See How It Works</button>
+  <div class="hero-frame">
+    <div class="frame-bar">
+      <span class="fdot" style="background:#FF5F57"></span>
+      <span class="fdot" style="background:#FFBD2E"></span>
+      <span class="fdot" style="background:#27C93F"></span>
+      <span class="furl">patientengage.com/campaigns</span>
+    </div>
+    <div class="eco-visual-inner">
+      <div class="eco-label">One click generates</div>
+      <div class="eco-title">Eye Allergy Season Campaign</div>
+      <div class="eco-grid">
+        <div class="eco-item">
+          <div class="eco-icon">📧</div>
+          <div class="eco-name">Email</div>
+          <div class="eco-ch">Patient list</div>
         </div>
-        <p class="hero-microcopy">No contracts · Setup in 1 day · HIPAA compliant</p>
-      </div>
-      <div class="hero-right">
-        <div class="ecosystem-visual">
-          <div class="eco-center">
-            <div class="eco-center-label">One click generates</div>
-            <div class="eco-center-title">Eye Allergy Season Campaign</div>
-          </div>
-          <div class="eco-pieces">
-            <div class="eco-piece">
-              <div class="eco-piece-icon">📧</div>
-              <div class="eco-piece-name">Email</div>
-              <div class="eco-piece-channel">Patient list</div>
-            </div>
-            <div class="eco-piece">
-              <div class="eco-piece-icon">🌐</div>
-              <div class="eco-piece-name">Landing Page</div>
-              <div class="eco-piece-channel">Appointment CTA</div>
-            </div>
-            <div class="eco-piece">
-              <div class="eco-piece-icon">📘</div>
-              <div class="eco-piece-name">Facebook Posts</div>
-              <div class="eco-piece-channel">4 weekly posts</div>
-            </div>
-            <div class="eco-piece">
-              <div class="eco-piece-icon">📍</div>
-              <div class="eco-piece-name">Google Posts</div>
-              <div class="eco-piece-channel">4 weekly posts</div>
-            </div>
-            <div class="eco-piece">
-              <div class="eco-piece-icon">📸</div>
-              <div class="eco-piece-name">Instagram</div>
-              <div class="eco-piece-channel">1 post</div>
-            </div>
-            <div class="eco-piece">
-              <div class="eco-piece-icon">🖼️</div>
-              <div class="eco-piece-name">FB Cover</div>
-              <div class="eco-piece-channel">Auto-swap</div>
-            </div>
-            <div class="eco-piece" style="grid-column: 1 / -1; max-width: 200px; margin: 0 auto;">
-              <div class="eco-piece-icon">🖨️</div>
-              <div class="eco-piece-name">Poster</div>
-              <div class="eco-piece-channel">Print for your office</div>
-            </div>
-          </div>
-          <div class="eco-badge">Same message · Every channel · One click</div>
+        <div class="eco-item">
+          <div class="eco-icon">🌐</div>
+          <div class="eco-name">Landing Page</div>
+          <div class="eco-ch">Appointment CTA</div>
+        </div>
+        <div class="eco-item">
+          <div class="eco-icon">📘</div>
+          <div class="eco-name">Facebook Posts</div>
+          <div class="eco-ch">4 weekly posts</div>
+        </div>
+        <div class="eco-item">
+          <div class="eco-icon">📍</div>
+          <div class="eco-name">Google Posts</div>
+          <div class="eco-ch">4 weekly posts</div>
+        </div>
+        <div class="eco-item">
+          <div class="eco-icon">📸</div>
+          <div class="eco-name">Instagram</div>
+          <div class="eco-ch">1 post</div>
+        </div>
+        <div class="eco-item">
+          <div class="eco-icon">🖼️</div>
+          <div class="eco-name">FB Cover</div>
+          <div class="eco-ch">Auto-swap</div>
+        </div>
+        <div class="eco-item wide">
+          <div class="eco-icon">🖨️</div>
+          <div class="eco-name">Poster</div>
+          <div class="eco-ch">Print for your office</div>
         </div>
       </div>
+      <div class="eco-footer-wrap">
+        <span class="eco-footer">Same message · Every channel · One click</span>
+      </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Social Proof Bar -->
-  <section class="social-proof animate-section">
-    <p class="social-proof-eyebrow">Independent eye care practices running One-Click Campaigns</p>
-    <div class="stats-row">
-      <div class="stat-block">
-        <div class="stat-value">647</div>
-        <div class="stat-label">practices running<br>campaigns in March</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-value">3.7M</div>
-        <div class="stat-label">campaign emails<br>sent in one month</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-value">21%</div>
-        <div class="stat-label">unique open rate<br>network-wide</div>
-      </div>
-      <div class="stat-block">
-        <div class="stat-value">54</div>
-        <div class="stat-label">avg appointments per<br>practice per month</div>
-      </div>
-    </div>
-  </section>
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-n">647</div>
+    <div class="stat-l">practices running<br>campaigns in March</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">3.7M</div>
+    <div class="stat-l">campaign emails<br>sent in one month</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">21%</div>
+    <div class="stat-l">unique open rate<br>network-wide</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">54</div>
+    <div class="stat-l">avg appointments per<br>practice per month</div>
+  </div>
+</div>
 
-  <!-- Problem Section -->
-  <section class="problem-section animate-section">
-    <div class="section-center">
-      <h2 class="section-heading">Between visits, your patients enter a void</h2>
-      <p class="section-subhead">They see competitor ads. They forget about the specialty services you offer. The only time they hear from you is a recall reminder — and by then, someone else has already been in their inbox, their feed, and their search results all month.</p>
-      <div class="problem-grid">
-        <div class="problem-card">
-          <div class="problem-card-icon">👻</div>
-          <h4 class="problem-card-title">Invisible database decay</h4>
-          <p class="problem-card-body">You have thousands of patient records that only hear from you once a year for a recall. Between visits, your practice doesn't exist to them. Your database is decaying and nobody notices until the schedule starts thinning.</p>
-        </div>
-        <div class="problem-card">
-          <div class="problem-card-icon">🎨</div>
-          <h4 class="problem-card-title">The manual labor tax</h4>
-          <p class="problem-card-body">Your office manager spends 45 minutes on Canva making one social post that gets 2 likes. Your "email strategy" is whatever someone has time for between insurance claims. High-value staff spending low-value hours on amateur creative.</p>
-        </div>
-        <div class="problem-card">
-          <div class="problem-card-icon">💸</div>
-          <h4 class="problem-card-title">The agency trap</h4>
-          <p class="problem-card-body">Hiring an eye care marketing agency costs $1,000–$3,000/month — and still requires your approvals, your feedback, and your patience. You're paying premium prices for the privilege of doing half the work yourself.</p>
-        </div>
+<!-- PROBLEM SECTION -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">The problem</div>
+    <h2>Between visits, your patients enter a void</h2>
+    <p class="ssub">They see competitor ads. They forget about your specialty services. The only time they hear from you is a recall reminder — and by then, someone else has already been in their inbox, their feed, and their search results all month.</p>
+    <div class="before-grid">
+      <div class="bc hl">
+        <span class="btag bad">Silent decay</span>
+        <div class="btitle">Invisible database decay</div>
+        <div class="bbody">You have thousands of patient records that only hear from you once a year for a recall. Between visits, your practice doesn't exist to them. Your database is decaying and nobody notices until the schedule starts thinning.</div>
       </div>
-      <p class="transition-line">One-Click Campaigns closes the gap between visits — automatically.</p>
+      <div class="bc hl">
+        <span class="btag bad">Staff time</span>
+        <div class="btitle">The manual labor tax</div>
+        <div class="bbody">Your office manager spends 45 minutes on Canva making one social post that gets 2 likes. Your "email strategy" is whatever someone has time for between insurance claims. High-value staff spending low-value hours on amateur creative.</div>
+      </div>
+      <div class="bc hl">
+        <span class="btag bad">Cost trap</span>
+        <div class="btitle">The agency trap</div>
+        <div class="bbody">Hiring an eye care marketing agency costs $1,000–$3,000/month — and still requires your approvals, your feedback, and your patience. You're paying premium prices for the privilege of doing half the work yourself.</div>
+      </div>
     </div>
-  </section>
+    <div class="pullquote">
+      <p>One-Click Campaigns closes the gap between visits — automatically.</p>
+      <span>Email, landing page, social, Google, poster — from one click</span>
+    </div>
+  </div>
+</section>
 
-  <!-- How It Works Section -->
-  <section class="how-section animate-section">
-    <div class="section-center">
-      <h2 class="section-heading section-intro">How One-Click Campaigns works</h2>
-      <p class="section-intro-sub">Four things happen. Only the first one requires you.</p>
-    </div>
-    <div class="steps-container">
+<!-- HOW IT WORKS -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">How it works</div>
+    <h2>Four things happen. Only the first one requires you.</h2>
+    <p class="ssub">Pick a topic and the system handles the rest.</p>
+    <div class="steps">
       <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-icon">📋</div>
-        <h3 class="step-title">Pick a topic</h3>
-        <p class="step-body">Choose from the campaign library — Dry Eye, Allergies, Myopia Management, and more. Optometry-specific themes, ready to go.</p>
+        <div class="step-n">STEP 1</div>
+        <div class="step-t">Pick a topic</div>
+        <div class="step-b">Choose from the campaign library — Dry Eye, Allergies, Myopia Management, and more. Optometry-specific themes, ready to go.</div>
       </div>
       <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-icon">⚡</div>
-        <h3 class="step-title">One click generates 7 pieces</h3>
-        <p class="step-body">Email, landing page, Facebook posts, Google posts, Instagram, cover photo, and poster — all branded to your practice automatically.</p>
+        <div class="step-n">STEP 2</div>
+        <div class="step-t">One click generates 7 pieces</div>
+        <div class="step-b">Email, landing page, Facebook posts, Google posts, Instagram, cover photo, and poster — all branded to your practice automatically.</div>
       </div>
       <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-icon">📡</div>
-        <h3 class="step-title">Campaign runs itself</h3>
-        <p class="step-body">Email hits your patient list. Social posts publish weekly. Landing page goes live. Poster is ready to print. Same message, everywhere.</p>
+        <div class="step-n">STEP 3</div>
+        <div class="step-t">Campaign runs itself</div>
+        <div class="step-b">Email hits your patient list. Social posts publish weekly. Landing page goes live. Poster is ready to print. Same message, everywhere.</div>
       </div>
       <div class="step">
-        <div class="step-number">4</div>
-        <div class="step-icon">📊</div>
-        <h3 class="step-title">Track what comes back</h3>
-        <p class="step-body">See email opens, landing page views, and appointments attributed to the campaign — all in one dashboard.</p>
+        <div class="step-n">STEP 4</div>
+        <div class="step-t">Track what comes back</div>
+        <div class="step-b">See email opens, landing page views, and appointments attributed to the campaign — all in one dashboard.</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Ecosystem Section — The Key Differentiator -->
-  <section class="ecosystem-section animate-section" id="features">
-    <div class="section-center">
-      <h2 class="section-heading">Every piece keeps patients inside your world</h2>
-      <p class="section-subhead">Same messaging. Same imagery. Same call to action. Across every channel your patients touch.</p>
+<!-- ECOSYSTEM — THE KEY DIFFERENTIATOR -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">The ecosystem</div>
+    <h2>Every piece keeps patients inside your world</h2>
+    <p class="ssub">Same messaging. Same imagery. Same call to action. Across every channel your patients touch.</p>
+    <div class="channels">
+      <div class="ch">
+        <div class="ch-icon">📧</div>
+        <div>
+          <div class="ch-title">Branded email to your patient list</div>
+          <div class="ch-body">The campaign email goes directly to your patients from the EHR — with your logo, your phone number, your booking link. Professional design, not a Canva template. Patients open it and recognize you immediately.</div>
+          <span class="ch-proof">21% open rate across the network</span>
+        </div>
+      </div>
+      <div class="ch">
+        <div class="ch-icon">🌐</div>
+        <div>
+          <div class="ch-title">Landing page that drives appointments</div>
+          <div class="ch-body">Every campaign generates a dedicated landing page — branded to your practice, themed to the topic, with a clear appointment CTA. When patients click through, they stay inside your ecosystem.</div>
+          <span class="ch-proof">10% of recipients visited the landing page</span>
+        </div>
+      </div>
+      <div class="ch">
+        <div class="ch-icon">📘</div>
+        <div>
+          <div class="ch-title">Facebook + Instagram posts all month</div>
+          <div class="ch-body">Four weekly Facebook posts and an Instagram post — all carrying the same campaign imagery and message. Your patients see you in their feed, reinforcing what they saw in their inbox.</div>
+          <span class="ch-proof">Auto-scheduled weekly, branded per practice</span>
+        </div>
+      </div>
+      <div class="ch">
+        <div class="ch-icon">📍</div>
+        <div>
+          <div class="ch-title">Google Business posts when they search</div>
+          <div class="ch-body">Four weekly Google My Business posts keep your campaign visible when patients search for you or browse Google Maps. Same theme, same imagery — they see you on Google and recognize the campaign from their email.</div>
+          <span class="ch-proof">Visible in Google Search and Maps</span>
+        </div>
+      </div>
+      <div class="ch">
+        <div class="ch-icon">🖨️</div>
+        <div>
+          <div class="ch-title">Poster + cover photo for your office</div>
+          <div class="ch-body">A print-ready poster for your waiting room and a Facebook cover photo that swaps automatically. The campaign extends from digital to physical — patients see it online AND when they walk in your door.</div>
+          <span class="ch-proof">Digital and in-office, from the same campaign</span>
+        </div>
+      </div>
+      <div class="ch">
+        <div class="ch-icon">🔗</div>
+        <div>
+          <div class="ch-title">Everything connects back to your chair</div>
+          <div class="ch-body">Every piece — email, landing page, social post, Google post, poster — carries the same call to action. The patient can enter your campaign from any channel and end up in the same place: your appointment book.</div>
+          <span class="ch-proof">108 appointments from one campaign (Coastal Eye)</span>
+        </div>
+      </div>
     </div>
-    <div class="ecosystem-grid">
-      <div class="channel-card">
-        <div class="channel-icon">📧</div>
-        <div>
-          <h4 class="channel-title">Branded email to your patient list</h4>
-          <p class="channel-body">The campaign email goes directly to your patients from the EHR — with your logo, your phone number, your booking link. Professional design, not a Canva template. Patients open it and recognize you immediately.</p>
-          <div class="channel-highlight">→ 21% open rate across the network</div>
-        </div>
-      </div>
-      <div class="channel-card">
-        <div class="channel-icon">🌐</div>
-        <div>
-          <h4 class="channel-title">Landing page that drives appointments</h4>
-          <p class="channel-body">Every campaign generates a dedicated landing page — branded to your practice, themed to the topic, with a clear appointment CTA. When patients click through, they stay inside your ecosystem. Not a generic website. Your world.</p>
-          <div class="channel-highlight">→ 10% of recipients visited the landing page (Coastal Eye)</div>
-        </div>
-      </div>
-      <div class="channel-card">
-        <div class="channel-icon">📘</div>
-        <div>
-          <h4 class="channel-title">Facebook + Instagram posts all month</h4>
-          <p class="channel-body">Four weekly Facebook posts and an Instagram post — all carrying the same campaign imagery and message. Your patients see you in their feed, reinforcing what they saw in their inbox. No separate social strategy needed.</p>
-          <div class="channel-highlight">→ Auto-scheduled weekly, branded per practice</div>
-        </div>
-      </div>
-      <div class="channel-card">
-        <div class="channel-icon">📍</div>
-        <div>
-          <h4 class="channel-title">Google Business posts when they search</h4>
-          <p class="channel-body">Four weekly Google My Business posts keep your campaign visible when patients search for you or browse Google Maps. Same theme, same imagery — they see you on Google and recognize the campaign from their email.</p>
-          <div class="channel-highlight">→ Visible in Google Search and Maps</div>
-        </div>
-      </div>
-      <div class="channel-card">
-        <div class="channel-icon">🖨️</div>
-        <div>
-          <h4 class="channel-title">Poster + cover photo for your office</h4>
-          <p class="channel-body">A print-ready poster for your waiting room and a Facebook cover photo that swaps automatically. The campaign extends from digital to physical — patients see it online AND when they walk in your door.</p>
-          <div class="channel-highlight">→ Digital and in-office, from the same campaign</div>
-        </div>
-      </div>
-      <div class="channel-card">
-        <div class="channel-icon">🔗</div>
-        <div>
-          <h4 class="channel-title">Everything connects back to your chair</h4>
-          <p class="channel-body">Every piece — email, landing page, social post, Google post, poster — carries the same call to action. The patient can enter your campaign from any channel and end up in the same place: your appointment book.</p>
-          <div class="channel-highlight">→ 108 appointments from one campaign (Coastal Eye)</div>
-        </div>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Why PatientEngage Section -->
-  <section class="why-section animate-section">
-    <div class="section-center">
-      <h2 class="section-heading">Three things no one else does</h2>
+<!-- WHY PATIENTENGAGE -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">Why PatientEngage</div>
+    <h2>Three things no one else does</h2>
+    <p class="ssub" style="margin-bottom: 32px;"></p>
+    <div class="adv-grid">
+      <div class="adv">
+        <div class="adv-icon">🎯</div>
+        <div class="adv-title">Coordinated — not piecemeal</div>
+        <div class="adv-body">Agencies build pieces one at a time. Communication platforms send emails in a vacuum. One-Click Campaigns generates a coordinated presence across every channel from a single action — same message everywhere, automatically.</div>
+        <div class="adv-fn">No competitor auto-generates 7 pieces across 5 channels from one click.</div>
+      </div>
+      <div class="adv">
+        <div class="adv-icon">👁️</div>
+        <div class="adv-title">Built for optometry</div>
+        <div class="adv-body">Campaign themes are clinically relevant — Dry Eye Awareness, Myopia Management, Eye Allergy Season, Diabetic Eye Exams. These aren't generic "small business" templates. They speak the language your patients need to hear.</div>
+        <div class="adv-fn">Generalist platforms have zero optometry-specific campaign themes.</div>
+      </div>
+      <div class="adv">
+        <div class="adv-icon">⚡</div>
+        <div class="adv-title">EHR-integrated patient targeting</div>
+        <div class="adv-body">Campaigns email your actual patients from the EHR — not a purchased list, not a manually exported CSV. The system knows who your patients are because it's connected to your practice management system natively.</div>
+        <div class="adv-fn">No agency or generalist platform has native EHR integration for campaign targeting.</div>
+      </div>
     </div>
-    <div class="advantage-grid">
-      <div class="advantage-card">
-        <div class="advantage-card-icon">🎯</div>
-        <h3 class="advantage-card-title">Coordinated — not piecemeal</h3>
-        <p class="advantage-card-body">Agencies build pieces one at a time. Communication platforms send emails in a vacuum. One-Click Campaigns generates a coordinated presence across every channel from a single action — same message everywhere, automatically.</p>
-        <p class="advantage-card-footnote">No competitor auto-generates 7 pieces across 5 channels from one click.</p>
-      </div>
-      <div class="advantage-card">
-        <div class="advantage-card-icon">👁️</div>
-        <h3 class="advantage-card-title">Built for optometry</h3>
-        <p class="advantage-card-body">Campaign themes are clinically relevant — Dry Eye Awareness, Myopia Management, Eye Allergy Season, Diabetic Eye Exams. These aren't generic "small business" templates. They speak the language your patients need to hear.</p>
-        <p class="advantage-card-footnote">Generalist platforms have zero optometry-specific campaign themes.</p>
-      </div>
-      <div class="advantage-card">
-        <div class="advantage-card-icon">⚡</div>
-        <h3 class="advantage-card-title">EHR-integrated patient targeting</h3>
-        <p class="advantage-card-body">Campaigns email your actual patients from the EHR — not a purchased list, not a manually exported CSV. The system knows who your patients are because it's connected to your practice management system natively.</p>
-        <p class="advantage-card-footnote">No agency or generalist platform has native EHR integration for campaign targeting.</p>
-      </div>
-    </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Practice Story Section -->
-  <section class="story-section animate-section">
-    <div class="story-container">
-      <div>
-        <p class="story-left-label">Practice spotlight</p>
-        <h3 class="story-practice-name">Coastal Eye Associates</h3>
-        <p class="story-practice-note">Independent practice · Single location · ~3,300 patients</p>
-        <div class="story-stat">108</div>
-        <p class="story-stat-label">appointments from one allergy campaign</p>
-        <div class="story-supporting-stats">
-          <div class="story-stat-item">
-            <span class="story-stat-bar"></span>
-            33% email open rate (vs. 21% network avg)
-          </div>
-          <div class="story-stat-item">
-            <span class="story-stat-bar"></span>
-            10% of recipients visited the landing page
-          </div>
-          <div class="story-stat-item">
-            <span class="story-stat-bar"></span>
-            3.3% email-to-appointment conversion
-          </div>
+<!-- CASE STUDY -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">Practice spotlight</div>
+    <h2>Coastal Eye Associates</h2>
+    <p class="ssub">Independent practice · Single location · ~3,300 patients</p>
+    <div class="case">
+      <div style="font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 6px;">One campaign. Same message everywhere. 108 appointments.</div>
+      <p style="font-size: 15px; color: var(--slate); line-height: 1.7; margin-bottom: 8px;">Coastal Eye Associates selected an Eye Allergy campaign from the library. The system generated a branded email, a landing page, Facebook posts, Google Business posts, an Instagram post, a cover photo, and a poster — all in one click.</p>
+      <p style="font-size: 15px; color: var(--slate); line-height: 1.7;">The email went to 3,286 patients. A third of them opened it. One in ten visited the campaign landing page. And 108 booked appointments — because every touchpoint pointed back to the same place: their chair.</p>
+      <div class="case-stats">
+        <div class="cs">
+          <div class="cs-n">108</div>
+          <div class="cs-l">appointments from<br>one campaign</div>
+        </div>
+        <div class="cs">
+          <div class="cs-n">33%</div>
+          <div class="cs-l">email open rate<br>(vs. 21% avg)</div>
+        </div>
+        <div class="cs">
+          <div class="cs-n">10%</div>
+          <div class="cs-l">recipients visited<br>the landing page</div>
+        </div>
+        <div class="cs">
+          <div class="cs-n">3.3%</div>
+          <div class="cs-l">email-to-appointment<br>conversion</div>
         </div>
       </div>
-      <div class="story-card">
-        <h3 class="story-card-title">One campaign. Same message everywhere. 108 appointments.</h3>
-        <p class="story-card-body">Coastal Eye Associates selected an Eye Allergy campaign from the library. The system generated a branded email, a landing page, Facebook posts, Google Business posts, an Instagram post, a cover photo, and a poster — all in one click.</p>
-        <p class="story-card-body">The email went to 3,286 patients. A third of them opened it. One in ten visited the campaign landing page. And 108 booked appointments — not through a separate booking flow, but because every touchpoint pointed back to the same place: their chair.</p>
-        <p class="story-card-body">The practice didn't design anything. They didn't approve anything. They didn't post anything manually. They picked a topic and the system handled the rest.</p>
-        <p class="story-context">Data reflects March 2026. Anonymized per practice policy. Stats are observed from PatientEngage campaign reports (Step 3 case study).</p>
+      <p class="qtext">"We used to talk about doing marketing every Monday morning and then never get to it. Now I pick a campaign on the first of the month and forget about it. Last month our allergy campaign brought in over a hundred appointments — and I didn't make a single phone call or design a single flyer."</p>
+      <div class="qattr">
+        <div class="avatar">PM</div>
+        <div>
+          <div class="qname">Practice Manager</div>
+          <div class="qloc">Coastal Eye Associates</div>
+        </div>
       </div>
+      <p style="font-size: 13px; color: var(--muted); font-style: italic; margin-top: 20px;">Data reflects March 2026. Anonymized per practice policy. [OBSERVED] from PatientEngage campaign reports.</p>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- Testimonial -->
-  <section class="testimonial-section animate-section">
-    <div class="testimonial-container">
-      <div class="testimonial-quote">We used to talk about doing marketing every Monday morning and then never get to it. Now I pick a campaign on the first of the month and forget about it. Last month our allergy campaign brought in over a hundred appointments — and I didn't make a single phone call or design a single flyer. The best part is patients see us everywhere.</div>
-      <div class="testimonial-attr">— Practice Manager, Coastal Eye Associates</div>
-    </div>
-  </section>
-
-  <!-- Competitive Comparison Section -->
-  <section class="comparison-section animate-section">
-    <h2 class="comparison-heading">How One-Click Campaigns compares</h2>
-    <p class="comparison-subhead">The difference isn't that we send emails. It's that one click creates a coordinated presence across every channel.</p>
-    <div class="table-wrapper">
+<!-- COMPARISON TABLE -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">Comparison</div>
+    <h2>How One-Click Campaigns compares</h2>
+    <p class="ssub">The difference isn't that we send emails. It's that one click creates a coordinated presence across every channel.</p>
+    <div class="tw">
       <table>
         <thead>
           <tr>
             <th>Capability</th>
-            <th class="patient-engage">One-Click Campaigns</th>
+            <th class="pe">One-Click Campaigns</th>
             <th>Agencies</th>
             <th>Weave</th>
             <th>Solutionreach</th>
@@ -685,141 +763,76 @@
         <tbody>
           <tr>
             <td>Coordinated multi-channel campaign</td>
-            <td class="patient-engage-col"><span class="check">✓</span> One click</td>
+            <td class="pe win">✓ One click</td>
             <td>Manual, per-channel</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
+            <td>✗</td>
+            <td>✗</td>
           </tr>
           <tr>
             <td>Campaign landing page</td>
-            <td class="patient-engage-col"><span class="check">✓</span> Auto-generated</td>
-            <td><span class="partial">~</span> If in retainer</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
+            <td class="pe win">✓ Auto-generated</td>
+            <td>~ If in retainer</td>
+            <td>✗</td>
+            <td>✗</td>
           </tr>
           <tr>
             <td>Social posts matching campaign</td>
-            <td class="patient-engage-col"><span class="check">✓</span> Auto-scheduled</td>
-            <td><span class="partial">~</span> Manual</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
+            <td class="pe win">✓ Auto-scheduled</td>
+            <td>~ Manual</td>
+            <td>✗</td>
+            <td>✗</td>
           </tr>
           <tr>
             <td>Optometry-specific themes</td>
-            <td class="patient-engage-col"><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="cross">✗</span></td>
+            <td class="pe win">✓</td>
+            <td>✓</td>
+            <td>✗</td>
+            <td>✗</td>
           </tr>
           <tr>
             <td>EHR patient targeting</td>
-            <td class="patient-engage-col"><span class="check">✓</span> Native</td>
-            <td><span class="cross">✗</span></td>
-            <td><span class="partial">~</span> Recalls only</td>
-            <td><span class="partial">~</span> Recalls only</td>
+            <td class="pe win">✓ Native</td>
+            <td>✗</td>
+            <td>~ Recalls only</td>
+            <td>~ Recalls only</td>
           </tr>
           <tr>
             <td>Time to launch a campaign</td>
-            <td class="patient-engage-col"><span class="check">✓</span> ~2 minutes</td>
+            <td class="pe win">✓ ~2 minutes</td>
             <td>Days to weeks</td>
             <td>Hours (manual)</td>
             <td>Hours (manual)</td>
           </tr>
           <tr>
             <td>Built for independent ODs</td>
-            <td class="patient-engage-col"><span class="check">✓</span></td>
-            <td><span class="check">✓</span></td>
-            <td><span class="partial">~</span></td>
-            <td><span class="partial">~</span></td>
+            <td class="pe win">✓</td>
+            <td>✓</td>
+            <td>~</td>
+            <td>~</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="table-footnote">✓ Supported · ~ Partial or limited · ✗ Not supported. Assessment based on published product documentation, competitive research, and practitioner feedback (April 2026).</p>
-  </section>
+    <p class="tnote">✓ Supported · ~ Partial or limited · ✗ Not supported. Assessment based on published product documentation, competitive research, and practitioner feedback (April 2026).</p>
+  </div>
+</section>
 
-  <!-- CTA Banner -->
-  <section class="cta-banner animate-section">
-    <div class="cta-banner-content">
-      <h2>See what one click creates for your practice</h2>
-      <p class="cta-banner-subhead">We'll walk you through a real campaign — the email, the landing page, the social posts, the results. You'll see exactly what your patients would see.</p>
-      <button class="btn-primary">Book a Live Demo</button>
-      <p class="cta-banner-secondary">Or talk to us first →</p>
-      <p class="cta-banner-micro">No contracts · No credit card required · Setup in 1 day</p>
-    </div>
-  </section>
+<!-- CTA -->
+<section class="cta">
+  <h2>See what one click creates for your practice</h2>
+  <p class="cta-sub">We'll walk you through a real campaign — the email, the landing page, the social posts, the results. You'll see exactly what your patients would see.</p>
+  <div class="cta-btns">
+    <button class="btn-teal-pill">Book a Live Demo</button>
+    <button class="btn-ghost-pill">Talk to us first</button>
+  </div>
+  <p class="cta-fine">No contracts · No credit card required · <a>Setup in 1 day</a></p>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div>
-        <div class="footer-brand">PatientEngage</div>
-        <p class="footer-tagline">The patient communication platform built for eye care.</p>
-      </div>
-      <div>
-        <h4 class="footer-col-title">Product</h4>
-        <ul class="footer-links">
-          <li><a href="/scheduler">Online Scheduler</a></li>
-          <li><a href="#">One-Click Campaigns</a></li>
-          <li><a href="/reminders">Reminders</a></li>
-          <li><a href="#">Intake Forms</a></li>
-          <li><a href="#">Two-Way Texting</a></li>
-          <li><a href="#">Recalls</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="footer-col-title">Company</h4>
-        <ul class="footer-links">
-          <li><a href="#">About</a></li>
-          <li><a href="#">Pricing</a></li>
-          <li><a href="#">Contact</a></li>
-          <li><a href="#">HIPAA Compliance</a></li>
-        </ul>
-      </div>
-      <div>
-        <h4 class="footer-col-title">Get Started</h4>
-        <button class="footer-cta">Book a Demo</button>
-        <p class="footer-address">PatientEngage, Inc.<br>Austin, Texas<br>hello@patientengage.com</p>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>&copy; 2026 PatientEngage. All rights reserved.</span>
-      <div class="footer-bottom-right">
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">HIPAA</a>
-      </div>
-    </div>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <span class="flogo">PatientEngage</span>
+  <span class="fcopy">&copy; 2026 PatientEngage, Inc.</span>
+</footer>
 
-  <script>
-    // Sticky feature nav — show after hero scrolls out of view
-    const featureNav = document.getElementById('feature-nav');
-    const hero = document.getElementById('hero');
-    const observer = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting) {
-        featureNav.classList.remove('visible');
-      } else {
-        featureNav.classList.add('visible');
-      }
-    }, { threshold: 0 });
-    observer.observe(hero);
-
-    // Scroll entrance animations
-    const sections = document.querySelectorAll('.animate-section');
-    const sectionObserver = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add('visible'); }
-      });
-    }, { threshold: 0.1 });
-    sections.forEach(s => sectionObserver.observe(s));
-
-    // CTA button interactions
-    document.querySelectorAll('.btn-primary, .btn-secondary, .footer-cta, .feature-nav-cta').forEach(btn => {
-      btn.addEventListener('click', function() {
-        console.log('CTA clicked:', this.textContent.trim());
-      });
-    });
-  </script>
 </body>
 </html>
