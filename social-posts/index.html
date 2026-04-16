@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social Stream — Automated Social Media for Eye Care | PatientEngage</title>
+  <meta name="description" content="Professional eye care content published to your Facebook, Instagram, and Google Business Profile automatically. Connect your accounts once — content flows every week.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy:    #0F2A4A;
+      --blue:    #1B5FA8;
+      --teal:    #00A3A3;
+      --green:   #0F6E56;
+      --green-bg:#F0FDF9;
+      --green-bd:#A7F3D0;
+      --slate:   #4B6278;
+      --muted:   #7A96A8;
+      --border:  #E2E8F0;
+      --bg:      #F8FAFC;
+      --blue-lt: #EEF4FF;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      color: var(--navy);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background: #fff;
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .nav-logo { font-size: 17px; font-weight: 800; color: var(--navy); text-decoration: none; letter-spacing: -.3px; }
+    .nav-links { display: flex; gap: 28px; list-style: none; }
+    .nav-links a { font-size: 14px; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .nav-links a:hover { color: var(--navy); }
+    .nav-links .active { color: var(--navy); font-weight: 600; border-bottom: 2px solid var(--teal); padding-bottom: 2px; }
+    .nav-actions { display: flex; gap: 8px; }
+    .btn-outline { padding: 9px 22px; border-radius: 30px; border: 1.5px solid var(--border); background: #fff; color: var(--navy); font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color .2s; text-decoration: none; }
+    .btn-outline:hover { border-color: var(--navy); }
+    .btn-dark { padding: 9px 22px; border-radius: 30px; border: none; background: var(--navy); color: #fff; font-size: 14px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; text-decoration: none; }
+    .btn-dark:hover { background: #1a3d6b; }
+
+    /* HERO */
+    .hero { padding: 88px 48px 72px; text-align: center; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 18px;
+      background: var(--green-bg);
+      border: 1px solid var(--green-bd);
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--green);
+      margin-bottom: 24px;
+    }
+    .badge-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); }
+    h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.08;
+      letter-spacing: -.5px;
+      margin-bottom: 20px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    h1 em { font-style: italic; color: var(--teal); }
+    .hero-sub {
+      font-size: 19px;
+      color: var(--slate);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto 14px;
+    }
+    .hero-detail {
+      font-size: 16px;
+      color: var(--slate);
+      line-height: 1.75;
+      max-width: 600px;
+      margin: 0 auto 30px;
+    }
+    .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 14px; }
+    .btn-navy-pill { padding: 14px 32px; border-radius: 30px; border: none; background: var(--navy); color: #fff; font-size: 15px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: background .2s; text-decoration: none; }
+    .btn-navy-pill:hover { background: #1a3d6b; }
+    .btn-ghost-pill { padding: 14px 32px; border-radius: 30px; border: 1.5px solid var(--border); background: #fff; color: var(--navy); font-size: 15px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: border-color .2s; text-decoration: none; }
+    .btn-ghost-pill:hover { border-color: var(--navy); }
+    .hero-fine { font-size: 14px; color: var(--muted); margin-bottom: 56px; }
+
+    /* HERO FRAME */
+    .hero-frame {
+      max-width: 700px;
+      margin: 0 auto;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 8px 48px rgba(15,42,74,.12);
+    }
+    .frame-bar {
+      background: var(--bg);
+      padding: 11px 18px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .fdot { width: 10px; height: 10px; border-radius: 50%; }
+    .furl {
+      background: #EDF2F7;
+      border-radius: 5px;
+      padding: 4px 16px;
+      font-size: 12px;
+      color: var(--muted);
+      margin-left: 12px;
+      flex: 1;
+      max-width: 340px;
+      text-align: center;
+    }
+    .hero-frame img { width: 100%; display: block; }
+
+    /* STATS */
+    .stats {
+      display: flex;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--bg);
+    }
+    .stat { flex: 1; padding: 32px 24px; text-align: center; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat-n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 42px;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+    .stat-l { font-size: 14px; color: var(--muted); line-height: 1.5; }
+
+    /* SECTIONS */
+    .section { padding: 80px 48px; }
+    .section-alt { background: var(--bg); }
+    .si { max-width: 900px; margin: 0 auto; }
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--teal);
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 40px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.15;
+      margin-bottom: 12px;
+      letter-spacing: -.3px;
+    }
+    .ssub {
+      font-size: 17px;
+      color: var(--slate);
+      line-height: 1.75;
+      max-width: 520px;
+      margin-bottom: 44px;
+    }
+
+    /* BEFORE / PROBLEM CARDS */
+    .before-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 40px; }
+    .bc { padding: 26px; border-radius: 14px; border: 1px solid var(--border); background: #fff; }
+    .bc.hl { border-color: #FECACA; background: #FEF9F9; }
+    .btag {
+      display: inline-block;
+      padding: 3px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      background: var(--bg);
+      color: var(--muted);
+    }
+    .btag.bad { background: #FEE2E2; color: #DC2626; }
+    .btitle { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .bbody { font-size: 14px; color: var(--slate); line-height: 1.7; }
+
+    .pullquote {
+      background: var(--navy);
+      border-radius: 14px;
+      padding: 32px 40px;
+      text-align: right;
+    }
+    .pullquote p {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: #fff;
+      line-height: 1.5;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+    .pullquote span { font-size: 14px; color: var(--muted); }
+
+    /* STEPS */
+    .steps { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .step { padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: #fff; transition: border-color .2s; }
+    .step:hover { border-color: var(--teal); }
+    .step-n { font-size: 12px; font-weight: 700; color: var(--teal); margin-bottom: 10px; letter-spacing: .3px; }
+    .step-t { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .step-b { font-size: 14px; color: var(--slate); line-height: 1.7; }
+
+    /* PAIRS (image + text) */
+    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; margin-top: 56px; }
+    .pair.flip { direction: rtl; }
+    .pair.flip > * { direction: ltr; }
+    .pframe { border-radius: 14px; overflow: hidden; border: 1px solid var(--border); box-shadow: 0 4px 28px rgba(15,42,74,.09); }
+    .pframe img { width: 100%; display: block; }
+    .ptext h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 30px; font-weight: 400; color: var(--navy); line-height: 1.2; margin-bottom: 14px;
+    }
+    .ptext p { font-size: 15px; color: var(--slate); line-height: 1.75; margin-bottom: 14px; }
+    .proof-pill {
+      display: inline-block; padding: 5px 16px;
+      background: var(--blue-lt); color: var(--blue); border-radius: 20px;
+      font-size: 13px; font-weight: 600;
+    }
+
+    /* CHANNEL CARDS */
+    .channels { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    .ch { padding: 26px; border: 1px solid var(--border); border-radius: 14px; background: #fff; transition: border-color .2s; }
+    .ch:hover { border-color: var(--teal); }
+    .ch-icon { font-size: 28px; margin-bottom: 12px; }
+    .ch-title { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .ch-body { font-size: 14px; color: var(--slate); line-height: 1.7; margin-bottom: 10px; }
+    .ch-proof {
+      display: inline-block;
+      padding: 4px 14px;
+      background: var(--blue-lt);
+      color: var(--blue);
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* RISK AUDIT SECTION */
+    .risk-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 32px; }
+    .risk-card { padding: 26px; border-radius: 14px; background: #fff; border: 1px solid var(--border); text-align: center; }
+    .risk-pct {
+      font-family: 'DM Serif Display', serif;
+      font-size: 52px;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .risk-pct.warn { color: #DC2626; }
+    .risk-label { font-size: 14px; color: var(--slate); line-height: 1.5; }
+    .risk-note { font-size: 14px; color: var(--muted); line-height: 1.7; max-width: 600px; }
+
+    /* CASE STUDY */
+    .case {
+      background: linear-gradient(135deg, #F0F7FF, #F0FDFB);
+      border: 1px solid #DBEAFE;
+      border-radius: 16px;
+      padding: 40px;
+    }
+    .case-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fff;
+      margin: 22px 0 32px;
+    }
+    .cs { padding: 20px 14px; text-align: center; border-right: 1px solid var(--border); }
+    .cs:last-child { border-right: none; }
+    .cs-n {
+      font-family: 'DM Serif Display', serif;
+      font-size: 34px;
+      color: var(--navy);
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .cs-l { font-size: 13px; color: var(--muted); line-height: 1.4; }
+    .qtext {
+      font-family: 'DM Serif Display', serif;
+      font-size: 20px;
+      color: var(--navy);
+      line-height: 1.65;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .qattr { display: flex; align-items: center; gap: 14px; }
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .qname { font-size: 14px; font-weight: 700; color: var(--navy); }
+    .qloc { font-size: 13px; color: var(--muted); margin-top: 2px; }
+
+    /* OBJECTIONS / FAQ */
+    .obj { border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; overflow: hidden; background: #fff; }
+    .obj-q {
+      padding: 18px 24px; font-size: 15px; font-weight: 600; color: var(--navy);
+      cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+      transition: background .15s; user-select: none; line-height: 1.4;
+    }
+    .obj-q:hover { background: var(--bg); }
+    .arr { color: var(--muted); font-size: 20px; transition: transform .2s; flex-shrink: 0; margin-left: 16px; }
+    .obj-a { padding: 0 24px 20px; font-size: 15px; color: var(--slate); line-height: 1.75; display: none; }
+    .obj.open .obj-a { display: block; }
+    .obj.open .arr { transform: rotate(180deg); }
+
+    /* TABLE */
+    .tw {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      overflow-x: auto;
+    }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    thead th {
+      padding: 15px 18px;
+      text-align: left;
+      font-weight: 700;
+      color: var(--navy);
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+    }
+    thead th:not(:first-child) { text-align: center; }
+    thead th.pe { background: var(--blue-lt); color: var(--blue); }
+    tbody td {
+      padding: 13px 18px;
+      border-bottom: 1px solid #F1F5F9;
+      color: var(--slate);
+      font-size: 14px;
+    }
+    tbody td:not(:first-child) { text-align: center; }
+    tbody td.pe { background: #F8FBFF; }
+    tbody td.win { color: var(--green); font-weight: 700; }
+    tbody tr:last-child td { border-bottom: none; }
+    tbody tr:hover td { background: var(--bg); }
+    tbody tr:hover td.pe { background: var(--blue-lt); }
+    .tnote { font-size: 13px; color: var(--muted); margin-top: 12px; }
+
+    /* CROSS-FEATURE TEASER */
+    .gr-teaser {
+      margin-top: 56px; padding: 28px 32px;
+      border: 1px solid var(--green-bd); border-radius: 14px; background: var(--green-bg);
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+    }
+    .gr-teaser-label { font-size: 12px; font-weight: 700; color: var(--green); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 7px; }
+    .gr-teaser-title { font-size: 17px; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .gr-teaser-body { font-size: 14px; color: var(--slate); max-width: 500px; line-height: 1.65; }
+    .gr-link {
+      display: inline-block; padding: 11px 24px; border-radius: 30px;
+      border: 1.5px solid var(--green); color: var(--green); font-size: 14px;
+      font-weight: 600; text-decoration: none; white-space: nowrap; transition: background .2s;
+    }
+    .gr-link:hover { background: rgba(15,110,86,.08); }
+
+    /* CTA */
+    .cta {
+      padding: 88px 48px;
+      text-align: center;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+    }
+    .cta h2 { margin-bottom: 14px; }
+    .cta-sub { font-size: 17px; color: var(--slate); margin-bottom: 32px; line-height: 1.7; max-width: 560px; margin-left: auto; margin-right: auto; }
+    .cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-teal-pill {
+      padding: 14px 32px;
+      border-radius: 30px;
+      border: none;
+      background: var(--teal);
+      color: #fff;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: 'DM Sans', sans-serif;
+      cursor: pointer;
+      transition: background .2s;
+      text-decoration: none;
+    }
+    .btn-teal-pill:hover { background: #008f8f; }
+    .cta-fine { font-size: 14px; color: var(--muted); margin-top: 18px; }
+    .cta-fine a { color: var(--blue); text-decoration: underline; cursor: pointer; }
+
+    /* FOOTER */
+    footer {
+      padding: 24px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--border);
+    }
+    .flogo { font-size: 16px; font-weight: 800; color: var(--navy); }
+    .fcopy { font-size: 13px; color: var(--muted); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 16px 20px; }
+      .nav-links { display: none; }
+      h1 { font-size: 38px; }
+      .hero { padding: 60px 20px 52px; }
+      .hero-sub { font-size: 17px; }
+      .stats { flex-direction: column; }
+      .stat { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat:last-child { border-bottom: none; }
+      .section { padding: 60px 20px; }
+      .before-grid, .steps, .channels, .risk-grid { grid-template-columns: 1fr; }
+      .pair, .pair.flip { grid-template-columns: 1fr; gap: 28px; direction: ltr; }
+      .case-stats { grid-template-columns: 1fr 1fr; }
+      .cs:nth-child(2) { border-right: none; }
+      .cs:nth-child(3) { border-top: 1px solid var(--border); }
+      h2 { font-size: 30px; }
+      .pullquote { text-align: left; padding: 24px; }
+      .gr-teaser { flex-direction: column; }
+      .cta { padding: 60px 20px; }
+      footer { flex-direction: column; gap: 8px; padding: 20px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="/" class="nav-logo">PatientEngage</a>
+  <ul class="nav-links">
+    <li><a href="/scheduler">Real-Time Scheduler</a></li>
+    <li><a href="/campaigns">One-Click Campaigns</a></li>
+    <li><a href="/social-posts" class="active">Social Stream</a></li>
+    <li><a href="#">Google Reserve</a></li>
+    <li><a href="/reminders">Reminders</a></li>
+  </ul>
+  <div class="nav-actions">
+    <a href="#" class="btn-outline">Sign in</a>
+    <a href="#" class="btn-dark">Get started</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge"><span class="badge-dot"></span> Included in EyeCarePro marketing programs</div>
+  <h1>Your digital storefront looks closed. <em>Even when you're open.</em></h1>
+  <p class="hero-sub">The Automated Heartbeat of Your Practice.</p>
+  <p class="hero-detail">Social Stream publishes curated, eye care-specific content to your Facebook, Instagram, and Google Business Profile every week — automatically. Connect your accounts once. Professional content flows like a utility. You never write a social post again.</p>
+  <div class="hero-cta">
+    <button class="btn-navy-pill">Book a Live Demo</button>
+    <button class="btn-ghost-pill">See What Your Feed Could Look Like</button>
+  </div>
+  <p class="hero-fine">No contracts · Setup in 1 day · HIPAA compliant</p>
+
+  <div class="hero-frame">
+    <div class="frame-bar">
+      <span class="fdot" style="background:#FF5F57"></span>
+      <span class="fdot" style="background:#FFBD2E"></span>
+      <span class="fdot" style="background:#27C93F"></span>
+      <span class="furl">patientengage.com/social-stream</span>
+    </div>
+    <img src="/social-posts/screenshots/ss_social_01_practice_calendar.png" alt="PatientEngage Social Stream calendar showing automated eye care content published across Facebook, Instagram, and Google Business Profile">
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-n">214K</div>
+    <div class="stat-l">social interactions<br>in a single month</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">2,696</div>
+    <div class="stat-l">locations receiving<br>automated content</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">3</div>
+    <div class="stat-l">channels per post<br>FB · IG · Google</div>
+  </div>
+  <div class="stat">
+    <div class="stat-n">0</div>
+    <div class="stat-l">posts written<br>by your staff</div>
+  </div>
+</div>
+
+<!-- PROBLEM SECTION: THE INVISIBILITY TAX -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">The invisibility tax</div>
+    <h2>Your patients can't find you between visits</h2>
+    <p class="ssub">Your last Facebook post was months ago. Instagram? Never started. Google Business Profile says "no recent updates." Meanwhile, patients are scrolling past competitors who look active, professional, and present. Silence has a cost.</p>
+    <div class="before-grid">
+      <div class="bc hl">
+        <span class="btag bad">Abandoned building</span>
+        <div class="btitle">Your practice looks closed online</div>
+        <div class="bbody">Your Facebook page has a post from last year and a blurry holiday photo. Your Instagram was created but never used. Patients comparing practices see yours and think: "Are they still open?" An abandoned social presence is worse than no presence at all. That's the shame Dr. Someday never talks about.</div>
+      </div>
+      <div class="bc hl">
+        <span class="btag bad">Canva fatigue</span>
+        <div class="btitle">45 minutes for 3 likes</div>
+        <div class="bbody">Sarah opens Canva. Spends 45 minutes making one mediocre graphic. Posts it. Gets 3 likes and zero reach. Closes the laptop. Doesn't post again for a month. The resentment builds: your highest-value staff member wasting hours on marketing nobody sees. That's Canva Fatigue.</div>
+      </div>
+      <div class="bc hl">
+        <span class="btag bad">Google ghost</span>
+        <div class="btitle">Invisible on Google Maps</div>
+        <div class="bbody">Your Google Business Profile shows "no recent updates" while the competitor down the street has fresh posts every week. Google notices. Practices with active GBP posts rank higher in the Map Pack — the 3 listings patients actually click. You're a Google Ghost, and it's costing you search visibility.</div>
+      </div>
+    </div>
+    <div class="pullquote">
+      <p>"Social Stream is the automated heartbeat of your practice — clinical presence, not viral fame."</p>
+      <span>Facebook · Instagram · Google Business Profile — every week, automatically</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">How it works</div>
+    <h2>Connect once. Content flows forever.</h2>
+    <p class="ssub">Three things happen. Only the first one requires you.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-n">STEP 1</div>
+        <div class="step-t">Connect your accounts</div>
+        <div class="step-b">Link your Facebook page, Instagram business account, and Google Business Profile to PatientEngage. Takes 5 minutes. You only do it once.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">STEP 2</div>
+        <div class="step-t">Content starts flowing</div>
+        <div class="step-b">Professional, seasonal eye care posts publish to all connected channels automatically. Allergies in spring. UV protection in summer. Save Your Vision Month when it matters most.</div>
+      </div>
+      <div class="step">
+        <div class="step-n">STEP 3</div>
+        <div class="step-t">Your calendar fills itself</div>
+        <div class="step-b">Your social calendar shows posts every week — without you writing, designing, or scheduling anything. Add specialty streams for Dry Eye, Vision Therapy, or Scleral Lenses and your feed gets even richer.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THREE CHANNELS — THE SURROUND SOUND EFFECT -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">The surround sound effect</div>
+    <h2>One post. Three channels. Zero effort.</h2>
+    <p class="ssub">Every Social Stream post publishes to Facebook, Instagram, and Google simultaneously — with platform-optimized images for each.</p>
+    <div class="channels">
+      <div class="ch">
+        <div class="ch-icon">📘</div>
+        <div class="ch-title">Facebook</div>
+        <div class="ch-body">Landscape-format posts with professional imagery and eye care-focused copy. Published to your Facebook business page automatically — patients see you in their feed without you opening Facebook.</div>
+        <span class="ch-proof">174,401 Facebook impressions in March</span>
+      </div>
+      <div class="ch">
+        <div class="ch-icon">📷</div>
+        <div class="ch-title">Instagram</div>
+        <div class="ch-body">Square-format images designed specifically for the Instagram grid. A separate image upload ensures your Instagram feed looks native, not like a cropped Facebook post.</div>
+        <span class="ch-proof">39,708 Instagram impressions in March</span>
+      </div>
+      <div class="ch">
+        <div class="ch-icon">📍</div>
+        <div class="ch-title">Google Business Profile — Stealth SEO</div>
+        <div class="ch-body">Most practices think social is just Facebook and Instagram. They're wrong. Every GBP post signals to Google that your practice is active — directly influencing your Map Pack ranking. Social Stream turns "social media fluff" into search engine dominance, automatically.</div>
+        <span class="ch-proof">73% connected · Active GBP = higher Map Pack rank</span>
+      </div>
+    </div>
+
+    <!-- Image + Text pairs -->
+    <div class="pair">
+      <div class="ptext">
+        <h3>Content designed for eye care — not generic health filler.</h3>
+        <p>Seasonal Allergies when spring hits. UV Protection for summer. Save Your Vision Month when patients are most receptive. Nine specialized content streams cover general eye care plus clinical specialties like Dry Eye, Vision Therapy, and Sports Vision.</p>
+        <p>This isn't a stock photo and a "Happy Tuesday!" caption. It's curated, seasonal, clinically relevant content — the kind a marketing agency would charge $500–$1,500/month to produce.</p>
+        <span class="proof-pill">9 specialized content streams</span>
+      </div>
+      <div class="pframe">
+        <img src="/social-posts/screenshots/ss_social_05_post_detail.png" alt="Social Stream post creation showing platform-optimized images for Facebook and Instagram">
+      </div>
+    </div>
+
+    <div class="pair flip">
+      <div class="ptext">
+        <h3>Specialty streams for specialty services.</h3>
+        <p>Offer Dry Eye treatment? Subscribe to the Dry Eye stream — 2 targeted posts per month about symptoms, treatment options, and awareness. Do Vision Therapy? There's a stream for that. Scleral Lenses? Sports Vision? All covered.</p>
+        <p>A practice subscribed to the main stream plus 3 specialties gets 10+ posts per month. That's a full content calendar built automatically around your clinical offerings.</p>
+        <span class="proof-pill">Dry Eye stream: 18.8 interactions per location per post</span>
+      </div>
+      <div class="pframe">
+        <img src="/social-posts/screenshots/ss_social_02_stream_report.png" alt="Social Stream report showing 9 specialized content streams with per-stream performance metrics">
+      </div>
+    </div>
+
+    <div class="pair">
+      <div class="ptext">
+        <h3>The hidden SEO signal your competitors don't know about.</h3>
+        <p>Every time Social Stream publishes to your Google Business Profile, it tells Google your practice is active. Active profiles rank higher in the Map Pack — the 3 listings patients actually click when they search "eye doctor near me."</p>
+        <p>Most practices don't even know GBP supports posts. Yours will have fresh content every week — automatically. That's not social media. That's search engine dominance disguised as social media.</p>
+        <span class="proof-pill">GBP posts = local SEO activity signals</span>
+      </div>
+      <div class="pframe">
+        <img src="/social-posts/screenshots/ss_social_04_connections.png" alt="Social Connections dashboard showing 73% Google Business Profile adoption across the network">
+      </div>
+    </div>
+
+    <div class="pair flip">
+      <div class="ptext">
+        <h3>214,509 interactions. One content team.</h3>
+        <p>Our content team creates 22 posts per month across 9 streams. Each post publishes to every subscribed practice's connected channels automatically. One post from our team reaches 731 practices simultaneously.</p>
+        <p>That's the equivalent of 731 practices each hiring their own social media manager — for a fraction of the cost.</p>
+        <span class="proof-pill">22 posts → 2,696 locations → 214K interactions</span>
+      </div>
+      <div class="pframe">
+        <img src="/social-posts/screenshots/ss_social_03_locations_report.png" alt="Network-wide social report showing 214,509 total interactions across 2,696 locations">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISK AUDIT: THE CONNECTION OPPORTUNITY -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">Risk audit</div>
+    <h2>Are you paying the Invisibility Tax?</h2>
+    <p class="ssub">The content is ready. The infrastructure works. The only question is whether your social accounts are connected.</p>
+    <div class="risk-grid">
+      <div class="risk-card">
+        <div class="risk-pct">73%</div>
+        <div class="risk-label">of practices have<br>Google connected</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-pct warn">45%</div>
+        <div class="risk-label">of practices have<br>Facebook connected</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-pct warn">20%</div>
+        <div class="risk-label">of practices have<br>Instagram connected</div>
+      </div>
+    </div>
+    <p class="risk-note">80% of practices are ghosting their Instagram audience. Even if your profile exists, if it hasn't been updated in 30 days, you're paying an Invisibility Tax. Social Stream has content ready to publish the moment you connect — the calendar fills itself within the first week.</p>
+  </div>
+</section>
+
+<!-- CASE STUDY -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">Real results</div>
+    <h2>The automated heartbeat across 2,696 locations</h2>
+    <p class="ssub">Network-wide performance, March 2026</p>
+    <div class="case">
+      <div style="font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 6px;">22 posts. 2,696 locations. Zero staff hours spent.</div>
+      <p style="font-size: 15px; color: var(--slate); line-height: 1.7; margin-bottom: 8px;">Our content team published 22 Social Stream posts across 9 specialized streams in March 2026. Each post automatically published to every subscribed practice's Facebook, Instagram, and Google Business Profile — generating 214,509 social interactions without a single practice writing a word.</p>
+      <p style="font-size: 15px; color: var(--slate); line-height: 1.7;">The EyeCarePro main stream alone reached 731 practices, generating 53,131 interactions from 4 weekly posts. Specialty streams proved equally effective — the Dry Eye stream averaged 18.8 interactions per location per post, nearly identical to the main stream's 18.2.</p>
+      <div class="case-stats">
+        <div class="cs">
+          <div class="cs-n">214K</div>
+          <div class="cs-l">social interactions<br>in one month</div>
+        </div>
+        <div class="cs">
+          <div class="cs-n">731</div>
+          <div class="cs-l">practices per post<br>on the main stream</div>
+        </div>
+        <div class="cs">
+          <div class="cs-n">18</div>
+          <div class="cs-l">avg interactions per<br>location per post</div>
+        </div>
+        <div class="cs">
+          <div class="cs-n">12h</div>
+          <div class="cs-l">staff time reclaimed<br>per practice per month</div>
+        </div>
+      </div>
+      <p class="qtext">"I used to spend two hours every week trying to think of something to post. Now our social calendar fills itself — seasonal tips, awareness month content, even posts for our dry eye services. Our Facebook has never been this active, and I never touch it."</p>
+      <div class="qattr">
+        <div class="avatar">OM</div>
+        <div>
+          <div class="qname">Office Manager</div>
+          <div class="qloc">3-doctor optometry practice · Midwest</div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: var(--muted); font-style: italic; margin-top: 20px;">Network data: March 2026. [OBSERVED] from PatientEngage Social Reports. Practice testimonial: composite, anonymized.</p>
+    </div>
+
+    <!-- Cross-feature teaser -->
+    <div class="gr-teaser">
+      <div>
+        <div class="gr-teaser-label">Also included</div>
+        <div class="gr-teaser-title">One-Click Campaigns</div>
+        <div class="gr-teaser-body">Social Stream keeps your channels active between visits. One-Click Campaigns drives patients into chairs — email, landing pages, and social posts from a single click. 34,623 appointments attributed in one month.</div>
+      </div>
+      <a href="/campaigns" class="gr-link">Learn more &#8594;</a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ / OBJECTIONS -->
+<section class="section section-alt">
+  <div class="si">
+    <div class="eyebrow">Common questions</div>
+    <h2>Everything you're wondering</h2>
+    <p class="ssub"></p>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"We already post to social media." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">That's a great start. A fair question to ask: when was your last post, and was it clinically relevant to what patients are dealing with <em>this season</em>? Social Stream publishes Seasonal Allergies in spring, UV Protection in summer, and Dry Eye awareness in winter — automatically, every week. Think of it as your always-on baseline. Whatever your team posts on top of that becomes a bonus, not the whole strategy.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"My staff handles our Facebook." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">Many practices rely on a talented team member for this — and it usually works beautifully, until it doesn't. When they're with a patient or on the phone, the posts pause. The hidden cost adds up too: at $22/hr, five hours a week in Canva is roughly $440/month in staff time. Social Stream doesn't replace your team's voice — it carries the professional baseline so their time can go back to patients, and your calendar never goes dark when things get busy.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"We already use Hootsuite / Buffer." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">Those are solid tools — but they're blank canvases. Every practice we talk to signs up with great intentions, schedules a few posts, then the calendar goes quiet. The tool assumes you already have a content strategy, design skills, and time. Social Stream flips that: we bring the content (professionally designed, eye-care specific, platform-optimized), you just connect your accounts. Keep Hootsuite if you love it — Social Stream fills the gaps.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"Automated posts feel inauthentic." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">That concern usually comes from seeing bad automation — generic "Happy Friday!" posts with stock photos. Social Stream looks nothing like that. It's professionally designed, clinically relevant content with separate imagery for each platform. Worth comparing: a consistent, polished presence versus a Facebook page that hasn't posted in six months. Patients notice both — and the quiet one tends to raise more eyebrows than the scheduled one.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"I don't think patients care about social media." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">Patients may not scroll looking for you, but Google pays close attention. Every post to your Google Business Profile signals that you're an active, engaged medical practice — and active profiles rank higher in the Map Pack. Quiet profiles get outranked by the ones posting weekly. Across our network, 214,509 social interactions happened in a single month, and the GBP posts quietly do the heavy lifting for local SEO.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"We use Weave / SolutionReach for this." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">Those platforms are excellent for appointment confirmations and recall texts — the administrative side. Social Stream covers the growth side: keeping your practice visible across Facebook, Instagram, and Google, and educating patients on services like Myopia Management or second pairs. They're complementary tools for different jobs. Think of Weave as the phones, Social Stream as the storefront.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"We tried marketing before and it didn't work." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">That's a fair hesitation — most bad experiences trace back to generic automated posts or generalist agencies with no eye care knowledge. Social Stream talks to the people who already know and trust you: your patients and their networks. Content is curated by a team that lives in optometry, so you're not getting a "see the world clearly" sunset post. It's the same quality of work a dedicated agency would produce, without the retainer.</div>
+    </div>
+
+    <div class="obj" onclick="toggle(this)">
+      <div class="obj-q">"We'll do it later — we're too busy right now." <span class="arr">&#8595;</span></div>
+      <div class="obj-a">We hear this often, and there's real logic to it — but Social Stream is specifically designed for the busy practice. Setup takes minutes (connect three accounts), and the content flows on its own after that. Every quiet week is a week patients can't tell if you're still open, and a week the larger competitors keep posting. The "right time" usually never arrives; the automation is what buys back the time.</div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section class="section">
+  <div class="si">
+    <div class="eyebrow">Comparison</div>
+    <h2>How Social Stream compares</h2>
+    <p class="ssub">The difference isn't that we post to social media. It's that we provide the content AND the posting — automatically.</p>
+    <div class="tw">
+      <table>
+        <thead>
+          <tr>
+            <th>Capability</th>
+            <th class="pe">Social Stream</th>
+            <th>DIY Staff ("Sarah")</th>
+            <th>Marketing Agency</th>
+            <th>Hootsuite / Buffer</th>
+            <th>Churn Mills</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Content included (not DIY)</td>
+            <td class="pe win">✓ Curated eye care</td>
+            <td>~ When she has time</td>
+            <td>✓ Custom</td>
+            <td>✗ Blank canvas</td>
+            <td>~ Generic filler</td>
+          </tr>
+          <tr>
+            <td>3-channel publishing (FB + IG + GBP)</td>
+            <td class="pe win">✓ Automatic</td>
+            <td>~ Usually FB only</td>
+            <td>✓ Manual</td>
+            <td>✓ Manual</td>
+            <td>~ FB only</td>
+          </tr>
+          <tr>
+            <td>Optometry-specific content</td>
+            <td class="pe win">✓ 9 streams</td>
+            <td>~ Knows practice, not marketing</td>
+            <td>~ If agency knows eye care</td>
+            <td>✗ Generic</td>
+            <td>✗ "Happy Friday!"</td>
+          </tr>
+          <tr>
+            <td>Platform-optimized images</td>
+            <td class="pe win">✓ Separate FB + IG</td>
+            <td>✗ Canva templates</td>
+            <td>✓</td>
+            <td>✗ You create them</td>
+            <td>✗ Stock photos</td>
+          </tr>
+          <tr>
+            <td>Practice effort required</td>
+            <td class="pe win">✓ Zero after setup</td>
+            <td>5+ hours/week</td>
+            <td>Approval cycles</td>
+            <td>Full DIY</td>
+            <td>Minimal</td>
+          </tr>
+          <tr>
+            <td>Specialty content (Dry Eye, VT)</td>
+            <td class="pe win">✓ Dedicated streams</td>
+            <td>✗</td>
+            <td>~ If requested</td>
+            <td>✗</td>
+            <td>✗</td>
+          </tr>
+          <tr>
+            <td>GBP posts for local SEO</td>
+            <td class="pe win">✓ Automatic weekly</td>
+            <td>✗ Doesn't know GBP has posts</td>
+            <td>~ If included</td>
+            <td>✓ Manual</td>
+            <td>✗</td>
+          </tr>
+          <tr>
+            <td>Consistency guarantee</td>
+            <td class="pe win">✓ Every week, forever</td>
+            <td>✗ Stops when busy</td>
+            <td>~ Depends on agency</td>
+            <td>✗ Depends on you</td>
+            <td>~ Inconsistent quality</td>
+          </tr>
+          <tr>
+            <td>True monthly cost</td>
+            <td class="pe win">Included with EyeCarePro</td>
+            <td>$440+/mo (hidden labor)</td>
+            <td>$500–$1,500+/mo</td>
+            <td>$25–$249/mo + your time</td>
+            <td>Varies</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="tnote">✓ Supported · ~ Partial or limited · ✗ Not supported. "Churn Mills" = low-cost automated social providers (Doctor Multimedia, iMatrix, etc.). DIY Staff cost: $22/hr × 5 hrs/wk × 4 wks. Assessment based on published product documentation and competitive research (April 2026).</p>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta">
+  <h2>Stop paying the Invisibility Tax</h2>
+  <p class="cta-sub">Connect your social accounts and let the content flow. We'll show you exactly what your Facebook, Instagram, and Google Business Profile will look like with Social Stream running.</p>
+  <div class="cta-btns">
+    <button class="btn-teal-pill">Book a Live Demo</button>
+    <button class="btn-ghost-pill">Talk to us first</button>
+  </div>
+  <p class="cta-fine">No contracts · No credit card required · <a>Already an EyeCarePro client? Ask your marketing manager.</a></p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="flogo">PatientEngage</span>
+  <span class="fcopy">&copy; 2026 PatientEngage, Inc.</span>
+</footer>
+
+<script>function toggle(el) { el.classList.toggle('open'); }</script>
+</body>
+</html>
